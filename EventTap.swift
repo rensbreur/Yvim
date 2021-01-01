@@ -10,7 +10,7 @@ import Cocoa
 import ApplicationServices
 
 protocol EventHandler {
-    func handleEvent(keycode: Int64, keyDown: Bool, simulateEvent: (Int, Bool) -> Void) -> Bool
+    func handleEvent(_ event: CGEvent, simulateEvent: (Int, Bool) -> Void) -> Bool
 }
 
 class EventTap {
@@ -36,17 +36,31 @@ class EventTap {
 
 private func Handle_EventCallback(proxy: OpaquePointer, type: CGEventType, event: CGEvent, refcon: UnsafeMutableRawPointer!) -> Unmanaged<CGEvent>?
 {
-    let kc: EventTap = Unmanaged<EventTap>.fromOpaque(refcon!).takeUnretainedValue()
+    let eventTap: EventTap = Unmanaged<EventTap>.fromOpaque(refcon!).takeUnretainedValue()
 
-    let keycode = event.getIntegerValueField(.keyboardEventKeycode)
-    let keyDown = type == CGEventType.keyDown
-
-    if let delegate = kc.eventHandler, delegate.handleEvent(keycode: keycode, keyDown: keyDown, simulateEvent: { (keycode, ctrl) in
-        kc.keyboardEvent(keyCode: keycode, keyDown: true, ctrl: ctrl).tapPostEvent(proxy)
-        kc.keyboardEvent(keyCode: keycode, keyDown: false, ctrl: ctrl).tapPostEvent(proxy)
+    if let delegate = eventTap.eventHandler, delegate.handleEvent(event, simulateEvent: { (keycode, ctrl) in
+        eventTap.keyboardEvent(keyCode: keycode, keyDown: true, ctrl: ctrl).tapPostEvent(proxy)
+        eventTap.keyboardEvent(keyCode: keycode, keyDown: false, ctrl: ctrl).tapPostEvent(proxy)
     }) {
         return nil
     }
 
     return Unmanaged.passUnretained(event)
+}
+
+extension CGEvent {
+    var keyboardEventKeycode: CGKeyCode {
+        CGKeyCode(getIntegerValueField(.keyboardEventKeycode))
+    }
+
+    var keyDown: Bool {
+        type == CGEventType.keyDown
+    }
+
+    var unicodeString: String {
+        var length: Int = 0
+        var str: [UniChar] = [0,0,0,0]
+        keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &str)
+        return CFStringCreateWithCharacters(kCFAllocatorDefault, str, 1) as String
+    }
 }
