@@ -24,9 +24,9 @@ extension CGEvent {
         return CFStringCreateWithCharacters(kCFAllocatorDefault, str, 1) as String
     }
 
-    static func keyboardEvent(keyCode: CGKeyCode, keyDown: Bool, ctrl: Bool = false) -> CGEvent {
+    static func keyboardEvent(keyCode: CGKeyCode, keyDown: Bool, modifierKeys: CGEventFlags = []) -> CGEvent {
         let event = CGEvent(keyboardEventSource: nil, virtualKey: keyCode, keyDown: keyDown)!
-        event.flags = (ctrl ? CGEventFlags.maskControl : [])
+        event.flags = modifierKeys
         return event
     }
 }
