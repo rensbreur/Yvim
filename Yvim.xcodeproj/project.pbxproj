@@ -1,0 +1,338 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2E0CF26923A29704009BDDFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E0CF26823A29704009BDDFB /* Assets.xcassets */; };
+		2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C4F8259F4EA800FB06EC /* StatusItemController.swift */; };
+		2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C4FD259F67EC00FB06EC /* CGKeyCode+character.swift */; };
+		2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */; };
+		2EA4C508259F74A600FB06EC /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C507259F74A600FB06EC /* Mode.swift */; };
+		2EC7406C259D135E00108463 /* EventTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406B259D135E00108463 /* EventTap.swift */; };
+		2EC7406F259D13B100108463 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406E259D13B100108463 /* main.swift */; };
+		2EC74074259DDEE200108463 /* YvimEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74073259DDEE200108463 /* YvimEngine.swift */; };
+		2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74076259DDF0500108463 /* AppDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2E0CF26223A29702009BDDFB /* Yvim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yvim.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E0CF26823A29704009BDDFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2E0CF26D23A29704009BDDFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EA4C4F8259F4EA800FB06EC /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
+		2EA4C4FD259F67EC00FB06EC /* CGKeyCode+character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGKeyCode+character.swift"; sourceTree = "<group>"; };
+		2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGEvent+keyboardEvent.swift"; sourceTree = "<group>"; };
+		2EA4C507259F74A600FB06EC /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		2EA4C50A259F755300FB06EC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2EC7406B259D135E00108463 /* EventTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTap.swift; sourceTree = "<group>"; };
+		2EC7406E259D13B100108463 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2EC74073259DDEE200108463 /* YvimEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimEngine.swift; sourceTree = "<group>"; };
+		2EC74076259DDF0500108463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2E0CF25F23A29702009BDDFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2E0CF25923A29702009BDDFB = {
+			isa = PBXGroup;
+			children = (
+				2EA4C50A259F755300FB06EC /* README.md */,
+				2E0CF26423A29702009BDDFB /* Yvim */,
+				2E0CF26323A29702009BDDFB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2E0CF26323A29702009BDDFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2E0CF26223A29702009BDDFB /* Yvim.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2E0CF26423A29702009BDDFB /* Yvim */ = {
+			isa = PBXGroup;
+			children = (
+				2EC7406E259D13B100108463 /* main.swift */,
+				2EC74076259DDF0500108463 /* AppDelegate.swift */,
+				2EC7406B259D135E00108463 /* EventTap.swift */,
+				2E0CF26823A29704009BDDFB /* Assets.xcassets */,
+				2E0CF26D23A29704009BDDFB /* Info.plist */,
+				2EC74073259DDEE200108463 /* YvimEngine.swift */,
+				2EA4C4F8259F4EA800FB06EC /* StatusItemController.swift */,
+				2EA4C4FD259F67EC00FB06EC /* CGKeyCode+character.swift */,
+				2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */,
+				2EA4C507259F74A600FB06EC /* Mode.swift */,
+			);
+			path = Yvim;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2E0CF26123A29702009BDDFB /* Yvim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E0CF27323A29704009BDDFB /* Build configuration list for PBXNativeTarget "Yvim" */;
+			buildPhases = (
+				2E0CF25E23A29702009BDDFB /* Sources */,
+				2E0CF25F23A29702009BDDFB /* Frameworks */,
+				2E0CF26023A29702009BDDFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Yvim;
+			productName = mouseplague;
+			productReference = 2E0CF26223A29702009BDDFB /* Yvim.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2E0CF25A23A29702009BDDFB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = "Rens Breur";
+				TargetAttributes = {
+					2E0CF26123A29702009BDDFB = {
+						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1230;
+					};
+				};
+			};
+			buildConfigurationList = 2E0CF25D23A29702009BDDFB /* Build configuration list for PBXProject "Yvim" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2E0CF25923A29702009BDDFB;
+			productRefGroup = 2E0CF26323A29702009BDDFB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2E0CF26123A29702009BDDFB /* Yvim */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2E0CF26023A29702009BDDFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E0CF26923A29704009BDDFB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2E0CF25E23A29702009BDDFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */,
+				2EC7406C259D135E00108463 /* EventTap.swift in Sources */,
+				2EA4C508259F74A600FB06EC /* Mode.swift in Sources */,
+				2EC7406F259D13B100108463 /* main.swift in Sources */,
+				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
+				2EC74074259DDEE200108463 /* YvimEngine.swift in Sources */,
+				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
+				2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2E0CF27123A29704009BDDFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2E0CF27223A29704009BDDFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2E0CF27423A29704009BDDFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Yvim/info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.rensbr.Yvim;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2E0CF27523A29704009BDDFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Yvim/info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.rensbr.Yvim;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2E0CF25D23A29702009BDDFB /* Build configuration list for PBXProject "Yvim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E0CF27123A29704009BDDFB /* Debug */,
+				2E0CF27223A29704009BDDFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2E0CF27323A29704009BDDFB /* Build configuration list for PBXNativeTarget "Yvim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E0CF27423A29704009BDDFB /* Debug */,
+				2E0CF27523A29704009BDDFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2E0CF25A23A29702009BDDFB /* Project object */;
+}
