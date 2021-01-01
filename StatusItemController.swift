@@ -17,7 +17,6 @@ class StatusItemController {
 
     init() {
         self.menuItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        self.menuItem.button!.title = "== Yvim =="
     }
 
     func start() {
