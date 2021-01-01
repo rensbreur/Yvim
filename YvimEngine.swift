@@ -24,37 +24,34 @@ enum Mode {
     }
 }
 
-class YvimEngine: KeyboardEventHandler {
+class YvimEngine: EventHandler {
     @Published var mode: Mode = .command
 
-    var kc: KeyboardEventSimulator
-
-    init(kc: KeyboardEventSimulator) {
-        self.kc = kc
+    init() {
     }
 
-    func handleKeyboardEvent(keycode: Int64, keyDown: Bool) -> Bool {
+    func handleEvent(keycode: Int64, keyDown: Bool, simulateEvent: (Int, Bool) -> Void) -> Bool {
         switch mode {
         case .command:
             if (keycode == kVK_ANSI_A || keycode == kVK_ANSI_I) && keyDown {
                 mode = .transparent
             }
             if (keycode == kVK_ANSI_H && keyDown) {
-                kc.sendKey(keyCode: kVK_LeftArrow)
+                simulateEvent(kVK_LeftArrow, false)
             }
             if (keycode == kVK_ANSI_L && keyDown) {
-            kc.sendKey(keyCode: kVK_RightArrow)
+                simulateEvent(kVK_RightArrow, false)
             }
             if (keycode == kVK_ANSI_S && keyDown) {
-                kc.sendKey(keyCode: kVK_ANSI_D, ctrl: true)
-                kc.sendKey(keyCode: kVK_ANSI_KeypadEnter)
+                simulateEvent(kVK_ANSI_D, true)
+                simulateEvent(kVK_ANSI_KeypadEnter, false)
                 self.mode = .transparent
             }
             if (keycode == kVK_ANSI_J && keyDown) {
-            kc.sendKey(keyCode: kVK_UpArrow)
+                simulateEvent(kVK_UpArrow, false)
             }
             if (keycode == kVK_ANSI_K && keyDown) {
-            kc.sendKey(keyCode: kVK_DownArrow)
+                simulateEvent(kVK_DownArrow, false)
             }
             let str = createStringForKey(keyCode: CGKeyCode(keycode))
             print("INTERCEPTING KEY \(keycode) \(str)")

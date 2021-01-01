@@ -9,14 +9,14 @@
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var keyboardEventTap: KeyboardEventTap!
+    var keyboardEventTap: EventTap!
     var engine: YvimEngine!
     var statusItemController: StatusItemController!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        self.keyboardEventTap = KeyboardEventTap()
-        self.engine = YvimEngine(kc: keyboardEventTap)
-        self.keyboardEventTap.keyboardEventHandler = engine
+        self.keyboardEventTap = EventTap()
+        self.engine = YvimEngine()
+        self.keyboardEventTap.eventHandler = engine
         self.keyboardEventTap.startListening()
         self.statusItemController = StatusItemController()
         self.statusItemController.mode = self.engine.$mode.eraseToAnyPublisher()
