@@ -32,10 +32,16 @@ class YvimEngine: EventHandler {
 
     init() {}
 
-    func handleEvent(_ event: CGEvent, simulateEvent: (Int, Bool) -> Void) -> Bool {
+    func handleEvent(_ event: CGEvent, simulateEvent se: (CGEvent) -> Void) -> Bool {
         let keycode = event.keyboardEventKeycode
         let keyDown = event.keyDown
         let char = stringForKeycode(keycode)
+
+        func simulateEvent(_ keyCode: CGKeyCode, _ ctrl: Bool) -> Void {
+            se(.keyboardEvent(keyCode: keyCode, keyDown: true, ctrl: ctrl))
+            se(.keyboardEvent(keyCode: keyCode, keyDown: false, ctrl: ctrl))
+        }
+        
         switch mode {
         case .command:
 
@@ -46,7 +52,7 @@ class YvimEngine: EventHandler {
 
             // ADD
             if char == "a" && keyDown {
-                simulateEvent(kVK_RightArrow, false)
+                simulateEvent(CGKeyCode(kVK_RightArrow), false)
             }
             if char == "a" && !keyDown {
                 mode = .transparent
@@ -54,16 +60,16 @@ class YvimEngine: EventHandler {
 
             // CURSOR NAVIGATION
             if char == "h" && keyDown {
-                simulateEvent(kVK_LeftArrow, false)
+                simulateEvent(CGKeyCode(kVK_LeftArrow), false)
             }
             if char == "l" && keyDown {
-                simulateEvent(kVK_RightArrow, false)
+                simulateEvent(CGKeyCode(kVK_RightArrow), false)
             }
             if char == "k" && keyDown {
-                simulateEvent(kVK_UpArrow, false)
+                simulateEvent(CGKeyCode(kVK_UpArrow), false)
             }
             if char == "j" && keyDown {
-                simulateEvent(kVK_DownArrow, false)
+                simulateEvent(CGKeyCode(kVK_DownArrow), false)
             }
             if keycode == kVK_LeftArrow || keycode == kVK_RightArrow
                     || keycode == kVK_UpArrow || keycode == kVK_DownArrow {
@@ -72,21 +78,21 @@ class YvimEngine: EventHandler {
 
             // WORD NAVIGATION
             if (char == "w" || char == "e") && keyDown {
-                simulateEvent(kVK_RightArrow, true)
+                simulateEvent(CGKeyCode(kVK_RightArrow), true)
             }
             if char == "b" && keyDown {
-                simulateEvent(kVK_LeftArrow, true)
+                simulateEvent(CGKeyCode(kVK_LeftArrow), true)
             }
 
             // LINE NAVIGATION
             if char == "0" && keyDown {
-                simulateEvent(Int(keycodeForString("a")), true)
+                simulateEvent(keycodeForString("a"), true)
             }
 
             // NEW LINE
             if char == "o" && keyDown {
-                simulateEvent(Int(keycodeForString("e")!), true)
-                simulateEvent(kVK_ANSI_KeypadEnter, false)
+                simulateEvent(keycodeForString("e"), true)
+                simulateEvent(CGKeyCode(kVK_ANSI_KeypadEnter), false)
             }
             if char == "o" && !keyDown {
                 self.mode = .transparent
