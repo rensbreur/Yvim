@@ -8,13 +8,15 @@
 
 import Cocoa
 
-private func Handle_AppswitchCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {
-    Unmanaged<AccessibilityService>.fromOpaque(context).takeUnretainedValue().applicationSwitched()
-}
-
 class AccessibilityService {
-    var _observers: [pid_t: AXObserver] = [:]
-    var _currentPid: pid_t?
+    let managedApplicationId = "com.apple.dt.Xcode"
+
+    var pid: pid_t?
+
+    var observer: AXObserver?
+    var observerAway: AXObserver?
+
+    @Published var active: Bool = false
 
     init() {}
 
@@ -31,82 +33,91 @@ class AccessibilityService {
                                                  object: workspace)
 
         for application in workspace.runningApplications {
-            self.registerForAppSwitchNotification(for: application)
+            self.managedApplicationLaunched(application)
         }
-
-        self.applicationSwitched()
     }
 
     func applicationSwitched() {
-        let application = NSWorkspace.shared.menuBarOwningApplication!
-        let switchedPid: pid_t = application.processIdentifier
+        self.active = true
+    }
 
-        guard (switchedPid != _currentPid && switchedPid != getpid()) else {
-            return
-        }
-
-        let applicationName = application.localizedName!
-
-        print("Switched to \(applicationName)")
-
-        _currentPid = switchedPid;
+    func applicationSwitchedAway() {
+        self.active = false
     }
 
     @objc func applicationLaunched(_ notification: NSNotification) {
         let application = notification.userInfo![NSWorkspace.applicationUserInfoKey] as! NSRunningApplication
-        self.registerForAppSwitchNotification(for: application)
-        self.applicationSwitched()
+        self.managedApplicationLaunched(application)
     }
-
 
     @objc func applicationTerminated(_ notification: NSNotification) {
         let application = notification.userInfo![NSWorkspace.applicationUserInfoKey] as! NSRunningApplication
         let pid = application.processIdentifier
 
-        guard let observer = _observers[pid] else {
-            print("Application that we didn't know about quit!")
+        guard pid == self.pid, let observer = self.observer, let observerAway = self.observerAway else {
             return
         }
 
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(),
                               AXObserverGetRunLoopSource(observer),
                               CFRunLoopMode.defaultMode)
-        _observers[pid] = nil
+        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), AXObserverGetRunLoopSource(observerAway), .defaultMode)
+        self.pid = nil
     }
 
-    func registerForAppSwitchNotification(for application: NSRunningApplication) {
-        let pid: pid_t = application.processIdentifier
+    func managedApplicationLaunched(_ application: NSRunningApplication) {
+        if application.bundleIdentifier == self.managedApplicationId {
+            guard (self.pid == nil && observer == nil && observerAway == nil) else {
+                print("Attempted to observe application twice.")
+                return
+            }
 
-        // Do not observe self
-        guard (pid != getpid()) else {
-            return
+            let pid: pid_t = application.processIdentifier
+            self.pid = pid
+
+            let element = AXUIElementCreateApplication(pid)
+
+            var observer: AXObserver!
+            guard AXObserverCreate(pid, Handle_AppswitchCallback, &observer) == AXError.success else {
+                print("Failed to create observer for application.")
+                return
+            }
+
+            CFRunLoopAddSource(CFRunLoopGetCurrent(),
+                               AXObserverGetRunLoopSource(observer),
+                               CFRunLoopMode.defaultMode);
+
+            guard AXObserverAddNotification(observer, element, kAXApplicationActivatedNotification as CFString, Unmanaged<AccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
+                print("Failed to create observer for application.")
+                return
+            }
+
+            self.observer = observer
+
+            var observerAway: AXObserver!
+            guard AXObserverCreate(pid, Handle_AppswitchAwayCallback, &observerAway) == AXError.success else {
+                print("Failed to create observer for application.")
+                return
+            }
+
+            CFRunLoopAddSource(CFRunLoopGetCurrent(),
+                               AXObserverGetRunLoopSource(observerAway),
+                               CFRunLoopMode.defaultMode);
+
+            guard AXObserverAddNotification(observerAway, element, kAXApplicationDeactivatedNotification as CFString, Unmanaged<AccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
+                print("Failed to create observer for application.")
+                return
+            }
+
+            self.observerAway = observerAway
         }
-
-        let applicationName: String = application.localizedName!
-
-        // Do not observe the same app twice
-        guard (_observers[pid] == nil) else {
-            print("Attempted to observe application \"\(applicationName)\" twice.")
-            return
-        }
-
-        /* Create an Accessibility observer for the application */
-        var observer: AXObserver!
-        guard AXObserverCreate(pid, Handle_AppswitchCallback, &observer) == AXError.success else {
-            print("Failed to create observer for application \"\(applicationName)\".")
-            return
-        }
-
-        CFRunLoopAddSource(CFRunLoopGetCurrent(),
-                           AXObserverGetRunLoopSource(observer),
-                           CFRunLoopMode.defaultMode);
-
-        let element = AXUIElementCreateApplication(pid)
-        guard AXObserverAddNotification(observer, element, kAXApplicationActivatedNotification as CFString, Unmanaged<AccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
-            print("Failed to create observer for application \"\(applicationName)\".")
-            return
-        }
-
-        _observers[pid] = observer
     }
+}
+
+private func Handle_AppswitchCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {
+    Unmanaged<AccessibilityService>.fromOpaque(context).takeUnretainedValue().applicationSwitched()
+}
+
+private func Handle_AppswitchAwayCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {
+    Unmanaged<AccessibilityService>.fromOpaque(context).takeUnretainedValue().applicationSwitchedAway()
 }

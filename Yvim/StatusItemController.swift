@@ -11,6 +11,7 @@ import Combine
 
 class StatusItemController {
     private(set) var menuItem: NSStatusItem!
+    var active: AnyPublisher<Bool, Never>!
     var mode: AnyPublisher<Mode, Never>!
 
     private var modeCancellable: AnyCancellable?
@@ -20,10 +21,16 @@ class StatusItemController {
     }
 
     func start() {
-        self.modeCancellable = mode
-            .map { "-- \($0.description.uppercased()) --" }
+        self.modeCancellable = active.removeDuplicates().combineLatest(mode)
+            .map(text)
             .sink { str in
                 self.menuItem.button!.title = str
             }
+    }
+
+    func text(state: (Bool, Mode)) -> String {
+        let (active, mode) = state
+        if !active { return "" }
+        else { return "-- \(mode.description.uppercased()) --" }
     }
 }

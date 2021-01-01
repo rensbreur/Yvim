@@ -9,11 +9,17 @@
 import Carbon.HIToolbox
 
 class YvimEngine: EventHandler {
-    @Published var mode: Mode = .command
+    var active: Bool = true // false when Xcode is not active
+
+    @Published private(set) var mode: Mode = .command
 
     init() {}
 
     func handleEvent(_ event: CGEvent, simulateEvent se: (CGEvent) -> Void) -> Bool {
+        guard self.active else {
+            return false
+        }
+
         let keycode = event.keyboardEventKeycode
         let keyDown = event.keyDown
         let char = stringForKeycode(keycode)

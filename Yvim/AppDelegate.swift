@@ -7,12 +7,15 @@
 //
 
 import Cocoa
+import Combine
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var keyboardEventTap: EventTap!
     var accessibilityService: AccessibilityService!
     var engine: YvimEngine!
     var statusItemController: StatusItemController!
+
+    var activeCancellable: AnyCancellable?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         self.keyboardEventTap = EventTap()
@@ -23,6 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.keyboardEventTap.startListening()
         self.statusItemController = StatusItemController()
         self.statusItemController.mode = self.engine.$mode.eraseToAnyPublisher()
+        self.statusItemController.active = self.accessibilityService.$active.eraseToAnyPublisher()
         self.statusItemController.start()
+        self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimEngine.active, on: self.engine)
     }
 }
