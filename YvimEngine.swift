@@ -71,6 +71,9 @@ class YvimEngine: EventHandler {
             if char == "0" && keyDown {
                 simulateEvent(keycodeForString("a"), true)
             }
+            if event.unicodeString == "$" && keyDown {
+                simulateEvent(keycodeForString("e"), true)
+            }
 
             // NEW LINE
             if char == "o" && keyDown {
