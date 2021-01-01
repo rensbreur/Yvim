@@ -8,7 +8,7 @@ Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcod
 
 * Copy `Yvim.app` to the `/Applications` folder.
 * Launch `Yvim.app` before or after starting Xcode.
-* When requested, give `Yvim` the Accessibility and Input monitoring permissions in System Preferences.
+* You will be requested to give `Yvim` the "Accessibility" and "Input monitoring" permissions in System Preferences.
 
 It is recommended to change to a block cursor style in Xcode in Preferences in the Themes tab.
 
@@ -32,5 +32,8 @@ In `-- COMMAND --` mode:
 * insert text before the cursor using `i` or after the cursor with `a`
 * navigate words using the `w` and `b` keys
 * move to the beginning or end of a line using `0` and `$`
+* enter visual mode using `v`
 
 When in `-- INSERT --` mode, use the escape key to go back to command mode. Any other key or key combination is sent through to Xcode.
+
+In `-- VISUAL --` mode, the same navigation controls as in the command mode are supported.

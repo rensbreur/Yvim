@@ -7,117 +7,44 @@
 //
 
 import Cocoa
+import Combine
 
-class AccessibilityService {
-    let managedApplicationId = "com.apple.dt.Xcode"
+class AccessibilityService: ProcessObserver {
+    let processObservationService = ProcessObservationService(bundleIdentifier: "com.apple.dt.Xcode")
 
-    var pid: pid_t?
+    var processControllers: (pid: pid_t, svc: ProgramAccessibilityService)?
 
-    var observer: AXObserver?
-    var observerAway: AXObserver?
+    @Published var active: Bool = true
 
-    @Published var active: Bool = false
+    var reassignActiveCancellable: AnyCancellable?
 
-    init() {}
-
-    func start() {
-        let workspace = NSWorkspace.shared
-
-        workspace.notificationCenter.addObserver(self,
-                                                 selector: #selector(applicationLaunched(_:)),
-                                                 name: NSWorkspace.didLaunchApplicationNotification,
-                                                 object: workspace)
-        workspace.notificationCenter.addObserver(self,
-                                                 selector: #selector(applicationTerminated(_:)),
-                                                 name: NSWorkspace.didTerminateApplicationNotification,
-                                                 object: workspace)
-
-        for application in workspace.runningApplications {
-            self.managedApplicationLaunched(application)
-        }
-    }
-
-    func applicationSwitched() {
-        self.active = true
-    }
-
-    func applicationSwitchedAway() {
-        self.active = false
-    }
-
-    @objc func applicationLaunched(_ notification: NSNotification) {
-        let application = notification.userInfo![NSWorkspace.applicationUserInfoKey] as! NSRunningApplication
-        self.managedApplicationLaunched(application)
-    }
-
-    @objc func applicationTerminated(_ notification: NSNotification) {
-        let application = notification.userInfo![NSWorkspace.applicationUserInfoKey] as! NSRunningApplication
+    func applicationLaunched(_ application: NSRunningApplication) {
         let pid = application.processIdentifier
-
-        guard pid == self.pid, let observer = self.observer, let observerAway = self.observerAway else {
+        guard processControllers?.pid != pid else {
             return
         }
-
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(),
-                              AXObserverGetRunLoopSource(observer),
-                              CFRunLoopMode.defaultMode)
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), AXObserverGetRunLoopSource(observerAway), .defaultMode)
-        self.pid = nil
+        if let svc = processControllers?.svc {
+            svc.stop()
+        }
+        let svc = ProgramAccessibilityService(pid: pid)
+        svc.start()
+        reassignActiveCancellable = svc.$active.assign(to: \.active, on: self)
+        processControllers = (pid, svc)
     }
 
-    func managedApplicationLaunched(_ application: NSRunningApplication) {
-        if application.bundleIdentifier == self.managedApplicationId {
-            guard (self.pid == nil && observer == nil && observerAway == nil) else {
-                print("Attempted to observe application twice.")
-                return
-            }
-
-            let pid: pid_t = application.processIdentifier
-            self.pid = pid
-
-            let element = AXUIElementCreateApplication(pid)
-
-            var observer: AXObserver!
-            guard AXObserverCreate(pid, Handle_AppswitchCallback, &observer) == AXError.success else {
-                print("Failed to create observer for application.")
-                return
-            }
-
-            CFRunLoopAddSource(CFRunLoopGetCurrent(),
-                               AXObserverGetRunLoopSource(observer),
-                               CFRunLoopMode.defaultMode);
-
-            guard AXObserverAddNotification(observer, element, kAXApplicationActivatedNotification as CFString, Unmanaged<AccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
-                print("Failed to create observer for application.")
-                return
-            }
-
-            self.observer = observer
-
-            var observerAway: AXObserver!
-            guard AXObserverCreate(pid, Handle_AppswitchAwayCallback, &observerAway) == AXError.success else {
-                print("Failed to create observer for application.")
-                return
-            }
-
-            CFRunLoopAddSource(CFRunLoopGetCurrent(),
-                               AXObserverGetRunLoopSource(observerAway),
-                               CFRunLoopMode.defaultMode);
-
-            guard AXObserverAddNotification(observerAway, element, kAXApplicationDeactivatedNotification as CFString, Unmanaged<AccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
-                print("Failed to create observer for application.")
-                return
-            }
-
-            self.observerAway = observerAway
+    func applicationTerminated(_ application: NSRunningApplication) {
+        let pid = application.processIdentifier
+        if pid == processControllers?.pid {
+            reassignActiveCancellable?.cancel()
+            processControllers?.svc.stop()
+            processControllers = nil
+            self.active = false
         }
     }
-}
 
-private func Handle_AppswitchCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {
-    Unmanaged<AccessibilityService>.fromOpaque(context).takeUnretainedValue().applicationSwitched()
-}
+    func start() {
+        processObservationService.observer = self
+        processObservationService.start()
+    }
 
-private func Handle_AppswitchAwayCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {
-    Unmanaged<AccessibilityService>.fromOpaque(context).takeUnretainedValue().applicationSwitchedAway()
 }
