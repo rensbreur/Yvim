@@ -10,11 +10,14 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var keyboardEventTap: EventTap!
+    var accessibilityService: AccessibilityService!
     var engine: YvimEngine!
     var statusItemController: StatusItemController!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         self.keyboardEventTap = EventTap()
+        self.accessibilityService = AccessibilityService()
+        self.accessibilityService.start()
         self.engine = YvimEngine()
         self.keyboardEventTap.eventHandler = engine
         self.keyboardEventTap.startListening()

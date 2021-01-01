@@ -12,6 +12,7 @@
 		2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C4FD259F67EC00FB06EC /* CGKeyCode+character.swift */; };
 		2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */; };
 		2EA4C508259F74A600FB06EC /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C507259F74A600FB06EC /* Mode.swift */; };
+		2EA4C50F259F82B800FB06EC /* AccessibilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C50E259F82B800FB06EC /* AccessibilityService.swift */; };
 		2EC7406C259D135E00108463 /* EventTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406B259D135E00108463 /* EventTap.swift */; };
 		2EC7406F259D13B100108463 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406E259D13B100108463 /* main.swift */; };
 		2EC74074259DDEE200108463 /* YvimEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74073259DDEE200108463 /* YvimEngine.swift */; };
@@ -27,6 +28,7 @@
 		2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGEvent+keyboardEvent.swift"; sourceTree = "<group>"; };
 		2EA4C507259F74A600FB06EC /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		2EA4C50A259F755300FB06EC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2EA4C50E259F82B800FB06EC /* AccessibilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityService.swift; sourceTree = "<group>"; };
 		2EC7406B259D135E00108463 /* EventTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTap.swift; sourceTree = "<group>"; };
 		2EC7406E259D13B100108463 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2EC74073259DDEE200108463 /* YvimEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimEngine.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				2EC7406E259D13B100108463 /* main.swift */,
 				2EC74076259DDF0500108463 /* AppDelegate.swift */,
 				2EC7406B259D135E00108463 /* EventTap.swift */,
+				2EA4C50E259F82B800FB06EC /* AccessibilityService.swift */,
 				2E0CF26823A29704009BDDFB /* Assets.xcassets */,
 				2E0CF26D23A29704009BDDFB /* Info.plist */,
 				2EC74073259DDEE200108463 /* YvimEngine.swift */,
@@ -149,6 +152,7 @@
 			files = (
 				2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */,
 				2EC7406C259D135E00108463 /* EventTap.swift in Sources */,
+				2EA4C50F259F82B800FB06EC /* AccessibilityService.swift in Sources */,
 				2EA4C508259F74A600FB06EC /* Mode.swift in Sources */,
 				2EC7406F259D13B100108463 /* main.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
