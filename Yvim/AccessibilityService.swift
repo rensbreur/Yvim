@@ -6,8 +6,6 @@
 //  Copyright © 2021 Rens Breur. All rights reserved.
 //
 
-import Foundation
-import ApplicationServices
 import Cocoa
 
 private func Handle_AppswitchCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {

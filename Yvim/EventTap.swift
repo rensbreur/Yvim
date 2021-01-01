@@ -6,8 +6,7 @@
 //  Copyright © 2020 Rens Breur. All rights reserved.
 //
 
-import Cocoa
-import ApplicationServices
+import ApplicationServices.HIServices
 
 protocol EventHandler {
     func handleEvent(_ event: CGEvent, simulateEvent: (CGEvent) -> Void) -> Bool

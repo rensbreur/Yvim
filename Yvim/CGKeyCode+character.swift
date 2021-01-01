@@ -6,9 +6,7 @@
 //  Copyright © 2021 Rens Breur. All rights reserved.
 //
 
-import Foundation
 import Carbon.HIToolbox
-import Carbon
 
 private let currentKeyboard = TISCopyCurrentKeyboardInputSource().takeRetainedValue()
 

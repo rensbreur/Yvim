@@ -6,9 +6,7 @@
 //  Copyright © 2020 Rens Breur. All rights reserved.
 //
 
-import Foundation
 import Carbon.HIToolbox
-import Carbon
 
 class YvimEngine: EventHandler {
     @Published var mode: Mode = .command
