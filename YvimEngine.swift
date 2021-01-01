@@ -10,23 +10,6 @@ import Foundation
 import Carbon.HIToolbox
 import Carbon
 
-enum Mode {
-    case command
-    case transparent // insert, send through all keys
-    case visual
-
-    var description: String {
-        switch self {
-        case .command:
-            return "command"
-        case .transparent:
-            return "insert"
-        case .visual:
-            return "visual"
-        }
-    }
-}
-
 class YvimEngine: EventHandler {
     @Published var mode: Mode = .command
 
