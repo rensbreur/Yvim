@@ -20,9 +20,10 @@ class StatusItemController {
     }
 
     func start() {
-        self.modeCancellable = mode.map { $0.description }.sink { str in
-            self.menuItem.button!.title = str
-        }
+        self.modeCancellable = mode
+            .map { "-- \($0.description.uppercased()) --" }
+            .sink { str in
+                self.menuItem.button!.title = str
+            }
     }
 }
-

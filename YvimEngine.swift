@@ -17,9 +17,12 @@ enum Mode {
 
     var description: String {
         switch self {
-        case .command: return "-- COMMAND --"
-        case .transparent: return "-- INSERT --"
-        case .visual: return "-- VISUAL --"
+        case .command:
+            return "command"
+        case .transparent:
+            return "insert"
+        case .visual:
+            return "visual"
         }
     }
 }
