@@ -10,9 +10,11 @@ import Foundation
 
 class ProgramAccessibilityService {
     let pid: pid_t
+    let element: AXUIElement
 
     init(pid: pid_t) {
         self.pid = pid
+        element = AXUIElementCreateApplication(pid)
     }
 
     @Published var active: Bool = true
@@ -21,8 +23,11 @@ class ProgramAccessibilityService {
     private var observerAway: AXObserver?
 
     func start() {
-        let element = AXUIElementCreateApplication(pid)
+        addApplicationActivatedObserver()
+        addApplicationDeactivatedObserver()
+    }
 
+    func addApplicationActivatedObserver() {
         var observer: AXObserver!
         guard AXObserverCreate(pid, Handle_AppswitchCallback, &observer) == AXError.success else {
             print("Failed to create observer for application.")
@@ -34,12 +39,14 @@ class ProgramAccessibilityService {
                            CFRunLoopMode.defaultMode);
 
         guard AXObserverAddNotification(observer, element, kAXApplicationActivatedNotification as CFString, Unmanaged<ProgramAccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
-            print("Failed to create observer for application.")
+            print("Failed to create notification for application.")
             return
         }
 
         self.observer = observer
+    }
 
+    func addApplicationDeactivatedObserver() {
         var observerAway: AXObserver!
         guard AXObserverCreate(pid, Handle_AppswitchAwayCallback, &observerAway) == AXError.success else {
             print("Failed to create observer for application.")
@@ -51,7 +58,7 @@ class ProgramAccessibilityService {
                            CFRunLoopMode.defaultMode);
 
         guard AXObserverAddNotification(observerAway, element, kAXApplicationDeactivatedNotification as CFString, Unmanaged<ProgramAccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
-            print("Failed to create observer for application.")
+            print("Failed to create notification for application.")
             return
         }
 
@@ -66,7 +73,9 @@ class ProgramAccessibilityService {
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(),
                               AXObserverGetRunLoopSource(observer),
                               CFRunLoopMode.defaultMode)
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), AXObserverGetRunLoopSource(observerAway), .defaultMode)
+        CFRunLoopRemoveSource(CFRunLoopGetCurrent(),
+                              AXObserverGetRunLoopSource(observerAway),
+                              .defaultMode)
     }
 
     func applicationSwitched() {
