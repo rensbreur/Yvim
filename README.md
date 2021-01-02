@@ -4,7 +4,7 @@
 
 Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcode.
 
-![Control mode](screenshot_control.png)
+![Command mode](screenshot_command.png)
 ![Visual mode](screenshot_visual.png)
 ![Insert mode](screenshot_insert.png)
 
