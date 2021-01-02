@@ -10,6 +10,10 @@ import Carbon.HIToolbox
 
 class YvimEngine: EventHandler {
     var active: Bool = true // false when Xcode is not active
+    
+    var bufferEditor: BufferEditor!
+    
+    private var register: String = ""
 
     @Published
     private(set) var mode: Mode = .command
@@ -93,6 +97,11 @@ class YvimEngine: EventHandler {
             if char == "v" && !keyDown {
                 self.mode = .visual
             }
+            
+            // Paste
+            if char == "p" && keyDown {
+                bufferEditor.selectedText = register
+            }
 
             return true
         case .transparent:
@@ -140,6 +149,19 @@ class YvimEngine: EventHandler {
             }
             if event.unicodeString == "$" && keyDown {
                 simulateEvent(keycodeForString("e"), modifierKeys: [.maskControl, .maskShift])
+            }
+            
+            // Deletion
+            if char == "d" && keyDown {
+                self.register = bufferEditor.selectedText
+                bufferEditor.selectedText = ""
+                mode = .command
+            }
+            
+            // Yank
+            if char == "y" && keyDown {
+                self.register = bufferEditor.selectedText
+                mode = .command
             }
 
             return true

@@ -20,6 +20,7 @@
 		2EC7406F259D13B100108463 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406E259D13B100108463 /* main.swift */; };
 		2EC74074259DDEE200108463 /* YvimEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74073259DDEE200108463 /* YvimEngine.swift */; };
 		2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74076259DDF0500108463 /* AppDelegate.swift */; };
+		840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F9BD325A008B2006B942F /* BufferEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		2EC7406E259D13B100108463 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2EC74073259DDEE200108463 /* YvimEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimEngine.swift; sourceTree = "<group>"; };
 		2EC74076259DDF0500108463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		840F9BD325A008B2006B942F /* BufferEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */,
 				2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */,
 				2EA4C507259F74A600FB06EC /* Mode.swift */,
+				840F9BD325A008B2006B942F /* BufferEditor.swift */,
 			);
 			path = Yvim;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				2EC7406C259D135E00108463 /* EventTap.swift in Sources */,
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,
+				840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */,
 				2EA4C508259F74A600FB06EC /* Mode.swift in Sources */,
 				2EC7406F259D13B100108463 /* main.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,

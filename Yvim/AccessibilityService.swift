@@ -12,7 +12,7 @@ import Combine
 class AccessibilityService: ProcessObserver {
     let processObservationService = ProcessObservationService(bundleIdentifier: "com.apple.dt.Xcode")
 
-    var processControllers: (pid: pid_t, svc: ProgramAccessibilityService)?
+    var processController: (pid: pid_t, svc: ProgramAccessibilityService)?
 
     @Published var active: Bool = true
 
@@ -20,24 +20,24 @@ class AccessibilityService: ProcessObserver {
 
     func applicationLaunched(_ application: NSRunningApplication) {
         let pid = application.processIdentifier
-        guard processControllers?.pid != pid else {
+        guard processController?.pid != pid else {
             return
         }
-        if let svc = processControllers?.svc {
+        if let svc = processController?.svc {
             svc.stop()
         }
         let svc = ProgramAccessibilityService(pid: pid)
         svc.start()
         reassignActiveCancellable = svc.$active.assign(to: \.active, on: self)
-        processControllers = (pid, svc)
+        processController = (pid, svc)
     }
 
     func applicationTerminated(_ application: NSRunningApplication) {
         let pid = application.processIdentifier
-        if pid == processControllers?.pid {
+        if pid == processController?.pid {
             reassignActiveCancellable?.cancel()
-            processControllers?.svc.stop()
-            processControllers = nil
+            processController?.svc.stop()
+            processController = nil
             self.active = false
         }
     }

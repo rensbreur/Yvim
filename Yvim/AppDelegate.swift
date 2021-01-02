@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var accessibilityService: AccessibilityService!
     var engine: YvimEngine!
     var statusItemController: StatusItemController!
+    var bufferEditor: AXBufferEditor!
 
     var activeCancellable: AnyCancellable?
 
@@ -29,5 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.statusItemController.active = self.accessibilityService.$active.eraseToAnyPublisher()
         self.statusItemController.start()
         self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimEngine.active, on: self.engine)
+        self.bufferEditor = AXBufferEditor(accessibilitySvc: self.accessibilityService)
+        self.engine.bufferEditor = self.bufferEditor
     }
 }

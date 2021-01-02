@@ -8,6 +8,30 @@
 
 import Foundation
 
+extension AXUIElement {
+    var focusedUIElement: AXUIElement {
+        var attrVal: AnyObject!
+        AXUIElementCopyAttributeValue(self, kAXFocusedUIElementAttribute as CFString, &attrVal)
+        return attrVal as! AXUIElement
+    }
+    
+    var value: String {
+        var attrVal: AnyObject?
+        AXUIElementCopyAttributeValue(self, kAXValueAttribute as CFString, &attrVal)
+        return (attrVal as! CFString) as String
+    }
+    
+    var selectedText: String {
+        var attrVal: AnyObject?
+        AXUIElementCopyAttributeValue(self, kAXSelectedTextAttribute as CFString, &attrVal)
+        return (attrVal as! CFString) as String
+    }
+    
+    func setSelectedText(_ text: String) {
+        AXUIElementSetAttributeValue(self, kAXSelectedTextAttribute as CFString, text as CFString)
+    }
+}
+
 class ProgramAccessibilityService {
     let pid: pid_t
     let element: AXUIElement
@@ -18,16 +42,6 @@ class ProgramAccessibilityService {
     }
 
     @Published var active: Bool = true
-
-    var sourcecodeEditorContents: String {
-        var attrVal: AnyObject?
-        AXUIElementCopyAttributeValue(element, kAXFocusedUIElementAttribute as CFString, &attrVal)
-        let focusedElement = attrVal as! AXUIElement
-        var valuePtr: AnyObject?
-
-        AXUIElementCopyAttributeValue(focusedElement, kAXValueAttribute as CFString, &valuePtr)
-        return (valuePtr as! CFString) as String
-    }
 
     private var observer: AXObserver!
 
