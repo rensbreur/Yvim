@@ -19,16 +19,19 @@ class ProgramAccessibilityService {
 
     @Published var active: Bool = true
 
-    private var observer: AXObserver?
-    private var observerAway: AXObserver?
+    var sourcecodeEditorContents: String {
+        var attrVal: AnyObject?
+        AXUIElementCopyAttributeValue(element, kAXFocusedUIElementAttribute as CFString, &attrVal)
+        let focusedElement = attrVal as! AXUIElement
+        var valuePtr: AnyObject?
 
-    func start() {
-        addApplicationActivatedObserver()
-        addApplicationDeactivatedObserver()
+        AXUIElementCopyAttributeValue(focusedElement, kAXValueAttribute as CFString, &valuePtr)
+        return (valuePtr as! CFString) as String
     }
 
-    func addApplicationActivatedObserver() {
-        var observer: AXObserver!
+    private var observer: AXObserver!
+
+    func start() {
         guard AXObserverCreate(pid, Handle_AppswitchCallback, &observer) == AXError.success else {
             print("Failed to create observer for application.")
             return
@@ -36,46 +39,26 @@ class ProgramAccessibilityService {
 
         CFRunLoopAddSource(CFRunLoopGetCurrent(),
                            AXObserverGetRunLoopSource(observer),
-                           CFRunLoopMode.defaultMode);
+                           CFRunLoopMode.defaultMode)
+        
+        addApplicationActiveNotifications()
+    }
 
+    func addApplicationActiveNotifications() {
         guard AXObserverAddNotification(observer, element, kAXApplicationActivatedNotification as CFString, Unmanaged<ProgramAccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
             print("Failed to create notification for application.")
             return
         }
-
-        self.observer = observer
-    }
-
-    func addApplicationDeactivatedObserver() {
-        var observerAway: AXObserver!
-        guard AXObserverCreate(pid, Handle_AppswitchAwayCallback, &observerAway) == AXError.success else {
-            print("Failed to create observer for application.")
-            return
-        }
-
-        CFRunLoopAddSource(CFRunLoopGetCurrent(),
-                           AXObserverGetRunLoopSource(observerAway),
-                           CFRunLoopMode.defaultMode);
-
-        guard AXObserverAddNotification(observerAway, element, kAXApplicationDeactivatedNotification as CFString, Unmanaged<ProgramAccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
+        guard AXObserverAddNotification(observer, element, kAXApplicationDeactivatedNotification as CFString, Unmanaged<ProgramAccessibilityService>.passUnretained(self).toOpaque()) == AXError.success else {
             print("Failed to create notification for application.")
             return
         }
-
-        self.observerAway = observerAway
     }
 
     func stop() {
-        guard pid == self.pid, let observer = self.observer, let observerAway = self.observerAway else {
-            return
-        }
-
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(),
                               AXObserverGetRunLoopSource(observer),
                               CFRunLoopMode.defaultMode)
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(),
-                              AXObserverGetRunLoopSource(observerAway),
-                              .defaultMode)
     }
 
     func applicationSwitched() {
@@ -88,10 +71,14 @@ class ProgramAccessibilityService {
 
 }
 
-private func Handle_AppswitchCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {
-    Unmanaged<ProgramAccessibilityService>.fromOpaque(context).takeUnretainedValue().applicationSwitched()
-}
-
-private func Handle_AppswitchAwayCallback(observer: AXObserver, element: AXUIElement, string: CFString, context: UnsafeMutableRawPointer!) {
-    Unmanaged<ProgramAccessibilityService>.fromOpaque(context).takeUnretainedValue().applicationSwitchedAway()
+private func Handle_AppswitchCallback(observer: AXObserver, element: AXUIElement, notification: CFString, context: UnsafeMutableRawPointer!) {
+    let srv = Unmanaged<ProgramAccessibilityService>.fromOpaque(context).takeUnretainedValue()
+    switch notification as String {
+    case kAXApplicationActivatedNotification:
+        srv.applicationSwitched()
+    case kAXApplicationDeactivatedNotification:
+        srv.applicationSwitchedAway()
+    default:
+        break
+    }
 }

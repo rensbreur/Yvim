@@ -16,9 +16,7 @@ To always automatically run `Yvim` , add it under the Users preference pane in S
 
 ## Compatibility
 
-Yvim has been tested to work under the following system configurations.
-
-* macOS Catalina | Xcode 12.3
+Yvim has been tested to work under macOS Big Sur and Catalina. It should work independently of the version of Xcode, and has been tested on Xcode 12.3.
 
 ## User guide
 
