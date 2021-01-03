@@ -9,20 +9,21 @@
 import Carbon.HIToolbox
 
 class YvimEngine: EventHandler {
-    var active: Bool = true // false when Xcode is not active
-    
+    var active: Bool = true // is Xcode active
+
     var bufferEditor: BufferEditor!
-    
-    private var register: String = ""
-    
-    private var function: String? = nil
-    
-    private var multiplier: Int?
 
     @Published
     private(set) var mode: Mode = .command
 
     init() {}
+
+    // Delete/yank/paste register
+    private var register: String = ""
+
+    // Parser state
+    private var function: String? = nil
+    private var multiplier: Int?
 
     func handleEvent(_ event: CGEvent, simulateEvent se: (CGEvent) -> Void) -> Bool {
         guard self.active else {
@@ -45,7 +46,10 @@ class YvimEngine: EventHandler {
             se(.keyboardEvent(keyCode: keyCode, keyDown: true, modifierKeys: modifierKeys))
             se(.keyboardEvent(keyCode: keyCode, keyDown: false, modifierKeys: modifierKeys))
         }
-        
+
+        let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
+        defer { editor.commit() }
+
         switch mode {
         case .command:
             
@@ -53,8 +57,8 @@ class YvimEngine: EventHandler {
             if self.function == "f", keyDown, event.unicodeString.count > 0 {
                 self.function = nil
                 let char = event.unicodeString
-                if let fw = self.bufferEditor.lookForward(char.utf16.first!) {
-                    self.bufferEditor.cursorPosition += fw
+                if let fw = editor.lookForward(char.utf16.first!) {
+                    editor.cursorPosition += fw
                 }
                 return true
             }
@@ -63,7 +67,6 @@ class YvimEngine: EventHandler {
             if let digit = Int(event.unicodeString), !(self.multiplier == nil && digit == 0) {
                 if keyDown {
                     self.multiplier = (self.multiplier ?? 0) * 10 + digit
-                    print("Multiplier: \(self.multiplier)")
                 }
                 return true
             }
@@ -93,7 +96,7 @@ class YvimEngine: EventHandler {
                 withMultiplier { simulateEvent(CGKeyCodeConstants.left) }
             }
             if char == "l" && keyDown {
-                bufferEditor.moveForward()
+                editor.moveForward()
             }
             if char == "k" && keyDown {
                 simulateEvent(CGKeyCodeConstants.up)
@@ -138,7 +141,7 @@ class YvimEngine: EventHandler {
             
             // Paste
             if char == "p" && keyDown {
-                bufferEditor.selectedText = register
+                editor.selectedText = register as NSString
             }
 
             return true
@@ -191,14 +194,14 @@ class YvimEngine: EventHandler {
             
             // Deletion
             if char == "d" && keyDown {
-                self.register = bufferEditor.selectedText
-                bufferEditor.selectedText = ""
+                self.register = editor.selectedText as String
+                editor.selectedText = ""
                 mode = .command
             }
             
             // Yank
             if char == "y" && keyDown {
-                self.register = bufferEditor.selectedText
+                self.register = editor.selectedText as String
                 mode = .command
             }
 

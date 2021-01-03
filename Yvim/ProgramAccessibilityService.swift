@@ -15,19 +15,19 @@ extension AXUIElement {
         return attrVal as! AXUIElement
     }
     
-    var value: String {
+    var value: CFString {
         var attrVal: AnyObject?
         AXUIElementCopyAttributeValue(self, kAXValueAttribute as CFString, &attrVal)
-        return (attrVal as! CFString) as String
+        return (attrVal as! CFString)
     }
     
-    var selectedText: String {
+    var selectedText: CFString {
         var attrVal: AnyObject?
         AXUIElementCopyAttributeValue(self, kAXSelectedTextAttribute as CFString, &attrVal)
-        return (attrVal as! CFString) as String
+        return (attrVal as! CFString)
     }
     
-    func setSelectedText(_ text: String) {
+    func setSelectedText(_ text: CFString) {
         AXUIElementSetAttributeValue(self, kAXSelectedTextAttribute as CFString, text as CFString)
     }
     
@@ -42,7 +42,7 @@ extension AXUIElement {
     
     func setSelection(_ range: CFRange) {
         var range = range
-        var attrVal = AXValueCreate(AXValueType(rawValue: kAXValueCFRangeType)!, &range)
+        let attrVal = AXValueCreate(AXValueType(rawValue: kAXValueCFRangeType)!, &range)
         AXUIElementSetAttributeValue(self, kAXSelectedTextRangeAttribute as CFString, attrVal!)
     }
     
