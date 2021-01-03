@@ -4,50 +4,46 @@
 
 Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcode.
 
+#### Command mode
+
 ![Command mode](screenshot_command.png)
-![Visual mode](screenshot_visual.png)
-![Insert mode](screenshot_insert.png)
 
-## How to install
+Move the cursor `h`, `l`, `j`, `k`, optionally multiple steps at once `{n}` + `h`, `l`, `j`, `k`.
 
-* Copy `Yvim.app` to the `/Applications` folder.
-* Launch `Yvim.app` before or after starting Xcode.
-* You will be requested to give `Yvim` the "Accessibility" and "Input monitoring" permissions in System Preferences.
+Jump to the beginning `0` or end `$` of a line, or to the first non-space character `^`.
 
-It is recommended to change to a block cursor style in Xcode in Preferences in the Themes tab.
+Find the first occurrence of a character after the cursor `f` + `{char}`.
 
-To always automatically run `Yvim` , add it under the Users preference pane in System Preferences. It will not affect any apps other than Xcode.
+Paste text that was deleted or yanked in visual mode `p`.
 
-## Compatibility
-
-Yvim has been tested to work under macOS Big Sur and Catalina. It should work independently of the version of Xcode, and has been tested on Xcode 12.3.
-
-## Features
-
-Yvim adds three modes to the source code editor in Xcode. The current mode is displayed in the top right of the menu bar.
-
-For now, Yvim supports the following features:
-
-#### In `-- COMMAND --` mode
-
-Navigate the cursor using the `h`, `l`, `j` and `k` keys.
-
-Insert text before the cursor `i` or after the cursor `a`.
-
-Navigate words using with `w` and `b`.
-
-Move to the beginning `0` or end of a line `$`.
+Insert text before `i` or after the cursor `a`.
 
 Enter visual mode `v`.
 
-Paste text from the internal register `p`.
+#### Visual mode
 
-#### In `-- INSERT --` mode
+![Visual mode](screenshot_visual.png)
 
-Use `esc` to go back to command mode. Any other key or key combination is sent through to Xcode.
+Change the selection `h`, `l`, `j`, `k`.
 
-#### In `-- VISUAL --` mode
+Delete the selection `d` or yank it `y`.
 
-The same navigation controls as in the command mode are supported.
+#### Insert mode
 
-Delete the selection `d`  or `y` to yank it. Both will end up in an internal register that is independent from the system clipboard.
+![Insert mode](screenshot_insert.png)
+
+Any key or key combination is sent through to Xcode.
+
+Use `esc` to go back to command mode.
+
+## How to run
+
+* Change to a block cursor style in Xcode in Preferences in the Themes tab.
+* Launch Yvim.
+* Give Yvim the "Accessibility" and "Input monitoring" permissions in System Preferences.
+
+Yvim does not affect any apps other than Xcode.
+
+## Compatibility
+
+Yvim has been tested to work with macOS Big Sur and Xcode 12.
