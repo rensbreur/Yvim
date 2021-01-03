@@ -21,6 +21,7 @@
 		2EC74074259DDEE200108463 /* YvimEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74073259DDEE200108463 /* YvimEngine.swift */; };
 		2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74076259DDF0500108463 /* AppDelegate.swift */; };
 		840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F9BD325A008B2006B942F /* BufferEditor.swift */; };
+		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		2EC74073259DDEE200108463 /* YvimEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimEngine.swift; sourceTree = "<group>"; };
 		2EC74076259DDF0500108463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		840F9BD325A008B2006B942F /* BufferEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditor.swift; sourceTree = "<group>"; };
+		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */,
 				2EA4C507259F74A600FB06EC /* Mode.swift */,
 				840F9BD325A008B2006B942F /* BufferEditor.swift */,
+				84DE1DC525A265910020963D /* VimSelection.swift */,
 			);
 			path = Yvim;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */,
+				84DE1DC625A265910020963D /* VimSelection.swift in Sources */,
 				2EC7406C259D135E00108463 /* EventTap.swift in Sources */,
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,

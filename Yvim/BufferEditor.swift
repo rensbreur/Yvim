@@ -55,7 +55,8 @@ class BufferEditorOperation {
 extension BufferEditorOperation {
     var cursorPosition: Int {
         get { selectedTextRange.location }
-        set { selectedTextRange.location = newValue }
+        set { selectedTextRange = CFRangeMake(newValue, 0) }
+
     }
 
     func character(at index: Int) -> unichar? {
