@@ -33,7 +33,7 @@ class YvimEngine: EventHandler {
         let keycode = event.keyboardEventKeycode
         let keyDown = event.keyDown
         let char = stringForKeycode(keycode)
-        
+
         let currentMultiplierValue = self.multiplier ?? 1
         func withMultiplier(_ block: () -> Void) {
             print("Multiplying: \(currentMultiplierValue)")
@@ -52,17 +52,19 @@ class YvimEngine: EventHandler {
 
         switch mode {
         case .command:
-            
+
             // [Multi-char] Lookahead
-            if self.function == "f", keyDown, event.unicodeString.count > 0 {
-                self.function = nil
-                let char = event.unicodeString
-                if let fw = editor.lookForward(char.utf16.first!) {
-                    editor.cursorPosition += fw
+            if self.function == "f", event.unicodeString.count > 0 {
+                if keyDown {
+                    let char = event.unicodeString
+                    editor.seekForward(char: char.utf16.first!)
+                }
+                else {
+                    self.function = nil
                 }
                 return true
             }
-            
+
             // Set multiplier
             if let digit = Int(event.unicodeString), !(self.multiplier == nil && digit == 0) {
                 if keyDown {
@@ -74,7 +76,7 @@ class YvimEngine: EventHandler {
             self.multiplier = nil
 
             // Multi-char
-            if char == "f" && keyDown {
+            if char == "f" && !keyDown {
                 self.function = "f"
             }
 
@@ -92,37 +94,36 @@ class YvimEngine: EventHandler {
             }
 
             // Cursor navigation
-            if char == "h" && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.left) }
+            if (char == "h" || keycode == CGKeyCodeConstants.left) && keyDown {
+                withMultiplier { editor.moveBackward() }
             }
-            if char == "l" && keyDown {
-                editor.moveForward()
+            if (char == "l" || keycode == CGKeyCodeConstants.right) && keyDown {
+                withMultiplier { editor.moveForward() }
             }
-            if char == "k" && keyDown {
-                simulateEvent(CGKeyCodeConstants.up)
+            if (char == "k" || keycode == CGKeyCodeConstants.up) && keyDown {
+                withMultiplier { simulateEvent(CGKeyCodeConstants.up) }
             }
-            if char == "j" && keyDown {
-                simulateEvent(CGKeyCodeConstants.down)
-            }
-            if keycode == kVK_LeftArrow || keycode == kVK_RightArrow
-                    || keycode == kVK_UpArrow || keycode == kVK_DownArrow {
-                return false
+            if (char == "j" || keycode == CGKeyCodeConstants.down) && keyDown {
+                withMultiplier { simulateEvent(CGKeyCodeConstants.down) }
             }
 
             // Word navigation
             if (char == "w" || char == "e") && keyDown {
-                simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl]) }
             }
             if char == "b" && keyDown {
-                simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl]) }
             }
 
             // Line navigation
             if char == "0" && keyDown {
-                simulateEvent(keycodeForString("a"), modifierKeys: [.maskControl])
+                editor.moveToBeginningOfLine()
             }
             if event.unicodeString == "$" && keyDown {
-                simulateEvent(keycodeForString("e"), modifierKeys: [.maskControl])
+                editor.moveToEndOfLine()
+            }
+            if event.unicodeString == "^" && keyDown {
+                editor.moveToFirstCharacterInLine()
             }
 
             // New line
@@ -138,7 +139,7 @@ class YvimEngine: EventHandler {
             if char == "v" && !keyDown {
                 self.mode = .visual
             }
-            
+
             // Paste
             if char == "p" && keyDown {
                 editor.selectedText = register as NSString
@@ -164,24 +165,24 @@ class YvimEngine: EventHandler {
 
             // Cursor navigation
             if (char == "h" || keycode == CGKeyCodeConstants.left) && keyDown {
-                simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskShift])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskShift]) }
             }
             if (char == "l" || keycode == CGKeyCodeConstants.right) && keyDown {
-                simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskShift])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskShift]) }
             }
             if (char == "k" || keycode == CGKeyCodeConstants.up) && keyDown {
-                simulateEvent(CGKeyCodeConstants.up, modifierKeys: [.maskShift])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.up, modifierKeys: [.maskShift]) }
             }
             if (char == "j" || keycode == CGKeyCodeConstants.down) && keyDown {
-                simulateEvent(CGKeyCodeConstants.down, modifierKeys: [.maskShift])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.down, modifierKeys: [.maskShift]) }
             }
 
             // Word navigation
             if (char == "w" || char == "e") && keyDown {
-                simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl, .maskShift])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl, .maskShift]) }
             }
             if char == "b" && keyDown {
-                simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl, .maskShift])
+                withMultiplier { simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl, .maskShift]) }
             }
 
             // Line navigation
@@ -191,14 +192,14 @@ class YvimEngine: EventHandler {
             if event.unicodeString == "$" && keyDown {
                 simulateEvent(keycodeForString("e"), modifierKeys: [.maskControl, .maskShift])
             }
-            
+
             // Deletion
             if char == "d" && keyDown {
                 self.register = editor.selectedText as String
                 editor.selectedText = ""
                 mode = .command
             }
-            
+
             // Yank
             if char == "y" && keyDown {
                 self.register = editor.selectedText as String

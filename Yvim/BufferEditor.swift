@@ -58,40 +58,68 @@ extension BufferEditorOperation {
         set { selectedTextRange.location = newValue }
     }
 
-    func lookForward(_ character: unichar) -> Int? {
-        let text = self.text
-        var offset = 0
-        for i in self.cursorPosition..<text.length {
-            if text.character(at: i) == character {
-                return offset
-            }
-            offset += 1
-        }
-        return nil
+    func character(at index: Int) -> unichar? {
+        guard index > 0 else { return nil }
+        guard index < text.length else { return nil }
+        return text.character(at: index)
     }
-    
+
+    func moveForward(while condition: (unichar) -> Bool) {
+        var pos = cursorPosition
+        while let char = character(at: pos), condition(char) {
+            pos += 1
+        }
+        cursorPosition = pos
+    }
+
+    func moveBackward(while condition: (unichar) -> Bool) {
+        var pos = cursorPosition
+        while let char = character(at: pos), condition(char) {
+            pos -= 1
+        }
+        cursorPosition = pos
+    }
+
+    func seekForward(char: unichar) {
+        moveForward()
+        moveForward(while: { $0 != char })
+    }
+
+    func moveToBeginningOfLine() {
+        moveBackward(while: { $0 != "\n" })
+        moveForward()
+    }
+
+    func moveToEndOfLine() {
+        moveForward(while: { $0 != "\n" })
+        moveBackward()
+    }
+
+    func moveToFirstCharacterInLine() {
+        moveToBeginningOfLine()
+        moveForward(while: { $0 == " " })
+    }
+
     func moveForward() {
-        let text = self.text
-        let pos = self.cursorPosition + 1
-        guard pos < text.length else {
-            return
-        }
-        if text.character(at: pos) != "\n".utf16.first! {
-            self.cursorPosition = pos
-        }
-    }
-    
-    func moveBackward() {
-        let text = self.text
-        let pos = self.cursorPosition - 1
-        guard pos >= 0 else {
-            return
-        }
-        if text.character(at: pos) != "\n".utf16.first! {
-            self.cursorPosition = pos
+        let pos = cursorPosition + 1
+        if let char = character(at: pos), char != "\n" {
+            cursorPosition = pos
         }
     }
 
+    func moveBackward() {
+        guard cursorPosition > 0 else { return }
+        if text.character(at: cursorPosition-1) != "\n" {
+            cursorPosition -= 1
+        }
+    }
+
+}
+
+extension unichar: ExpressibleByUnicodeScalarLiteral {
+    public init(unicodeScalarLiteral value: Character) {
+        self = value.utf16.first!
+    }
 }
 
 class AXBufferEditor: BufferEditor {
