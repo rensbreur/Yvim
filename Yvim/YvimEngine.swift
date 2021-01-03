@@ -14,6 +14,10 @@ class YvimEngine: EventHandler {
     var bufferEditor: BufferEditor!
     
     private var register: String = ""
+    
+    private var function: String? = nil
+    
+    private var multiplier: Int?
 
     @Published
     private(set) var mode: Mode = .command
@@ -28,6 +32,14 @@ class YvimEngine: EventHandler {
         let keycode = event.keyboardEventKeycode
         let keyDown = event.keyDown
         let char = stringForKeycode(keycode)
+        
+        let currentMultiplierValue = self.multiplier ?? 1
+        func withMultiplier(_ block: () -> Void) {
+            print("Multiplying: \(currentMultiplierValue)")
+            for _ in 0..<currentMultiplierValue {
+                block()
+            }
+        }
 
         func simulateEvent(_ keyCode: CGKeyCode, modifierKeys: CGEventFlags = []) -> Void {
             se(.keyboardEvent(keyCode: keyCode, keyDown: true, modifierKeys: modifierKeys))
@@ -36,6 +48,32 @@ class YvimEngine: EventHandler {
         
         switch mode {
         case .command:
+            
+            // [Multi-char] Lookahead
+            if self.function == "f", keyDown, event.unicodeString.count > 0 {
+                self.function = nil
+                let char = event.unicodeString
+                if let fw = self.bufferEditor.lookForward(char.utf16.first!) {
+                    self.bufferEditor.cursorPosition += fw
+                }
+                return true
+            }
+            
+            // Set multiplier
+            if let digit = Int(event.unicodeString), !(self.multiplier == nil && digit == 0) {
+                if keyDown {
+                    self.multiplier = (self.multiplier ?? 0) * 10 + digit
+                    print("Multiplier: \(self.multiplier)")
+                }
+                return true
+            }
+
+            self.multiplier = nil
+
+            // Multi-char
+            if char == "f" && keyDown {
+                self.function = "f"
+            }
 
             // Insert
             if char == "i" && !keyDown {
@@ -52,10 +90,10 @@ class YvimEngine: EventHandler {
 
             // Cursor navigation
             if char == "h" && keyDown {
-                simulateEvent(CGKeyCodeConstants.left)
+                withMultiplier { simulateEvent(CGKeyCodeConstants.left) }
             }
             if char == "l" && keyDown {
-                simulateEvent(CGKeyCodeConstants.right)
+                bufferEditor.moveForward()
             }
             if char == "k" && keyDown {
                 simulateEvent(CGKeyCodeConstants.up)

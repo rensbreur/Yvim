@@ -30,6 +30,28 @@ extension AXUIElement {
     func setSelectedText(_ text: String) {
         AXUIElementSetAttributeValue(self, kAXSelectedTextAttribute as CFString, text as CFString)
     }
+    
+    var selection: CFRange {
+        var attrVal: AnyObject?
+        AXUIElementCopyAttributeValue(self, kAXSelectedTextRangeAttribute as CFString, &attrVal)
+        var range: CFRange = CFRangeMake(0,0)
+        print(AXValueGetType((attrVal as! AXValue)).rawValue == kAXValueCFRangeType)
+        AXValueGetValue((attrVal as! AXValue), AXValueType(rawValue: kAXValueCFRangeType)!, &range)
+        return range
+    }
+    
+    func setSelection(_ range: CFRange) {
+        var range = range
+        var attrVal = AXValueCreate(AXValueType(rawValue: kAXValueCFRangeType)!, &range)
+        AXUIElementSetAttributeValue(self, kAXSelectedTextRangeAttribute as CFString, attrVal!)
+    }
+    
+    /// Using NSString's reference semantics to increase performance
+    var text: NSString {
+        var attrVal: AnyObject?
+        AXUIElementCopyAttributeValue(self, kAXValueAttribute as CFString, &attrVal)
+        return (attrVal as! CFString)
+    }
 }
 
 class ProgramAccessibilityService {
