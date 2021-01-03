@@ -4,37 +4,39 @@
 
 Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcode.
 
-#### Command mode
+### Command mode
 
 ![Command mode](screenshot_command.png)
 
-Move the cursor `h`, `l`, `j`, `k`, optionally multiple steps at once `{n}` + `h`, `l`, `j`, `k`.
+* Move the cursor `h`, `l`, `j`, `k`
 
-Jump to the beginning `0` or end `$` of a line, or to the first non-space character `^`.
+* Move multiple steps at once `{n}` + `h`, `l`, `j`, `k`.
 
-Find the first occurrence of a character after the cursor `f` + `{char}`.
+* Jump to the beginning `0` or end `$` of a line, or to the first non-space character `^`.
 
-Paste text that was deleted or yanked in visual mode `p`.
+* Find the first occurrence of a character after the cursor `f` + `{char}`.
 
-Insert text before `i` or after the cursor `a`.
+* Paste text that was deleted or yanked in visual mode `p`.
 
-Enter visual mode `v`.
+* Insert text before `i` or after the cursor `a`.
 
-#### Visual mode
+* Enter visual mode `v`.
+
+### Visual mode
 
 ![Visual mode](screenshot_visual.png)
 
-Change the selection `h`, `l`, `j`, `k`.
+* Change the selection `h`, `l`, `j`, `k`.
 
-Delete the selection `d` or yank it `y`.
+* Delete the selection `d` or yank it `y`.
 
-#### Insert mode
+### Insert mode
 
 ![Insert mode](screenshot_insert.png)
 
-Any key or key combination is sent through to Xcode.
+* Any key or key combination is sent through to Xcode.
 
-Use `esc` to go back to command mode.
+* Use `esc` to go back to command mode.
 
 ## How to run
 
