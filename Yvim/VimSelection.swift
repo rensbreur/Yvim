@@ -8,7 +8,8 @@
 
 import Foundation
 
-/// A range with direction, so that it is clear which end to modify
+/// A range with direction, so that it is clear which end to modify.
+/// A VimSelection always has a absolute length of at least 1.
 struct VimSelection {
     private(set) var start: Int
     private(set) var length: Int // can be negative
@@ -41,5 +42,9 @@ struct VimSelection {
     var cfRange: CFRange {
         if length < 0 { return CFRangeMake(start + length, -length) }
         return CFRangeMake(start, length)
+    }
+
+    static func withRange(location: Int, length: Int = 0) -> VimSelection {
+        VimSelection(start: location == 0 ? 1 : location, length: length)
     }
 }
