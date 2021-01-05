@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var activeCancellable: AnyCancellable?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        self.checkPermissions()
         self.keyboardEventTap = EventTap()
         self.accessibilityService = AccessibilityService()
         self.accessibilityService.start()
@@ -32,5 +33,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimEngine.active, on: self.engine)
         self.bufferEditor = AXBufferEditor(accessibilitySvc: self.accessibilityService)
         self.engine.bufferEditor = self.bufferEditor
+    }
+
+    func checkPermissions() {
+        let trustedCheckOptions = [kAXTrustedCheckOptionPrompt.takeUnretainedValue(): true]
+        let hasPermissions = AXIsProcessTrustedWithOptions(trustedCheckOptions as CFDictionary)
+        if !hasPermissions {
+            let alert = NSAlert()
+            alert.messageText = "Restart Yvim after granting access."
+            alert.runModal()
+            exit(EXIT_FAILURE)
+        }
     }
 }
