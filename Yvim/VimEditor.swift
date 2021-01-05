@@ -46,6 +46,34 @@ class VimEditor {
         }
     }
 
+    func changeSelection(_ movement: VimMovement, multiplier: Int = 1, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) {
+        let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
+        defer { editor.commit() }
+
+        for _ in 0..<multiplier {
+            switch movement {
+            case .forward:
+                simulateKeyPress(CGKeyCodeConstants.left, [.maskShift])
+            case .backward:
+                simulateKeyPress(CGKeyCodeConstants.right, [.maskShift])
+            case .up:
+                simulateKeyPress(CGKeyCodeConstants.up, [.maskShift])
+            case .down:
+                simulateKeyPress(CGKeyCodeConstants.down, [.maskShift])
+            case .nextWord:
+                simulateKeyPress(CGKeyCodeConstants.right, [.maskControl, .maskShift])
+            case .wordBegin:
+                simulateKeyPress(CGKeyCodeConstants.left, [.maskControl, .maskShift])
+            case .lineStart:
+                simulateKeyPress(keycodeForString("a"), [.maskControl, .maskShift])
+            case .lineEnd:
+                simulateKeyPress(keycodeForString("e"), [.maskControl, .maskShift])
+            default:
+                break
+            }
+        }
+    }
+
     func paste() {
         let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
         defer { editor.commit() }

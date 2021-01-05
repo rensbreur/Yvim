@@ -98,29 +98,7 @@ class YvimEngine: EventHandler {
 
             let r = self.movementHandler.feed(KeyEvent(event: keyDown ? .down : .up, keycode: keycode, char: event.unicodeString.first!)) { (arg0) in
                 let (multiplier, movement) = arg0
-
-                for _ in 0..<multiplier {
-                    switch movement {
-                    case .forward:
-                        simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskShift])
-                    case .backward:
-                        simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskShift])
-                    case .up:
-                        simulateEvent(CGKeyCodeConstants.up, modifierKeys: [.maskShift])
-                    case .down:
-                        simulateEvent(CGKeyCodeConstants.down, modifierKeys: [.maskShift])
-                    case .nextWord:
-                        simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl, .maskShift])
-                    case .wordBegin:
-                        simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl, .maskShift])
-                    case .lineStart:
-                        simulateEvent(keycodeForString("a"), modifierKeys: [.maskControl, .maskShift])
-                    case .lineEnd:
-                        simulateEvent(keycodeForString("e"), modifierKeys: [.maskControl, .maskShift])
-                    default:
-                        break
-                    }
-                }
+                editor.changeSelection(movement, multiplier: multiplier, simulateKeyPress: simulateEvent)
             }
 
             if r { return true }
