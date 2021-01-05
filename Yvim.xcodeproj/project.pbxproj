@@ -26,6 +26,8 @@
 		84605E2925A3C7FD00410C44 /* unichar+unicodeScalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */; };
 		84605E2C25A3C81E00410C44 /* NSString+unichar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2B25A3C81E00410C44 /* NSString+unichar.swift */; };
 		84605E2F25A3C83900410C44 /* BufferEditorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */; };
+		84605E3225A3CA3E00410C44 /* VimMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3125A3CA3E00410C44 /* VimMovement.swift */; };
+		84605E3525A3CE8000410C44 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3425A3CE8000410C44 /* Parser.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "unichar+unicodeScalar.swift"; sourceTree = "<group>"; };
 		84605E2B25A3C81E00410C44 /* NSString+unichar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+unichar.swift"; sourceTree = "<group>"; };
 		84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditorOperation.swift; sourceTree = "<group>"; };
+		84605E3125A3CA3E00410C44 /* VimMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimMovement.swift; sourceTree = "<group>"; };
+		84605E3425A3CE8000410C44 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +111,8 @@
 				84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */,
 				84605E2B25A3C81E00410C44 /* NSString+unichar.swift */,
 				84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */,
+				84605E3125A3CA3E00410C44 /* VimMovement.swift */,
+				84605E3425A3CE8000410C44 /* Parser.swift */,
 			);
 			path = Yvim;
 			sourceTree = "<group>";
@@ -195,10 +201,12 @@
 				84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
+				84605E3225A3CA3E00410C44 /* VimMovement.swift in Sources */,
 				2EC74074259DDEE200108463 /* YvimEngine.swift in Sources */,
 				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
 				2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */,
 				2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */,
+				84605E3525A3CE8000410C44 /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
