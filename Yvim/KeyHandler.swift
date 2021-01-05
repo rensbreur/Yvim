@@ -8,8 +8,10 @@
 
 import Foundation
 
+typealias SimulateKeyPress = (CGKeyCode, CGEventFlags) -> Void
+
 protocol KeyHandler {
-    func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) -> Bool
+    func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool
 }
 
 class KeyEventHandler: EventHandler {

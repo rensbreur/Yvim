@@ -14,13 +14,13 @@ class YvimKeyHandler: KeyHandler {
     @Published private(set) var mode: Mode = .command
     var active: Bool = true
 
-    private var movementHandler: ParserKeyHandler<(Int, VimMovement)> = .movementWithMultiplierHandler
+    private let movementHandler: ParserKeyHandler<(Int, VimMovement)> = .movementWithMultiplierHandler
 
     init(editor: VimEditor) {
         self.editor = editor
     }
 
-    func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) -> Bool {
+    func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
         if !self.active {
             return false
         }
@@ -45,7 +45,7 @@ class YvimKeyHandler: KeyHandler {
         }
     }
 
-    func handleCommandModeKey(_ keyEvent: KeyEvent, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) -> Bool {
+    private func handleCommandModeKey(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
         // Move
         let r = self.movementHandler.feed(keyEvent) { (arg0) in
             let (multiplier, movement) = arg0
@@ -87,7 +87,7 @@ class YvimKeyHandler: KeyHandler {
         return true
     }
 
-    func handleVisualModeKey(_ keyEvent: KeyEvent, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) -> Bool {
+    private func handleVisualModeKey(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
         // Enter command mode
         if keyEvent.keycode == kVK_Escape && keyEvent.event == .up {
             mode = .command

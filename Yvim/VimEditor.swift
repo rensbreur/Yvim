@@ -14,7 +14,7 @@ class VimEditor {
     // Delete/yank/paste register
     private var register: String = ""
 
-    func move(_ movement: VimMovement, multiplier: Int = 1, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) {
+    func move(_ movement: VimMovement, multiplier: Int = 1, simulateKeyPress: SimulateKeyPress) {
         let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
         defer { editor.commit() }
 
@@ -46,7 +46,7 @@ class VimEditor {
         }
     }
 
-    func changeSelection(_ movement: VimMovement, multiplier: Int = 1, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) {
+    func changeSelection(_ movement: VimMovement, multiplier: Int = 1, simulateKeyPress: SimulateKeyPress) {
         let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
         defer { editor.commit() }
 
