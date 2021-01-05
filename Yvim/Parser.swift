@@ -54,7 +54,7 @@ class MultiplierParser: ActionParser {
     private var multiplier: Int?
 
     func feed(_ character: Character) -> (Bool, ParseResult<Int>) {
-        guard let digit = Int(String(character)) else {
+        guard let digit = Int(String(character)), !(multiplier == nil && digit == 0) else {
             return (false, .success(multiplier ?? 1))
         }
         self.multiplier = ((self.multiplier ?? 0) * 10) + digit

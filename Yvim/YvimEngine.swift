@@ -22,8 +22,7 @@ class YvimEngine: EventHandler {
     private var register: String = ""
 
     // Parser state
-    private var function: String? = nil
-    private var multiplier: Int?
+    private var movementHandler: ParserKeyHandler<(Int, VimMovement)> = .movementWithMultiplierHandler
 
     func handleEvent(_ event: CGEvent, simulateEvent se: (CGEvent) -> Void) -> Bool {
         guard self.active else {
@@ -33,14 +32,6 @@ class YvimEngine: EventHandler {
         let keycode = event.keyboardEventKeycode
         let keyDown = event.keyDown
         let char = stringForKeycode(keycode)
-
-        let currentMultiplierValue = self.multiplier ?? 1
-        func withMultiplier(_ block: () -> Void) {
-            print("Multiplying: \(currentMultiplierValue)")
-            for _ in 0..<currentMultiplierValue {
-                block()
-            }
-        }
 
         func simulateEvent(_ keyCode: CGKeyCode, modifierKeys: CGEventFlags = []) -> Void {
             se(.keyboardEvent(keyCode: keyCode, keyDown: true, modifierKeys: modifierKeys))
@@ -52,33 +43,38 @@ class YvimEngine: EventHandler {
 
         switch mode {
         case .command:
+            let r = self.movementHandler.feed(KeyEvent(event: keyDown ? .down : .up, keycode: keycode, char: event.unicodeString.first!)) { (arg0) in
+                let (multiplier, movement) = arg0
 
-            // [Multi-char] Lookahead
-            if self.function == "f", event.unicodeString.count > 0 {
-                if keyDown {
-                    let char = event.unicodeString
-                    editor.seekForward(char: char.utf16.first!)
+                for _ in 0..<multiplier {
+                    switch movement {
+                    case .forward:
+                        editor.moveForward()
+                    case .backward:
+                        editor.moveBackward()
+                    case .up:
+                        simulateEvent(CGKeyCodeConstants.up)
+                    case .down:
+                        simulateEvent(CGKeyCodeConstants.down)
+                    case .nextWord:
+                        simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl])
+                    case .wordBegin:
+                        simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl])
+                    case .lineStart:
+                        editor.moveToBeginningOfLine()
+                    case .lineEnd:
+                        editor.moveToEndOfLine()
+                    case .lineFirstNonBlankCharacter:
+                        editor.moveToFirstCharacterInLine()
+                    case .find(char: let char):
+                        editor.seekForward(char: char.utf16.first!)
+                    default:
+                        break
+                    }
                 }
-                else {
-                    self.function = nil
-                }
-                return true
             }
 
-            // Set multiplier
-            if let digit = Int(event.unicodeString), !(self.multiplier == nil && digit == 0) {
-                if keyDown {
-                    self.multiplier = (self.multiplier ?? 0) * 10 + digit
-                }
-                return true
-            }
-
-            self.multiplier = nil
-
-            // Multi-char
-            if char == "f" && !keyDown {
-                self.function = "f"
-            }
+            if r { return true }
 
             // Insert
             if char == "i" && !keyDown {
@@ -91,39 +87,6 @@ class YvimEngine: EventHandler {
             }
             if char == "a" && !keyDown {
                 mode = .transparent
-            }
-
-            // Cursor navigation
-            if (char == "h" || keycode == CGKeyCodeConstants.left) && keyDown {
-                withMultiplier { editor.moveBackward() }
-            }
-            if (char == "l" || keycode == CGKeyCodeConstants.right) && keyDown {
-                withMultiplier { editor.moveForward() }
-            }
-            if (char == "k" || keycode == CGKeyCodeConstants.up) && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.up) }
-            }
-            if (char == "j" || keycode == CGKeyCodeConstants.down) && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.down) }
-            }
-
-            // Word navigation
-            if (char == "w" || char == "e") && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl]) }
-            }
-            if char == "b" && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl]) }
-            }
-
-            // Line navigation
-            if char == "0" && keyDown {
-                editor.moveToBeginningOfLine()
-            }
-            if event.unicodeString == "$" && keyDown {
-                editor.moveToEndOfLine()
-            }
-            if event.unicodeString == "^" && keyDown {
-                editor.moveToFirstCharacterInLine()
             }
 
             // New line
@@ -163,35 +126,34 @@ class YvimEngine: EventHandler {
                 return true
             }
 
-            // Cursor navigation
-            if (char == "h" || keycode == CGKeyCodeConstants.left) && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskShift]) }
-            }
-            if (char == "l" || keycode == CGKeyCodeConstants.right) && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskShift]) }
-            }
-            if (char == "k" || keycode == CGKeyCodeConstants.up) && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.up, modifierKeys: [.maskShift]) }
-            }
-            if (char == "j" || keycode == CGKeyCodeConstants.down) && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.down, modifierKeys: [.maskShift]) }
+            let r = self.movementHandler.feed(KeyEvent(event: keyDown ? .down : .up, keycode: keycode, char: event.unicodeString.first!)) { (arg0) in
+                let (multiplier, movement) = arg0
+
+                for _ in 0..<multiplier {
+                    switch movement {
+                    case .forward:
+                        simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskShift])
+                    case .backward:
+                        simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskShift])
+                    case .up:
+                        simulateEvent(CGKeyCodeConstants.up, modifierKeys: [.maskShift])
+                    case .down:
+                        simulateEvent(CGKeyCodeConstants.down, modifierKeys: [.maskShift])
+                    case .nextWord:
+                        simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl, .maskShift])
+                    case .wordBegin:
+                        simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl, .maskShift])
+                    case .lineStart:
+                        simulateEvent(keycodeForString("a"), modifierKeys: [.maskControl, .maskShift])
+                    case .lineEnd:
+                        simulateEvent(keycodeForString("e"), modifierKeys: [.maskControl, .maskShift])
+                    default:
+                        break
+                    }
+                }
             }
 
-            // Word navigation
-            if (char == "w" || char == "e") && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl, .maskShift]) }
-            }
-            if char == "b" && keyDown {
-                withMultiplier { simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl, .maskShift]) }
-            }
-
-            // Line navigation
-            if char == "0" && keyDown {
-                simulateEvent(keycodeForString("a"), modifierKeys: [.maskControl, .maskShift])
-            }
-            if event.unicodeString == "$" && keyDown {
-                simulateEvent(keycodeForString("e"), modifierKeys: [.maskControl, .maskShift])
-            }
+            if r { return true }
 
             // Deletion
             if char == "d" && keyDown {
