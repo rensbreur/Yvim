@@ -100,33 +100,89 @@
 			children = (
 				2EC7406E259D13B100108463 /* main.swift */,
 				2EC74076259DDF0500108463 /* AppDelegate.swift */,
-				2EC7406B259D135E00108463 /* EventTap.swift */,
+				84605E4925A4D40200410C44 /* Models */,
+				84605E4A25A4D46A00410C44 /* Key handling */,
+				84605E4B25A4D48300410C44 /* Editor */,
+				84605E5125A4D51900410C44 /* Status item */,
+				84605E4C25A4D4AC00410C44 /* Accessibility */,
+				84605E4D25A4D4F600410C44 /* Event tap */,
+				84605E4F25A4D50E00410C44 /* String utilities */,
+				2E0CF26823A29704009BDDFB /* Assets.xcassets */,
+				2E0CF26D23A29704009BDDFB /* Info.plist */,
+			);
+			path = Yvim;
+			sourceTree = "<group>";
+		};
+		84605E4925A4D40200410C44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2EA4C507259F74A600FB06EC /* Mode.swift */,
+				84605E3125A3CA3E00410C44 /* VimMovement.swift */,
+				84DE1DC525A265910020963D /* VimSelection.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		84605E4A25A4D46A00410C44 /* Key handling */ = {
+			isa = PBXGroup;
+			children = (
+				2EC74073259DDEE200108463 /* YvimKeyHandler.swift */,
+				84605E4125A4CBCD00410C44 /* KeyHandler.swift */,
+				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
+				84605E3425A3CE8000410C44 /* Parser.swift */,
+				84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */,
+			);
+			path = "Key handling";
+			sourceTree = "<group>";
+		};
+		84605E4B25A4D48300410C44 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				84605E3D25A4C5F900410C44 /* VimEditor.swift */,
+				840F9BD325A008B2006B942F /* BufferEditor.swift */,
+				84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		84605E4C25A4D4AC00410C44 /* Accessibility */ = {
+			isa = PBXGroup;
+			children = (
 				2EA4C51C259FBDCE00FB06EC /* AccessibilityService.swift */,
 				2EA4C50E259F82B800FB06EC /* ProcessObservationService.swift */,
 				2EA4C518259FB94300FB06EC /* ProgramAccessibilityService.swift */,
-				2E0CF26823A29704009BDDFB /* Assets.xcassets */,
-				2E0CF26D23A29704009BDDFB /* Info.plist */,
-				2EC74073259DDEE200108463 /* YvimKeyHandler.swift */,
-				84605E3D25A4C5F900410C44 /* VimEditor.swift */,
-				2EA4C4F8259F4EA800FB06EC /* StatusItemController.swift */,
-				2EA4C4FD259F67EC00FB06EC /* CGKeyCode+character.swift */,
-				2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */,
-				2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */,
-				2EA4C507259F74A600FB06EC /* Mode.swift */,
-				840F9BD325A008B2006B942F /* BufferEditor.swift */,
-				84DE1DC525A265910020963D /* VimSelection.swift */,
 				84605E2225A3C7A600410C44 /* AXUIElement+TextArea.swift */,
 				84605E2525A3C7D700410C44 /* AXBufferEditor.swift */,
+			);
+			path = Accessibility;
+			sourceTree = "<group>";
+		};
+		84605E4D25A4D4F600410C44 /* Event tap */ = {
+			isa = PBXGroup;
+			children = (
+				2EC7406B259D135E00108463 /* EventTap.swift */,
+				2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */,
+				2EA4C4FD259F67EC00FB06EC /* CGKeyCode+character.swift */,
+				2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */,
+			);
+			path = "Event tap";
+			sourceTree = "<group>";
+		};
+		84605E4F25A4D50E00410C44 /* String utilities */ = {
+			isa = PBXGroup;
+			children = (
 				84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */,
 				84605E2B25A3C81E00410C44 /* NSString+unichar.swift */,
-				84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */,
-				84605E3125A3CA3E00410C44 /* VimMovement.swift */,
-				84605E3425A3CE8000410C44 /* Parser.swift */,
-				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
-				84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */,
-				84605E4125A4CBCD00410C44 /* KeyHandler.swift */,
 			);
-			path = Yvim;
+			path = "String utilities";
+			sourceTree = "<group>";
+		};
+		84605E5125A4D51900410C44 /* Status item */ = {
+			isa = PBXGroup;
+			children = (
+				2EA4C4F8259F4EA800FB06EC /* StatusItemController.swift */,
+			);
+			path = "Status item";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

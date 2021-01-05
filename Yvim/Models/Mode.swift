@@ -10,14 +10,14 @@ import Foundation
 
 enum Mode {
     case command
-    case transparent // insert, send through all keys
+    case insert
     case visual
 
     var description: String {
         switch self {
         case .command:
             return "command"
-        case .transparent:
+        case .insert:
             return "insert"
         case .visual:
             return "visual"

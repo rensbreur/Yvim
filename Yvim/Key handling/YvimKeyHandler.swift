@@ -33,7 +33,7 @@ class YvimKeyHandler: KeyHandler {
         case .command:
             return handleCommandModeKey(keyEvent, simulateKeyPress: simulateKeyPress)
 
-        case .transparent:
+        case .insert:
             if keyEvent.keycode == kVK_Escape && keyEvent.event == .down {
                 mode = .command
                 return true
@@ -57,20 +57,20 @@ class YvimKeyHandler: KeyHandler {
 
         // Insert
         case ("i", .up):
-            mode = .transparent
+            mode = .insert
 
         // Add
         case ("a", .down):
             simulateKeyPress(CGKeyCode(kVK_RightArrow), [])
         case ("a", .up):
-            mode = .transparent
+            mode = .insert
 
         // New line
         case ("o", .down):
             simulateKeyPress(keycodeForString("e"), [.maskControl])
             simulateKeyPress(CGKeyCode(kVK_ANSI_KeypadEnter), [])
         case ("o", .up):
-            self.mode = .transparent
+            self.mode = .insert
 
         // Enter visual mode
         case ("v", .up):
