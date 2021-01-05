@@ -12,7 +12,7 @@ import Combine
 class AppDelegate: NSObject, NSApplicationDelegate {
     var keyboardEventTap: EventTap!
     var accessibilityService: AccessibilityService!
-    var engine: YvimEngine!
+    var engine: YvimKeyHandler!
     var statusItemController: StatusItemController!
     var bufferEditor: AXBufferEditor!
     var editor: VimEditor!
@@ -26,14 +26,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.bufferEditor = AXBufferEditor(accessibilitySvc: self.accessibilityService)
         self.editor = VimEditor()
         self.editor.bufferEditor = self.bufferEditor
-        self.engine = YvimEngine(editor: editor)
+        self.engine = YvimKeyHandler(editor: editor)
         self.statusItemController = StatusItemController()
         self.statusItemController.mode = self.engine.$mode.eraseToAnyPublisher()
         self.statusItemController.active = self.accessibilityService.$active.eraseToAnyPublisher()
         self.statusItemController.start()
-        self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimEngine.active, on: self.engine)
+        self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimKeyHandler.active, on: self.engine)
         self.keyboardEventTap = EventTap()
-        self.keyboardEventTap.eventHandler = engine
+        self.keyboardEventTap.eventHandler = KeyEventHandler(keyHandler: engine)
         self.keyboardEventTap.startListening()
     }
 
