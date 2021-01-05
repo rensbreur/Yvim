@@ -15,24 +15,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var engine: YvimEngine!
     var statusItemController: StatusItemController!
     var bufferEditor: AXBufferEditor!
+    var editor: VimEditor!
 
     var activeCancellable: AnyCancellable?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         self.checkPermissions()
-        self.keyboardEventTap = EventTap()
         self.accessibilityService = AccessibilityService()
         self.accessibilityService.start()
-        self.engine = YvimEngine()
-        self.keyboardEventTap.eventHandler = engine
-        self.keyboardEventTap.startListening()
+        self.bufferEditor = AXBufferEditor(accessibilitySvc: self.accessibilityService)
+        self.editor = VimEditor()
+        self.editor.bufferEditor = self.bufferEditor
+        self.engine = YvimEngine(editor: editor)
         self.statusItemController = StatusItemController()
         self.statusItemController.mode = self.engine.$mode.eraseToAnyPublisher()
         self.statusItemController.active = self.accessibilityService.$active.eraseToAnyPublisher()
         self.statusItemController.start()
         self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimEngine.active, on: self.engine)
-        self.bufferEditor = AXBufferEditor(accessibilitySvc: self.accessibilityService)
-        self.engine.bufferEditor = self.bufferEditor
+        self.keyboardEventTap = EventTap()
+        self.keyboardEventTap.eventHandler = engine
+        self.keyboardEventTap.startListening()
     }
 
     func checkPermissions() {

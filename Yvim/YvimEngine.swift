@@ -9,17 +9,15 @@
 import Carbon.HIToolbox
 
 class YvimEngine: EventHandler {
-    var active: Bool = true // is Xcode active
+    let editor: VimEditor
 
-    var bufferEditor: BufferEditor!
+    var active: Bool = true
 
-    @Published
-    private(set) var mode: Mode = .command
+    @Published private(set) var mode: Mode = .command
 
-    init() {}
-
-    // Delete/yank/paste register
-    private var register: String = ""
+    init(editor: VimEditor) {
+        self.editor = editor
+    }
 
     // Parser state
     private var movementHandler: ParserKeyHandler<(Int, VimMovement)> = .movementWithMultiplierHandler
@@ -38,40 +36,12 @@ class YvimEngine: EventHandler {
             se(.keyboardEvent(keyCode: keyCode, keyDown: false, modifierKeys: modifierKeys))
         }
 
-        let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
-        defer { editor.commit() }
-
         switch mode {
         case .command:
             let r = self.movementHandler.feed(KeyEvent(event: keyDown ? .down : .up, keycode: keycode, char: event.unicodeString.first!)) { (arg0) in
                 let (multiplier, movement) = arg0
 
-                for _ in 0..<multiplier {
-                    switch movement {
-                    case .forward:
-                        editor.moveForward()
-                    case .backward:
-                        editor.moveBackward()
-                    case .up:
-                        simulateEvent(CGKeyCodeConstants.up)
-                    case .down:
-                        simulateEvent(CGKeyCodeConstants.down)
-                    case .nextWord:
-                        simulateEvent(CGKeyCodeConstants.right, modifierKeys: [.maskControl])
-                    case .wordBegin:
-                        simulateEvent(CGKeyCodeConstants.left, modifierKeys: [.maskControl])
-                    case .lineStart:
-                        editor.moveToBeginningOfLine()
-                    case .lineEnd:
-                        editor.moveToEndOfLine()
-                    case .lineFirstNonBlankCharacter:
-                        editor.moveToFirstCharacterInLine()
-                    case .find(char: let char):
-                        editor.seekForward(char: char.utf16.first!)
-                    default:
-                        break
-                    }
-                }
+                editor.move(movement, multiplier: multiplier, simulateKeyPress: simulateEvent(_:modifierKeys:))
             }
 
             if r { return true }
@@ -105,7 +75,7 @@ class YvimEngine: EventHandler {
 
             // Paste
             if char == "p" && keyDown {
-                editor.selectedText = register as NSString
+                editor.paste()
             }
 
             return true
@@ -157,14 +127,13 @@ class YvimEngine: EventHandler {
 
             // Deletion
             if char == "d" && keyDown {
-                self.register = editor.selectedText as String
-                editor.selectedText = ""
+                editor.delete()
                 mode = .command
             }
 
             // Yank
             if char == "y" && keyDown {
-                self.register = editor.selectedText as String
+                editor.yank()
                 mode = .command
             }
 
