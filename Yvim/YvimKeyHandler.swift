@@ -11,100 +11,109 @@ import Carbon.HIToolbox
 class YvimKeyHandler: KeyHandler {
     let editor: VimEditor
 
+    @Published private(set) var mode: Mode = .command
     var active: Bool = true
 
-    @Published private(set) var mode: Mode = .command
+    private var movementHandler: ParserKeyHandler<(Int, VimMovement)> = .movementWithMultiplierHandler
 
     init(editor: VimEditor) {
         self.editor = editor
     }
 
-    // Parser state
-    private var movementHandler: ParserKeyHandler<(Int, VimMovement)> = .movementWithMultiplierHandler
-
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) -> Bool {
-        guard self.active else {
+        if !self.active {
+            return false
+        }
+
+        if keyEvent.modifierKeys.contains(.maskCommand) {
             return false
         }
 
         switch mode {
         case .command:
-            let r = self.movementHandler.feed(keyEvent) { (arg0) in
-                let (multiplier, movement) = arg0
-                editor.move(movement, multiplier: multiplier, simulateKeyPress: simulateKeyPress)
-            }
-            if r { return true }
+            return handleCommandModeKey(keyEvent, simulateKeyPress: simulateKeyPress)
 
-            // Insert
-            if keyEvent.char == "i" && keyEvent.event == .up {
-                mode = .transparent
-            }
-
-            // Add
-            if keyEvent.char == "a" && keyEvent.event == .down {
-                simulateKeyPress(CGKeyCode(kVK_RightArrow), [])
-            }
-            if keyEvent.char == "a" && keyEvent.event == .up {
-                mode = .transparent
-            }
-
-            // New line
-            if keyEvent.char == "o" && keyEvent.event == .down {
-                simulateKeyPress(keycodeForString("e"), [.maskControl])
-                simulateKeyPress(CGKeyCode(kVK_ANSI_KeypadEnter), [])
-            }
-            if keyEvent.char == "o" && keyEvent.event == .up {
-                self.mode = .transparent
-            }
-
-            // Enter visual mode
-            if keyEvent.char == "v" && keyEvent.event == .up {
-                self.mode = .visual
-            }
-
-            // Paste
-            if keyEvent.char == "p" && keyEvent.event == .down {
-                editor.paste()
-            }
-
-            return true
         case .transparent:
-
-            // Enter command mode
             if keyEvent.keycode == kVK_Escape && keyEvent.event == .down {
                 mode = .command
                 return true
             }
-
             return false
+
         case .visual:
+            return handleVisualModeKey(keyEvent, simulateKeyPress: simulateKeyPress)
+        }
+    }
 
-            // Enter command mode
-            if keyEvent.keycode == kVK_Escape && keyEvent.event == .up {
-                mode = .command
-                return true
-            }
+    func handleCommandModeKey(_ keyEvent: KeyEvent, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) -> Bool {
+        // Move
+        let r = self.movementHandler.feed(keyEvent) { (arg0) in
+            let (multiplier, movement) = arg0
+            editor.move(movement, multiplier: multiplier, simulateKeyPress: simulateKeyPress)
+        }
+        if r { return true }
 
-            let r = self.movementHandler.feed(keyEvent) { (arg0) in
-                let (multiplier, movement) = arg0
-                editor.changeSelection(movement, multiplier: multiplier, simulateKeyPress: simulateKeyPress)
-            }
-            if r { return true }
+        switch (keyEvent.char, keyEvent.event) {
 
-            // Deletion
-            if keyEvent.char == "d" && keyEvent.event == .down {
-                editor.delete()
-                mode = .command
-            }
+        // Insert
+        case ("i", .up):
+            mode = .transparent
 
-            // Yank
-            if keyEvent.char == "y" && keyEvent.event == .down {
-                editor.yank()
-                mode = .command
-            }
+        // Add
+        case ("a", .down):
+            simulateKeyPress(CGKeyCode(kVK_RightArrow), [])
+        case ("a", .up):
+            mode = .transparent
 
+        // New line
+        case ("o", .down):
+            simulateKeyPress(keycodeForString("e"), [.maskControl])
+            simulateKeyPress(CGKeyCode(kVK_ANSI_KeypadEnter), [])
+        case ("o", .up):
+            self.mode = .transparent
+
+        // Enter visual mode
+        case ("v", .up):
+            self.mode = .visual
+
+        // Paste
+        case ("p", .down):
+            editor.paste()
+
+        default:
+            break
+        }
+
+        return true
+    }
+
+    func handleVisualModeKey(_ keyEvent: KeyEvent, simulateKeyPress: (CGKeyCode, CGEventFlags) -> Void) -> Bool {
+        // Enter command mode
+        if keyEvent.keycode == kVK_Escape && keyEvent.event == .up {
+            mode = .command
             return true
         }
+
+        // Change selection
+        let r = self.movementHandler.feed(keyEvent) { (arg0) in
+            let (multiplier, movement) = arg0
+            editor.changeSelection(movement, multiplier: multiplier, simulateKeyPress: simulateKeyPress)
+        }
+        if r { return true }
+
+        // Deletion
+        if keyEvent.char == "d" && keyEvent.event == .down {
+            editor.delete()
+            mode = .command
+        }
+
+        // Yank
+        if keyEvent.char == "y" && keyEvent.event == .down {
+            editor.yank()
+            mode = .command
+        }
+
+        return true
     }
 
 }

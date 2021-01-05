@@ -16,4 +16,5 @@ struct KeyEvent {
     let event: Event
     let keycode: CGKeyCode
     let char: Character
+    let modifierKeys: CGEventFlags
 }
