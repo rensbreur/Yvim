@@ -10,30 +10,32 @@ import Cocoa
 import Combine
 
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var yvimKeyHandler: YvimKeyHandler!
+    var editor: VimEditor!
+
     var keyboardEventTap: EventTap!
     var accessibilityService: AccessibilityService!
-    var engine: YvimKeyHandler!
     var statusItemController: StatusItemController!
     var bufferEditor: AXBufferEditor!
-    var editor: VimEditor!
 
     var activeCancellable: AnyCancellable?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+
         self.checkPermissions()
         self.accessibilityService = AccessibilityService()
         self.accessibilityService.start()
         self.bufferEditor = AXBufferEditor(accessibilitySvc: self.accessibilityService)
         self.editor = VimEditor()
         self.editor.bufferEditor = self.bufferEditor
-        self.engine = YvimKeyHandler(editor: editor)
+        self.yvimKeyHandler = YvimKeyHandler(editor: editor)
         self.statusItemController = StatusItemController()
-        self.statusItemController.mode = self.engine.$mode.eraseToAnyPublisher()
+        self.statusItemController.mode = self.yvimKeyHandler.$mode.eraseToAnyPublisher()
         self.statusItemController.active = self.accessibilityService.$active.eraseToAnyPublisher()
         self.statusItemController.start()
-        self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimKeyHandler.active, on: self.engine)
+        self.activeCancellable = self.accessibilityService.$active.assign(to: \YvimKeyHandler.active, on: self.yvimKeyHandler)
         self.keyboardEventTap = EventTap()
-        self.keyboardEventTap.eventHandler = KeyEventHandler(keyHandler: engine)
+        self.keyboardEventTap.eventHandler = KeyEventHandler(keyHandler: yvimKeyHandler)
         self.keyboardEventTap.startListening()
     }
 
