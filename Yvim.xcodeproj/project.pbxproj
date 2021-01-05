@@ -32,6 +32,7 @@
 		84605E3B25A4C4E000410C44 /* ParserKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */; };
 		84605E3E25A4C5F900410C44 /* VimEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3D25A4C5F900410C44 /* VimEditor.swift */; };
 		84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E4125A4CBCD00410C44 /* KeyHandler.swift */; };
+		84605E5525A4D7F400410C44 /* MovementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E5425A4D7F400410C44 /* MovementParser.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserKeyHandler.swift; sourceTree = "<group>"; };
 		84605E3D25A4C5F900410C44 /* VimEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimEditor.swift; sourceTree = "<group>"; };
 		84605E4125A4CBCD00410C44 /* KeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHandler.swift; sourceTree = "<group>"; };
+		84605E5425A4D7F400410C44 /* MovementParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementParser.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 				2EA4C507259F74A600FB06EC /* Mode.swift */,
 				84605E3125A3CA3E00410C44 /* VimMovement.swift */,
 				84DE1DC525A265910020963D /* VimSelection.swift */,
+				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -128,9 +131,9 @@
 			children = (
 				2EC74073259DDEE200108463 /* YvimKeyHandler.swift */,
 				84605E4125A4CBCD00410C44 /* KeyHandler.swift */,
-				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
 				84605E3425A3CE8000410C44 /* Parser.swift */,
 				84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */,
+				84605E5425A4D7F400410C44 /* MovementParser.swift */,
 			);
 			path = "Key handling";
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
 				2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */,
 				2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */,
+				84605E5525A4D7F400410C44 /* MovementParser.swift in Sources */,
 				84605E3525A3CE8000410C44 /* Parser.swift in Sources */,
 				84605E3B25A4C4E000410C44 /* ParserKeyHandler.swift in Sources */,
 			);
