@@ -9,55 +9,61 @@
 import Foundation
 
 class MotionParser: ActionParser {
-    private var find = false
-    private var findReverse = false
-    private var til = false
-    private var tilReverse = false
+    private var parametrizedMotion: ParametrizedVimMotion.Type?
 
     func feed(_ character: Character) -> (Bool, ParseResult<VimMotion>) {
-        if self.find {
-            return (true, .success(VimFind(parameter: character.utf16.first!)))
+        if let parametrizedMotion = self.parametrizedMotion {
+            return (true, .success(parametrizedMotion.init(parameter: character.utf16.first!)))
         }
-        if self.til {
-            return (true, .success(VimTil(parameter: character.utf16.first!)))
+
+        if let parametrizedMotion = readParametrizedMotion(character) {
+            self.parametrizedMotion = parametrizedMotion
+            return (true, .needMore)
         }
-        if self.findReverse {
-            return (true, .success(VimFindReverse(parameter: character.utf16.first!)))
+
+        if let motion = readMotion(character) {
+            return (true, .success(motion))
         }
-        if self.tilReverse {
-            return (true, .success(VimTilReverse(parameter: character.utf16.first!)))
-        }
+
+        return (false, .fail)
+    }
+
+    private func readMotion(_ character: Character) -> VimMotion? {
         switch character {
         case KeyConstants.Motion.forward:
-            return (true, .success(VimMotionForward()))
+            return VimMotionForward()
         case KeyConstants.Motion.backward:
-            return (true, .success(VimMotionBackward()))
-        case KeyConstants.Motion.find:
-            self.find = true
-            return (true, .needMore)
-        case KeyConstants.Motion.findReverse:
-            self.findReverse = true
-            return (true, .needMore)
-        case KeyConstants.Motion.til:
-            self.til = true
-            return (true, .needMore)
-        case KeyConstants.Motion.tilReverse:
-            self.tilReverse = true
-            return (true, .needMore)
+            return VimMotionBackward()
         case KeyConstants.Motion.word:
-            return (true, .success(VimWord()))
+            return VimWord()
         case KeyConstants.Motion.wordBack:
-            return (true, .success(VimBack()))
+            return VimBack()
         case KeyConstants.Motion.wordEnd:
-            return (true, .success(VimEnd()))
+            return VimEnd()
         case KeyConstants.Motion.lineStart:
-            return (true, .success(VimLineStart()))
+            return VimLineStart()
         case KeyConstants.Motion.lineEnd:
-            return (true, .success(VimLineEnd()))
+            return VimLineEnd()
         case KeyConstants.Motion.lineFirstNonBlank:
-            return (true, .success(VimLineFirstNonBlankCharacter()))
+            return VimLineFirstNonBlankCharacter()
         default:
-            return (false, .fail)
+            return nil
         }
     }
+
+    private func readParametrizedMotion(_ character: Character) -> ParametrizedVimMotion.Type? {
+        switch character {
+        case KeyConstants.Motion.find:
+            return VimFind.self
+        case KeyConstants.Motion.findReverse:
+            return VimFindReverse.self
+        case KeyConstants.Motion.til:
+            return VimTil.self
+        case KeyConstants.Motion.tilReverse:
+            return VimTilReverse.self
+        default:
+            return nil
+        }
+    }
+
 }
