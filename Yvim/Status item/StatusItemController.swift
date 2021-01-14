@@ -18,6 +18,14 @@ class StatusItemController {
 
     init() {
         self.menuItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        self.menuItem.menu = NSMenu()
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "")
+        quitItem.target = self
+        self.menuItem.menu?.addItem(quitItem)
+    }
+
+    @objc func quit() {
+        exit(0)
     }
 
     func start() {

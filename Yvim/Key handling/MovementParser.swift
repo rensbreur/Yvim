@@ -16,50 +16,46 @@ class MovementParser: ActionParser {
 
     func feed(_ character: Character) -> (Bool, ParseResult<VimMovement>) {
         if self.find {
-            return (true, .success(.find(char: character)))
+            return (true, .success(VimFind(parameter: character.utf16.first!)))
         }
         if self.til {
-            return (true, .success(.find(char: character)))
+            return (true, .success(VimTil(parameter: character.utf16.first!)))
         }
         if self.findReverse {
-            return (true, .success(.findReverse(char: character)))
+            return (true, .success(VimFindReverse(parameter: character.utf16.first!)))
         }
         if self.tilReverse {
-            return (true, .success(.tilReverse(char: character)))
+            return (true, .success(VimTilReverse(parameter: character.utf16.first!)))
         }
         switch character {
-        case "l":
-            return (true, .success(.forward))
-        case "h":
-            return (true, .success(.backward))
-        case "j":
-            return (true, .success(.down))
-        case "k":
-            return (true, .success(.up))
-        case "f":
+        case KeyConstants.Motion.forward:
+            return (true, .success(VimMovementForward()))
+        case KeyConstants.Motion.backward:
+            return (true, .success(VimMovementBackward()))
+        case KeyConstants.Motion.find:
             self.find = true
             return (true, .needMore)
-        case "F":
+        case KeyConstants.Motion.findReverse:
             self.findReverse = true
             return (true, .needMore)
-        case "t":
+        case KeyConstants.Motion.til:
             self.til = true
             return (true, .needMore)
-        case "T":
+        case KeyConstants.Motion.tilReverse:
             self.tilReverse = true
             return (true, .needMore)
-        case "w":
-            return (true, .success(.nextWord))
-        case "b":
-            return (true, .success(.wordBegin))
-        case "e":
-            return (true, .success(.wordEnd))
-        case "0":
-            return (true, .success(.lineStart))
-        case "$":
-            return (true, .success(.lineEnd))
-        case "^":
-            return (true, .success(.lineFirstNonBlankCharacter))
+        case KeyConstants.Motion.word:
+            return (true, .success(VimWord()))
+        case KeyConstants.Motion.wordBack:
+            return (true, .success(VimBack()))
+        case KeyConstants.Motion.wordEnd:
+            return (true, .success(VimEnd()))
+        case KeyConstants.Motion.lineStart:
+            return (true, .success(VimLineStart()))
+        case KeyConstants.Motion.lineEnd:
+            return (true, .success(VimLineEnd()))
+        case KeyConstants.Motion.lineFirstNonBlank:
+            return (true, .success(VimLineFirstNonBlankCharacter()))
         default:
             return (false, .fail)
         }

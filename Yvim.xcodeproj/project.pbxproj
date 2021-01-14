@@ -16,6 +16,8 @@
 		2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */; };
 		2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C518259FB94300FB06EC /* ProgramAccessibilityService.swift */; };
 		2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C51C259FBDCE00FB06EC /* AccessibilityService.swift */; };
+		2EC4671625AF7E0700E6367D /* NSString+motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4671525AF7E0700E6367D /* NSString+motion.swift */; };
+		2EC4671925AF870E00E6367D /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4671825AF870E00E6367D /* KeyConstants.swift */; };
 		2EC7406C259D135E00108463 /* EventTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406B259D135E00108463 /* EventTap.swift */; };
 		2EC7406F259D13B100108463 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406E259D13B100108463 /* main.swift */; };
 		2EC74074259DDEE200108463 /* YvimKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74073259DDEE200108463 /* YvimKeyHandler.swift */; };
@@ -49,6 +51,8 @@
 		2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGKeyCode+keyConstants.swift"; sourceTree = "<group>"; };
 		2EA4C518259FB94300FB06EC /* ProgramAccessibilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAccessibilityService.swift; sourceTree = "<group>"; };
 		2EA4C51C259FBDCE00FB06EC /* AccessibilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityService.swift; sourceTree = "<group>"; };
+		2EC4671525AF7E0700E6367D /* NSString+motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+motion.swift"; sourceTree = "<group>"; };
+		2EC4671825AF870E00E6367D /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
 		2EC7406B259D135E00108463 /* EventTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTap.swift; sourceTree = "<group>"; };
 		2EC7406E259D13B100108463 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2EC74073259DDEE200108463 /* YvimKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimKeyHandler.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 				84605E3425A3CE8000410C44 /* Parser.swift */,
 				84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */,
 				84605E5425A4D7F400410C44 /* MovementParser.swift */,
+				2EC4671825AF870E00E6367D /* KeyConstants.swift */,
 			);
 			path = "Key handling";
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 			children = (
 				84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */,
 				84605E2B25A3C81E00410C44 /* NSString+unichar.swift */,
+				2EC4671525AF7E0700E6367D /* NSString+motion.swift */,
 			);
 			path = "String utilities";
 			sourceTree = "<group>";
@@ -268,12 +274,14 @@
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,
 				84605E2325A3C7A600410C44 /* AXUIElement+TextArea.swift in Sources */,
+				2EC4671925AF870E00E6367D /* KeyConstants.swift in Sources */,
 				840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */,
 				2EA4C508259F74A600FB06EC /* Mode.swift in Sources */,
 				2EC7406F259D13B100108463 /* main.swift in Sources */,
 				84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */,
 				84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
+				2EC4671625AF7E0700E6367D /* NSString+motion.swift in Sources */,
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
 				84605E3225A3CA3E00410C44 /* VimMovement.swift in Sources */,
 				2EC74074259DDEE200108463 /* YvimKeyHandler.swift in Sources */,

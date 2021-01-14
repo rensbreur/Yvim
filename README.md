@@ -8,13 +8,11 @@ Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcod
 
 ![Command mode](screenshot_command.png)
 
-* Move the cursor `h`, `l`, `j`, `k`
-
-* Move multiple steps at once `{n}` + `h`, `l`, `j`, `k`.
+* Move the cursor one step `h`, `l`, `j`, `k`, or multiple steps at once `{n}` + `h`, `l`, `j`, `k`.
 
 * Jump to the beginning `0` or end `$` of a line, or to the first non-space character `^`.
 
-* Find the first occurrence of a character after the cursor `f` + `{char}`.
+* Find a character after the cursor `f` + `{char}`, or move forward upto a character `t` + `{char}`, or in reverse `F` + `{char}`, `T` + `{char}`.
 
 * Paste text that was deleted or yanked in visual mode `p`.
 

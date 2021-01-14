@@ -48,57 +48,5 @@ extension BufferEditorOperation {
     var cursorPosition: Int {
         get { selectedTextRange.location }
         set { selectedTextRange = CFRangeMake(newValue, 0) }
-
     }
-
-    func moveForward(while condition: (unichar) -> Bool) {
-        var pos = cursorPosition
-        while let char = text.safeCharacter(at: pos), condition(char) {
-            pos += 1
-        }
-        cursorPosition = pos
-    }
-
-    func moveBackward(while condition: (unichar) -> Bool) {
-        var pos = cursorPosition
-        while let char = text.safeCharacter(at: pos), condition(char) {
-            pos -= 1
-        }
-        cursorPosition = pos
-    }
-
-    func seekForward(char: unichar) {
-        moveForward()
-        moveForward(while: { $0 != char })
-    }
-
-    func moveToBeginningOfLine() {
-        moveBackward(while: { $0 != "\n" })
-        moveForward()
-    }
-
-    func moveToEndOfLine() {
-        moveForward(while: { $0 != "\n" })
-        moveBackward()
-    }
-
-    func moveToFirstCharacterInLine() {
-        moveToBeginningOfLine()
-        moveForward(while: { $0 == " " })
-    }
-
-    func moveForward() {
-        let pos = cursorPosition + 1
-        if let char = text.safeCharacter(at: pos), char != "\n" {
-            cursorPosition = pos
-        }
-    }
-
-    func moveBackward() {
-        guard cursorPosition > 0 else { return }
-        if text.character(at: cursorPosition-1) != "\n" {
-            cursorPosition -= 1
-        }
-    }
-
 }

@@ -14,7 +14,7 @@ class AccessibilityService: ProcessObserver {
 
     var processController: (pid: pid_t, svc: ProgramAccessibilityService)?
 
-    @Published var active: Bool = true
+    @Published var active: Bool = false
 
     var reassignActiveCancellable: AnyCancellable?
 

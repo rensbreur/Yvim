@@ -16,62 +16,19 @@ class VimEditor {
 
     func move(_ movement: VimMovement, multiplier: Int = 1, simulateKeyPress: SimulateKeyPress) {
         let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
-        defer { editor.commit() }
-
-        for _ in 0..<multiplier {
-            switch movement {
-            case .forward:
-                editor.moveForward()
-            case .backward:
-                editor.moveBackward()
-            case .up:
-                simulateKeyPress(CGKeyCodeConstants.up, [])
-            case .down:
-                simulateKeyPress(CGKeyCodeConstants.down, [])
-            case .nextWord:
-                simulateKeyPress(CGKeyCodeConstants.right, [.maskControl])
-            case .wordBegin:
-                simulateKeyPress(CGKeyCodeConstants.left, [.maskControl])
-            case .lineStart:
-                editor.moveToBeginningOfLine()
-            case .lineEnd:
-                editor.moveToEndOfLine()
-            case .lineFirstNonBlankCharacter:
-                editor.moveToFirstCharacterInLine()
-            case .find(char: let char):
-                editor.seekForward(char: char.utf16.first!)
-            default:
-                break
-            }
+        for _ in 0 ..< multiplier {
+            editor.cursorPosition = movement.index(from: editor.cursorPosition, in: editor.text)
         }
+        editor.commit()
     }
 
     func changeSelection(_ movement: VimMovement, multiplier: Int = 1, simulateKeyPress: SimulateKeyPress) {
         let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
-        defer { editor.commit() }
-
-        for _ in 0..<multiplier {
-            switch movement {
-            case .forward:
-                simulateKeyPress(CGKeyCodeConstants.left, [.maskShift])
-            case .backward:
-                simulateKeyPress(CGKeyCodeConstants.right, [.maskShift])
-            case .up:
-                simulateKeyPress(CGKeyCodeConstants.up, [.maskShift])
-            case .down:
-                simulateKeyPress(CGKeyCodeConstants.down, [.maskShift])
-            case .nextWord:
-                simulateKeyPress(CGKeyCodeConstants.right, [.maskControl, .maskShift])
-            case .wordBegin:
-                simulateKeyPress(CGKeyCodeConstants.left, [.maskControl, .maskShift])
-            case .lineStart:
-                simulateKeyPress(keycodeForString("a"), [.maskControl, .maskShift])
-            case .lineEnd:
-                simulateKeyPress(keycodeForString("e"), [.maskControl, .maskShift])
-            default:
-                break
-            }
+        for _ in 0 ..< multiplier {
+            let motionEndIndex = movement.index(from: editor.selectedTextRange.location + editor.selectedTextRange.length - 1, in: editor.text)
+            editor.selectedTextRange = CFRangeMake(editor.cursorPosition, motionEndIndex - editor.cursorPosition + 1)
         }
+        editor.commit()
     }
 
     func paste() {
