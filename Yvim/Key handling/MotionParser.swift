@@ -1,5 +1,5 @@
 //
-//  MovementParser.swift
+//  MotionParser.swift
 //  Yvim
 //
 //  Created by Admin on 05.01.21.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-class MovementParser: ActionParser {
+class MotionParser: ActionParser {
     private var find = false
     private var findReverse = false
     private var til = false
     private var tilReverse = false
 
-    func feed(_ character: Character) -> (Bool, ParseResult<VimMovement>) {
+    func feed(_ character: Character) -> (Bool, ParseResult<VimMotion>) {
         if self.find {
             return (true, .success(VimFind(parameter: character.utf16.first!)))
         }
@@ -29,9 +29,9 @@ class MovementParser: ActionParser {
         }
         switch character {
         case KeyConstants.Motion.forward:
-            return (true, .success(VimMovementForward()))
+            return (true, .success(VimMotionForward()))
         case KeyConstants.Motion.backward:
-            return (true, .success(VimMovementBackward()))
+            return (true, .success(VimMotionBackward()))
         case KeyConstants.Motion.find:
             self.find = true
             return (true, .needMore)

@@ -16,7 +16,8 @@
 		2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */; };
 		2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C518259FB94300FB06EC /* ProgramAccessibilityService.swift */; };
 		2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4C51C259FBDCE00FB06EC /* AccessibilityService.swift */; };
-		2EC4671625AF7E0700E6367D /* NSString+motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4671525AF7E0700E6367D /* NSString+motion.swift */; };
+		2EC25F7525B0C4B30068643C /* VimMotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC25F7425B0C4B30068643C /* VimMotions.swift */; };
+		2EC4671625AF7E0700E6367D /* TextPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4671525AF7E0700E6367D /* TextPosition.swift */; };
 		2EC4671925AF870E00E6367D /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4671825AF870E00E6367D /* KeyConstants.swift */; };
 		2EC7406C259D135E00108463 /* EventTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406B259D135E00108463 /* EventTap.swift */; };
 		2EC7406F259D13B100108463 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406E259D13B100108463 /* main.swift */; };
@@ -28,13 +29,13 @@
 		84605E2925A3C7FD00410C44 /* unichar+unicodeScalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */; };
 		84605E2C25A3C81E00410C44 /* NSString+unichar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2B25A3C81E00410C44 /* NSString+unichar.swift */; };
 		84605E2F25A3C83900410C44 /* BufferEditorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */; };
-		84605E3225A3CA3E00410C44 /* VimMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3125A3CA3E00410C44 /* VimMovement.swift */; };
+		84605E3225A3CA3E00410C44 /* VimMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3125A3CA3E00410C44 /* VimMotion.swift */; };
 		84605E3525A3CE8000410C44 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3425A3CE8000410C44 /* Parser.swift */; };
 		84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3725A4C4BF00410C44 /* KeyEvent.swift */; };
 		84605E3B25A4C4E000410C44 /* ParserKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */; };
 		84605E3E25A4C5F900410C44 /* VimEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3D25A4C5F900410C44 /* VimEditor.swift */; };
 		84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E4125A4CBCD00410C44 /* KeyHandler.swift */; };
-		84605E5525A4D7F400410C44 /* MovementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E5425A4D7F400410C44 /* MovementParser.swift */; };
+		84605E5525A4D7F400410C44 /* MotionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E5425A4D7F400410C44 /* MotionParser.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +52,8 @@
 		2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGKeyCode+keyConstants.swift"; sourceTree = "<group>"; };
 		2EA4C518259FB94300FB06EC /* ProgramAccessibilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAccessibilityService.swift; sourceTree = "<group>"; };
 		2EA4C51C259FBDCE00FB06EC /* AccessibilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityService.swift; sourceTree = "<group>"; };
-		2EC4671525AF7E0700E6367D /* NSString+motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+motion.swift"; sourceTree = "<group>"; };
+		2EC25F7425B0C4B30068643C /* VimMotions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimMotions.swift; sourceTree = "<group>"; };
+		2EC4671525AF7E0700E6367D /* TextPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPosition.swift; sourceTree = "<group>"; };
 		2EC4671825AF870E00E6367D /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
 		2EC7406B259D135E00108463 /* EventTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTap.swift; sourceTree = "<group>"; };
 		2EC7406E259D13B100108463 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -63,13 +65,13 @@
 		84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "unichar+unicodeScalar.swift"; sourceTree = "<group>"; };
 		84605E2B25A3C81E00410C44 /* NSString+unichar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+unichar.swift"; sourceTree = "<group>"; };
 		84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditorOperation.swift; sourceTree = "<group>"; };
-		84605E3125A3CA3E00410C44 /* VimMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimMovement.swift; sourceTree = "<group>"; };
+		84605E3125A3CA3E00410C44 /* VimMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimMotion.swift; sourceTree = "<group>"; };
 		84605E3425A3CE8000410C44 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		84605E3725A4C4BF00410C44 /* KeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserKeyHandler.swift; sourceTree = "<group>"; };
 		84605E3D25A4C5F900410C44 /* VimEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimEditor.swift; sourceTree = "<group>"; };
 		84605E4125A4CBCD00410C44 /* KeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHandler.swift; sourceTree = "<group>"; };
-		84605E5425A4D7F400410C44 /* MovementParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementParser.swift; sourceTree = "<group>"; };
+		84605E5425A4D7F400410C44 /* MotionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionParser.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,7 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				2EA4C507259F74A600FB06EC /* Mode.swift */,
-				84605E3125A3CA3E00410C44 /* VimMovement.swift */,
+				84605E3125A3CA3E00410C44 /* VimMotion.swift */,
+				2EC25F7425B0C4B30068643C /* VimMotions.swift */,
 				84DE1DC525A265910020963D /* VimSelection.swift */,
 				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
 			);
@@ -137,7 +140,7 @@
 				84605E4125A4CBCD00410C44 /* KeyHandler.swift */,
 				84605E3425A3CE8000410C44 /* Parser.swift */,
 				84605E3A25A4C4E000410C44 /* ParserKeyHandler.swift */,
-				84605E5425A4D7F400410C44 /* MovementParser.swift */,
+				84605E5425A4D7F400410C44 /* MotionParser.swift */,
 				2EC4671825AF870E00E6367D /* KeyConstants.swift */,
 			);
 			path = "Key handling";
@@ -181,7 +184,7 @@
 			children = (
 				84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */,
 				84605E2B25A3C81E00410C44 /* NSString+unichar.swift */,
-				2EC4671525AF7E0700E6367D /* NSString+motion.swift */,
+				2EC4671525AF7E0700E6367D /* TextPosition.swift */,
 			);
 			path = "String utilities";
 			sourceTree = "<group>";
@@ -281,14 +284,15 @@
 				84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */,
 				84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
-				2EC4671625AF7E0700E6367D /* NSString+motion.swift in Sources */,
+				2EC4671625AF7E0700E6367D /* TextPosition.swift in Sources */,
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
-				84605E3225A3CA3E00410C44 /* VimMovement.swift in Sources */,
+				2EC25F7525B0C4B30068643C /* VimMotions.swift in Sources */,
+				84605E3225A3CA3E00410C44 /* VimMotion.swift in Sources */,
 				2EC74074259DDEE200108463 /* YvimKeyHandler.swift in Sources */,
 				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
 				2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */,
 				2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */,
-				84605E5525A4D7F400410C44 /* MovementParser.swift in Sources */,
+				84605E5525A4D7F400410C44 /* MotionParser.swift in Sources */,
 				84605E3525A3CE8000410C44 /* Parser.swift in Sources */,
 				84605E3B25A4C4E000410C44 /* ParserKeyHandler.swift in Sources */,
 			);

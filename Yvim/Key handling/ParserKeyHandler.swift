@@ -52,7 +52,7 @@ class ParserKeyHandler<T> {
         }
     }
 
-    static var movementWithMultiplierHandler: ParserKeyHandler<(Int, VimMovement)> {
-        ParserKeyHandler<(Int, VimMovement)>(createParser: { return AnyParser(ZipParser(first: AnyParser(MultiplierParser()), then: AnyParser(MovementParser()))) })
+    static var motionWithMultiplierHandler: ParserKeyHandler<(Int, VimMotion)> {
+        ParserKeyHandler<(Int, VimMotion)>(createParser: { return AnyParser(ZipParser(first: AnyParser(MultiplierParser()), then: AnyParser(MotionParser()))) })
     }
 }

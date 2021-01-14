@@ -14,7 +14,7 @@ class YvimKeyHandler: KeyHandler {
     @Published private(set) var mode: Mode = .command
     var active: Bool = false
 
-    private let movementHandler: ParserKeyHandler<(Int, VimMovement)> = .movementWithMultiplierHandler
+    private let motionHandler: ParserKeyHandler<(Int, VimMotion)> = .motionWithMultiplierHandler
 
     init(editor: VimEditor) {
         self.editor = editor
@@ -54,7 +54,7 @@ class YvimKeyHandler: KeyHandler {
         case (KeyConstants.Motion.down, .down):
             simulateKeyPress(CGKeyCode(kVK_DownArrow), [])
 
-        case _ where self.movementHandler.feed(keyEvent, {
+        case _ where self.motionHandler.feed(keyEvent, {
             editor.move($0.1, multiplier: $0.0, simulateKeyPress: simulateKeyPress)
         }):
             return true
@@ -100,7 +100,7 @@ class YvimKeyHandler: KeyHandler {
         case (KeyConstants.Motion.down, .down):
             simulateKeyPress(CGKeyCode(kVK_DownArrow), [.maskShift])
 
-        case _ where self.movementHandler.feed(keyEvent, {
+        case _ where self.motionHandler.feed(keyEvent, {
             editor.changeSelection($0.1, multiplier: $0.0, simulateKeyPress: simulateKeyPress)
         }):
             return true
