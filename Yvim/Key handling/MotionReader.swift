@@ -1,31 +1,29 @@
-//
-//  MotionParser.swift
-//  Yvim
-//
-//  Created by Admin on 05.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
-class MotionParser: ActionParser {
+class MotionReader {
     private var parametrizedMotion: ParametrizedVimMotion.Type?
 
-    func feed(_ character: Character) -> (Bool, ParseResult<VimMotion>) {
+    var motion: VimMotion?
+
+    func feed(character: Character) -> Bool {
+        let char = character
+
         if let parametrizedMotion = self.parametrizedMotion {
-            return (true, .success(parametrizedMotion.init(parameter: character.utf16.first!)))
+            self.motion = parametrizedMotion.init(parameter: char.utf16.first!)
+            return true
         }
 
-        if let parametrizedMotion = readParametrizedMotion(character) {
+        if let parametrizedMotion = readParametrizedMotion(char) {
             self.parametrizedMotion = parametrizedMotion
-            return (true, .needMore)
+            return true
         }
 
-        if let motion = readMotion(character) {
-            return (true, .success(motion))
+        if let motion = readMotion(char) {
+            self.motion = motion
+            return true
         }
 
-        return (false, .fail)
+        return false
     }
 
     private func readMotion(_ character: Character) -> VimMotion? {

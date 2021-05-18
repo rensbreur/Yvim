@@ -11,10 +11,6 @@ class EditorModeInsert: EditorMode {
     }
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
-        if keyEvent.keycode == kVK_Escape && keyEvent.event == .down {
-            context.switchToCommandMode()
-            return true
-        }
         return false
     }
 }

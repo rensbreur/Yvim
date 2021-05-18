@@ -42,6 +42,11 @@ class YvimKeyHandler: KeyHandler {
             return false
         }
 
+        if keyEvent.keycode == kVK_Escape && keyEvent.event == .down {
+            switchToCommandMode()
+            return true
+        }
+
         return self.state.handleKeyEvent(keyEvent, simulateKeyPress: simulateKeyPress)
     }
 }
