@@ -14,20 +14,16 @@ class VimEditor {
     // Delete/yank/paste register
     private var register: String = ""
 
-    func move(_ motion: VimMotion, multiplier: Int = 1, simulateKeyPress: SimulateKeyPress) {
+    func move(_ motion: VimMotion, simulateKeyPress: SimulateKeyPress) {
         let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
-        for _ in 0 ..< multiplier {
-            editor.cursorPosition = motion.index(from: editor.cursorPosition, in: editor.text)
-        }
+        editor.cursorPosition = motion.index(from: editor.cursorPosition, in: editor.text)
         editor.commit()
     }
 
-    func changeSelection(_ motion: VimMotion, multiplier: Int = 1, simulateKeyPress: SimulateKeyPress) {
+    func changeSelection(_ motion: VimMotion, simulateKeyPress: SimulateKeyPress) {
         let editor: BufferEditorOperation = BufferEditorOperation(editor: bufferEditor)
-        for _ in 0 ..< multiplier {
-            let motionEndIndex = motion.index(from: editor.selectedTextRange.location + editor.selectedTextRange.length - 1, in: editor.text)
-            editor.selectedTextRange = CFRangeMake(editor.cursorPosition, motionEndIndex - editor.cursorPosition + 1)
-        }
+        let motionEndIndex = motion.index(from: editor.selectedTextRange.location + editor.selectedTextRange.length - 1, in: editor.text)
+        editor.selectedTextRange = CFRangeMake(editor.cursorPosition, motionEndIndex - editor.cursorPosition + 1)
         editor.commit()
     }
 

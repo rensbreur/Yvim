@@ -9,11 +9,18 @@ class EditorModeVisual: EditorMode {
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
     let selectionCommandReader = SelectionCommandReader()
+    var selection: VimSelection
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: YvimKeyHandler) {
+    init(context: YvimKeyHandler, selection: VimSelection? = nil) {
         self.context = context
+        self.selection = selection ?? VimSelection(anchor: context.editor.bufferEditor.getSelectedTextRange().location)
+        updateSelection()
+    }
+
+    func updateSelection() {
+        self.context.editor.bufferEditor.setSelectedTextRange(selection.range)
     }
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
@@ -28,8 +35,8 @@ class EditorModeVisual: EditorMode {
 
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
-                context.editor.changeSelection(motion, multiplier: multiplierReader.multiplier ?? 1, simulateKeyPress: simulateKeyPress)
-                context.switchToVisualMode()
+                self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: context.editor.bufferEditor.getText())
+                context.switchToVisualMode(selection: self.selection)
             }
             return true
         }

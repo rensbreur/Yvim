@@ -33,8 +33,8 @@ class YvimKeyHandler: KeyHandler {
         self.state = EditorModeInsert(context: self)
     }
 
-    func switchToVisualMode() {
-        self.state = EditorModeVisual(context: self)
+    func switchToVisualMode(selection: VimSelection? = nil) {
+        self.state = EditorModeVisual(context: self, selection: selection)
     }
 
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {

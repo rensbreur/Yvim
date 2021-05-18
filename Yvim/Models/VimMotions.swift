@@ -91,3 +91,20 @@ struct VimLineFirstNonBlankCharacter: VimMotion {
         position.moveForward(while: { $0 == " " })
     }
 }
+
+struct VimMotionMultiplied: VimMotion {
+    let motion: VimMotion
+    let multiplier: Int
+
+    func move(_ position: inout TextPosition) {
+        for _ in 0 ..< multiplier {
+            motion.move(&position)
+        }
+    }
+}
+
+extension VimMotion {
+    func multiplied(_ multiplier: Int) -> VimMotion {
+        VimMotionMultiplied(motion: self, multiplier: multiplier)
+    }
+}

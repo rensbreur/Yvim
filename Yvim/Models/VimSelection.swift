@@ -1,50 +1,30 @@
-//
-//  VimSelection.swift
-//  Yvim
-//
-//  Created by Admin on 03.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
-/// A range with direction, so that it is clear which end to modify.
-/// A VimSelection always has a absolute length of at least 1.
 struct VimSelection {
-    private(set) var start: Int
-    private(set) var length: Int // can be negative
+    init(anchor: Int, movable: Int? = nil) {
+        self.anchor = anchor
+        self.movable = movable ?? anchor
+    }
 
-    /// Move right, keeping a minimum length of 1
-    mutating func moveRight() {
-        if length == -1 {
-            //  <-*
-            //  *-->
-            start -= 1
-            length = 2
-            return
+    private(set) var anchor: Int
+    private(set) var movable: Int
+
+    var start: Int {
+        min(anchor, movable)
+    }
+
+    var end: Int {
+        if movable <= anchor {
+            return anchor + 1
         }
-
-        length += 1
+        return movable + 1
     }
 
-    /// Move left, keeping a minimum length of 1
-    mutating func moveLeft() {
-        if length == 1 {
-            //   *->
-            //  <--*
-            start += 1
-            length = -2
-            return
-        }
-        length -= 1
+    mutating func move(motion: VimMotion, in text: NSString) {
+        movable = motion.index(from: movable, in: text)
     }
 
-    var cfRange: CFRange {
-        if length < 0 { return CFRangeMake(start + length, -length) }
-        return CFRangeMake(start, length)
-    }
-
-    static func withRange(location: Int, length: Int = 0) -> VimSelection {
-        VimSelection(start: location == 0 ? 1 : location, length: length)
+    var range: CFRange {
+        CFRange(location: start, length: end - start)
     }
 }

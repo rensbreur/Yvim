@@ -28,7 +28,7 @@ class EditorModeCommand: EditorMode {
 
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
-                context.editor.move(motion, multiplier: multiplierReader.multiplier ?? 1, simulateKeyPress: simulateKeyPress)
+                context.editor.move(motion.multiplied(multiplierReader.multiplier ?? 1), simulateKeyPress: simulateKeyPress)
                 context.switchToCommandMode()
             }
             return true

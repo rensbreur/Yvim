@@ -1,40 +1,26 @@
-*This is a work in progress!*
-
 #  Yvim
 
 Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcode.
 
-### Command mode
+![Command mode](screenshot.png)
 
-![Command mode](screenshot_command.png)
+### Commands
+
+* Insert text before `i` or after the cursor `a`.
+
+* Paste text that was deleted or yanked `p`.
+
+* Delete `d` + `{motion}` or yank text `y` + `{motion}`.
+
+* Enter visual mode `v`.
+
+### Motions
 
 * Move the cursor one step `h`, `l`, `j`, `k`, or multiple steps at once `{n}` + `h`, `l`, `j`, `k`.
 
 * Jump to the beginning `0` or end `$` of a line, or to the first non-space character `^`.
 
 * Find a character after the cursor `f` + `{char}`, or move forward upto a character `t` + `{char}`, or in reverse `F` + `{char}`, `T` + `{char}`.
-
-* Paste text that was deleted or yanked in visual mode `p`.
-
-* Insert text before `i` or after the cursor `a`.
-
-* Enter visual mode `v`.
-
-### Visual mode
-
-![Visual mode](screenshot_visual.png)
-
-* Change the selection `h`, `l`, `j`, `k`.
-
-* Delete the selection `d` or yank it `y`.
-
-### Insert mode
-
-![Insert mode](screenshot_insert.png)
-
-* Any key or key combination is sent through to Xcode.
-
-* Use `esc` to go back to command mode.
 
 ## How to run
 
