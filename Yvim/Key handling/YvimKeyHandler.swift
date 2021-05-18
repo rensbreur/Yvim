@@ -38,11 +38,11 @@ class YvimKeyHandler: KeyHandler {
             return false
         }
 
-        if keyEvent.modifierKeys.contains(.maskCommand) {
+        if keyEvent.key.modifierKeys.contains(.maskCommand) {
             return false
         }
 
-        if keyEvent.keycode == kVK_Escape && keyEvent.event == .down {
+        if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
             switchToCommandMode()
             return true
         }

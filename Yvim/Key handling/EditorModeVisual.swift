@@ -6,43 +6,46 @@ class EditorModeVisual: EditorMode {
 
     unowned var context: YvimKeyHandler
 
-    let motionHandler: ParserKeyHandler<(Int, VimMotion)> = .motionWithMultiplierHandler
+    let multiplierReader = MultiplierReader()
+    let motionReader = MotionReader()
+
+    private var onKeyUp: (() -> Void)?
 
     init(context: YvimKeyHandler) {
         self.context = context
     }
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
-        switch (keyEvent.char, keyEvent.event) {
-
-        case (_, .up) where keyEvent.keycode == kVK_Escape:
-            context.switchToCommandMode()
+        if keyEvent.event == .up {
+            self.onKeyUp?()
             return true
-
-        case (KeyConstants.Motion.up, .down):
-            simulateKeyPress(CGKeyCode(kVK_UpArrow), [.maskShift])
-
-        case (KeyConstants.Motion.down, .down):
-            simulateKeyPress(CGKeyCode(kVK_DownArrow), [.maskShift])
-
-        case _ where motionHandler.feed(keyEvent, {
-            context.editor.changeSelection($0.1, multiplier: $0.0, simulateKeyPress: simulateKeyPress)
-        }):
-            return true
-
-        case (KeyConstants.delete, .down):
-            context.editor.delete()
-            context.switchToCommandMode()
-
-        case (KeyConstants.yank, .down):
-            context.editor.yank()
-            context.switchToCommandMode()
-
-        default:
-            break
-
         }
 
+        if multiplierReader.feed(character: keyEvent.key.char) {
+            return true
+        }
+
+        if motionReader.feed(character: keyEvent.key.char) {
+            if let motion = motionReader.motion {
+                context.editor.changeSelection(motion, multiplier: multiplierReader.multiplier ?? 1, simulateKeyPress: simulateKeyPress)
+                context.switchToVisualMode()
+            }
+            return true
+        }
+
+        if keyEvent.key.char == KeyConstants.delete {
+            context.editor.delete()
+            context.switchToCommandMode()
+            return true
+        }
+
+        if keyEvent.key.char == KeyConstants.yank {
+            context.editor.yank()
+            context.switchToCommandMode()
+            return true
+        }
+
+        context.switchToCommandMode()
         return true
     }
 }

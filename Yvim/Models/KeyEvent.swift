@@ -14,6 +14,10 @@ struct KeyEvent {
         case down
     }
     let event: Event
+    let key: Key
+}
+
+struct Key {
     let keycode: CGKeyCode
     let char: Character
     let modifierKeys: CGEventFlags

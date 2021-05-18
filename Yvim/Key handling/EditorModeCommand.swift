@@ -21,11 +21,11 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
-        if multiplierReader.feed(character: keyEvent.char) {
+        if multiplierReader.feed(character: keyEvent.key.char) {
             return true
         }
 
-        if motionReader.feed(character: keyEvent.char) {
+        if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
                 context.editor.move(motion, multiplier: multiplierReader.multiplier ?? 1, simulateKeyPress: simulateKeyPress)
                 context.switchToCommandMode()
@@ -33,12 +33,12 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
-        if keyEvent.char == KeyConstants.insert {
+        if keyEvent.key.char == KeyConstants.insert {
             onKeyUp = { [weak self] in self?.context.switchToInsertMode() }
             return true
         }
 
-        if keyEvent.char == KeyConstants.visual {
+        if keyEvent.key.char == KeyConstants.visual {
             onKeyUp = { [weak self] in self?.context.switchToVisualMode() }
             return true
         }
