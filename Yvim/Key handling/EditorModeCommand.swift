@@ -8,6 +8,7 @@ class EditorModeCommand: EditorMode {
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
+    let selectionCommandReader = SelectionCommandReader()
 
     private var onKeyUp: (() -> Void)?
 
@@ -29,6 +30,13 @@ class EditorModeCommand: EditorMode {
             if let motion = motionReader.motion {
                 context.editor.move(motion, multiplier: multiplierReader.multiplier ?? 1, simulateKeyPress: simulateKeyPress)
                 context.switchToCommandMode()
+            }
+            return true
+        }
+
+        if selectionCommandReader.feed(character: keyEvent.key.char) {
+            if let command = selectionCommandReader.command {
+                context.switchToCommandParameterMode(command: command, multiplier: multiplierReader.multiplier ?? 1)
             }
             return true
         }

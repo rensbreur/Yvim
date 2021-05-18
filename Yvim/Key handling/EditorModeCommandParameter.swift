@@ -1,21 +1,24 @@
-import Carbon.HIToolbox
 import Foundation
 
-class EditorModeVisual: EditorMode {
-    let mode: Mode = .visual
+class EditorModeCommandParameter: EditorMode {
+    let mode: Mode = .command
 
     unowned var context: YvimKeyHandler
 
+    let commandMultiplier: Int
+    let command: Command
+
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
-    let selectionCommandReader = SelectionCommandReader()
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: YvimKeyHandler) {
+    init(context: YvimKeyHandler, command: Command, multiplier: Int) {
         self.context = context
+        self.command = command
+        self.commandMultiplier = multiplier
     }
-    
+
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
         if keyEvent.event == .up {
             self.onKeyUp?()
@@ -29,13 +32,6 @@ class EditorModeVisual: EditorMode {
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
                 context.editor.changeSelection(motion, multiplier: multiplierReader.multiplier ?? 1, simulateKeyPress: simulateKeyPress)
-                context.switchToVisualMode()
-            }
-            return true
-        }
-
-        if selectionCommandReader.feed(character: keyEvent.key.char) {
-            if let command = selectionCommandReader.command {
                 command.perform(editor: context.editor)
                 context.switchToCommandMode()
             }
@@ -45,4 +41,5 @@ class EditorModeVisual: EditorMode {
         context.switchToCommandMode()
         return true
     }
+
 }

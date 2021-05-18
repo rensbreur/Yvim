@@ -25,6 +25,10 @@ class YvimKeyHandler: KeyHandler {
         self.state = EditorModeCommand(context: self)
     }
 
+    func switchToCommandParameterMode(command: Command, multiplier: Int) {
+        self.state = EditorModeCommandParameter(context: self, command: command, multiplier: multiplier)
+    }
+
     func switchToInsertMode() {
         self.state = EditorModeInsert(context: self)
     }
