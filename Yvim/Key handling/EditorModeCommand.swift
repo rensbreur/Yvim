@@ -59,16 +59,19 @@ class EditorModeCommand: EditorMode {
 
         if keyEvent.key.char == KeyConstants.VerticalMotion.up {
             simulateKeyPress(CGKeyCode(kVK_UpArrow), [])
+            context.switchToCommandMode()
             return true
         }
 
         if keyEvent.key.char == KeyConstants.VerticalMotion.down {
             simulateKeyPress(CGKeyCode(kVK_DownArrow), [])
+            context.switchToCommandMode()
             return true
         }
 
         if keyEvent.key.char == KeyConstants.undo {
             simulateKeyPress(keycodeForString("z"), [.maskCommand])
+            context.switchToCommandMode()
             return true
         }
 
