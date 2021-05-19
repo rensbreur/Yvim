@@ -41,6 +41,7 @@
 		845E4C942655611700A11E53 /* FreeTextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C932655611700A11E53 /* FreeTextCommand.swift */; };
 		845E4C962655666400A11E53 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C952655666400A11E53 /* Reader.swift */; };
 		845E4C982655668900A11E53 /* CompositeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C972655668900A11E53 /* CompositeReader.swift */; };
+		845E4C9A2655693D00A11E53 /* SimpleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C992655693D00A11E53 /* SimpleReader.swift */; };
 		84605E2325A3C7A600410C44 /* AXUIElement+TextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2225A3C7A600410C44 /* AXUIElement+TextArea.swift */; };
 		84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2525A3C7D700410C44 /* AXBufferEditor.swift */; };
 		84605E2925A3C7FD00410C44 /* unichar+unicodeScalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */; };
@@ -103,6 +104,7 @@
 		845E4C932655611700A11E53 /* FreeTextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextCommand.swift; sourceTree = "<group>"; };
 		845E4C952655666400A11E53 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		845E4C972655668900A11E53 /* CompositeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeReader.swift; sourceTree = "<group>"; };
+		845E4C992655693D00A11E53 /* SimpleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleReader.swift; sourceTree = "<group>"; };
 		84605E2225A3C7A600410C44 /* AXUIElement+TextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AXUIElement+TextArea.swift"; sourceTree = "<group>"; };
 		84605E2525A3C7D700410C44 /* AXBufferEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AXBufferEditor.swift; sourceTree = "<group>"; };
 		84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "unichar+unicodeScalar.swift"; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				84605E4125A4CBCD00410C44 /* KeyHandler.swift */,
 				2EC4671825AF870E00E6367D /* KeyConstants.swift */,
 				845E4C952655666400A11E53 /* Reader.swift */,
+				845E4C992655693D00A11E53 /* SimpleReader.swift */,
 				845E4C972655668900A11E53 /* CompositeReader.swift */,
 				843591E226540D580088F749 /* MultiplierReader.swift */,
 				84605E5425A4D7F400410C44 /* MotionReader.swift */,
@@ -396,6 +399,7 @@
 				2EC4671625AF7E0700E6367D /* TextPosition.swift in Sources */,
 				840AB79D2651BE0B00449ADC /* Mode.swift in Sources */,
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
+				845E4C9A2655693D00A11E53 /* SimpleReader.swift in Sources */,
 				84605E3225A3CA3E00410C44 /* LineMotion.swift in Sources */,
 				845E4C942655611700A11E53 /* FreeTextCommand.swift in Sources */,
 				845E4C982655668900A11E53 /* CompositeReader.swift in Sources */,

@@ -10,15 +10,12 @@ class EditorModeCommand: EditorMode {
     let motionReader = MotionReader()
     lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: context.register))
 
-    private var onKeyUp: (() -> Void)?
-
     init(context: YvimKeyHandler) {
         self.context = context
     }
 
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
-        if keyEvent.event == .up {
-            self.onKeyUp?()
+        guard keyEvent.event == .down else {
             return true
         }
 
@@ -42,7 +39,12 @@ class EditorModeCommand: EditorMode {
 
         if selectionCommandReader.feed(character: keyEvent.key.char) {
             if let command = selectionCommandReader.command {
-                context.switchToCommandParameterMode(command: command, multiplier: multiplierReader.multiplier ?? 1)
+                context.switchToCommandParameterMode() {
+                    let composite = Commands.Composite(commands: [$0, command])
+                    self.context.mostRecentCommand = composite
+                    composite.perform(self.context.editor)
+                    self.context.switchToCommandMode()
+                }
             }
             return true
         }
@@ -50,19 +52,28 @@ class EditorModeCommand: EditorMode {
         if keyEvent.key.char == KeyConstants.insert {
             let insert = FreeTextCommands.Insert()
             insert.performFirstTime(context.editor)
-            onKeyUp = { [weak self] in self?.context.switchToInsertMode(freeTextCommand: insert) }
+            context.onKeyUp = { [weak self] in self?.context.switchToInsertMode(freeTextCommand: insert) }
             return true
         }
 
         if keyEvent.key.char == KeyConstants.add {
             let add = FreeTextCommands.Add()
             add.performFirstTime(context.editor)
-            onKeyUp = { [weak self] in self?.context.switchToInsertMode(freeTextCommand: add) }
+            context.onKeyUp = { [weak self] in self?.context.switchToInsertMode(freeTextCommand: add) }
+            return true
+        }
+
+        if keyEvent.key.char == KeyConstants.change {
+            context.switchToCommandParameterMode() { selection in
+                let change = FreeTextCommands.Change(register: self.context.register, selection: selection)
+                change.performFirstTime(self.context.editor)
+                self.context.onKeyUp = { self.context.switchToInsertMode(freeTextCommand: change) }
+            }
             return true
         }
 
         if keyEvent.key.char == KeyConstants.visual {
-            onKeyUp = { [weak self] in self?.context.switchToVisualMode() }
+            context.onKeyUp = { [weak self] in self?.context.switchToVisualMode() }
             return true
         }
 

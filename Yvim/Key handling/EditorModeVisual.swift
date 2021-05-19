@@ -10,8 +10,9 @@ class EditorModeVisual: EditorMode {
     let motionReader = MotionReader()
     let textObjectReader = TextObjectReader()
     lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: context.register))
+    let changeTextReader = SimpleReader(character: KeyConstants.change)
 
-    lazy var reader = CompositeReader(readers: [motionReader, textObjectReader, selectionCommandReader])
+    lazy var reader = CompositeReader(readers: [motionReader, textObjectReader, selectionCommandReader, changeTextReader])
 
     var selection: VimSelection
 
@@ -56,6 +57,12 @@ class EditorModeVisual: EditorMode {
             if let command = selectionCommandReader.command {
                 command.perform(context.editor)
                 context.switchToCommandMode()
+            }
+
+            if changeTextReader.success {
+                let change = FreeTextCommands.Change(register: context.register)
+                change.performFirstTime(context.editor)
+                context.switchToInsertMode(freeTextCommand: change)
             }
 
             return true

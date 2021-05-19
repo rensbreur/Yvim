@@ -15,6 +15,8 @@ class YvimKeyHandler: KeyHandler {
 
     var mostRecentCommand: Command?
 
+    var onKeyUp: (() -> Void)?
+
     init(editor: BufferEditor) {
         self.editor = editor
         self.mode = .command
@@ -29,8 +31,8 @@ class YvimKeyHandler: KeyHandler {
         self.state = EditorModeCommand(context: self)
     }
 
-    func switchToCommandParameterMode(command: Command, multiplier: Int) {
-        self.state = EditorModeCommandParameter(context: self, command: command, multiplier: multiplier)
+    func switchToCommandParameterMode(completion: @escaping (Command) -> Void) {
+        self.state = EditorModeCommandParameter(context: self, completion: completion)
     }
 
     func switchToInsertMode(freeTextCommand: FreeTextCommand) {
@@ -48,6 +50,11 @@ class YvimKeyHandler: KeyHandler {
 
         if keyEvent.key.modifierKeys.contains(.maskCommand) {
             return false
+        }
+
+        if let onKeyUp = self.onKeyUp {
+            onKeyUp()
+            self.onKeyUp = nil
         }
 
         return self.state.handleKeyEvent(keyEvent, simulateKeyPress: simulateKeyPress)
