@@ -54,6 +54,13 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
+        if keyEvent.key.char == KeyConstants.add {
+            let add = FreeTextCommands.Add()
+            add.performFirstTime(context.editor)
+            onKeyUp = { [weak self] in self?.context.switchToInsertMode(freeTextCommand: add) }
+            return true
+        }
+
         if keyEvent.key.char == KeyConstants.visual {
             onKeyUp = { [weak self] in self?.context.switchToVisualMode() }
             return true

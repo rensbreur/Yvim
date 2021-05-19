@@ -18,7 +18,7 @@ class EditorModeInsert: EditorMode {
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
         guard keyEvent.event == .down else {
-            return true
+            return false
         }
 
         if keyEvent.key.keycode == kVK_Escape {

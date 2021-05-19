@@ -56,6 +56,19 @@ enum Commands {
         }
     }
 
+    struct Add: Command {
+        let text: String
+
+        func perform(_ editor: BufferEditor) {
+            editor.perform {
+                $0.selectedTextRange = CFRangeMake($0.selectedTextRange.location + 1, 0)
+            }
+            editor.perform {
+                $0.selectedText = text as NSString
+            }
+        }
+    }
+
     struct Change: Command {
         let register: Register
         let text: String
