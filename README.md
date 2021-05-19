@@ -6,7 +6,7 @@ Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcod
 
 ### Commands
 
-* Insert text before `i` or after the cursor `a`.
+* Insert text before `i` or after the cursor `a`, finish with `esc`.
 
 * Enter visual mode `v`.
 
@@ -14,11 +14,13 @@ Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcod
 
 * Undo the previous action `u`.
 
+* Repeat the previous action `.`.
+
 ### Operations
 
 Operations take a motion, text object or visual mode selection.
 
-* Delete `d` or yank text `y`.
+* Delete `d`, yank `y` or change text `c`.
 
 ### Motions
 
