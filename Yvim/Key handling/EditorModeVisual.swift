@@ -4,7 +4,7 @@ import Foundation
 class EditorModeVisual: EditorMode {
     let mode: Mode = .visual
 
-    unowned var modeSwitcher: EditorModeSwitcher
+    weak var modeSwitcher: EditorModeSwitcher?
     let register: Register
     let editor: BufferEditor
 
@@ -39,7 +39,7 @@ class EditorModeVisual: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
-            modeSwitcher.switchToCommandMode()
+            modeSwitcher?.switchToCommandMode()
             return true
         }
 
@@ -50,29 +50,29 @@ class EditorModeVisual: EditorMode {
         if reader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
                 self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: editor.getText())
-                modeSwitcher.switchToVisualMode(selection: self.selection)
+                modeSwitcher?.switchToVisualMode(selection: self.selection)
             }
 
             if let textObject = textObjectReader.textObject {
                 self.selection.expand(textObject: textObject, in: editor.getText())
-                modeSwitcher.switchToVisualMode(selection: self.selection)
+                modeSwitcher?.switchToVisualMode(selection: self.selection)
             }
 
             if let command = selectionCommandReader.command {
                 command.perform(editor)
-                modeSwitcher.switchToCommandMode()
+                modeSwitcher?.switchToCommandMode()
             }
 
             if changeTextReader.success {
                 let change = FreeTextCommands.Change(register: register)
                 change.performFirstTime(editor)
-                modeSwitcher.switchToInsertMode(freeTextCommand: change)
+                modeSwitcher?.switchToInsertMode(freeTextCommand: change)
             }
 
             return true
         }
 
-        modeSwitcher.switchToCommandMode()
+        modeSwitcher?.switchToCommandMode()
         return true
     }
 }

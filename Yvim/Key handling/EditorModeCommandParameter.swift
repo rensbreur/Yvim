@@ -4,7 +4,7 @@ import Foundation
 class EditorModeCommandParameter: EditorMode {
     let mode: Mode = .command
 
-    unowned var modeSwitcher: EditorModeSwitcher
+    weak var modeSwitcher: EditorModeSwitcher?
 
     let completion: (Command) -> Void
 
@@ -28,7 +28,7 @@ class EditorModeCommandParameter: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
-            modeSwitcher.switchToCommandMode()
+            modeSwitcher?.switchToCommandMode()
             return true
         }
 
@@ -50,7 +50,7 @@ class EditorModeCommandParameter: EditorMode {
             return true
         }
 
-        modeSwitcher.switchToCommandMode()
+        modeSwitcher?.switchToCommandMode()
 
         return true
     }
