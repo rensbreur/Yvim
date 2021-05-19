@@ -19,7 +19,7 @@ class MainEditor: KeyHandler, EditorModeSwitcher {
         self.editor = editor
         self.mode = .command
         self.commandMemory = CommandMemory()
-        self.state = EditorModeCommand(mainEditor: self, register: register, editor: editor, commandMemory: commandMemory)
+        self.state = EditorModeCommand(modeSwitcher: self, register: register, editor: editor, commandMemory: commandMemory)
         $state
             .compactMap { $0?.mode }
             .sink { [weak self] in self?.mode = $0 }
@@ -44,19 +44,19 @@ class MainEditor: KeyHandler, EditorModeSwitcher {
     }
 
     func switchToCommandMode() {
-        self.state = EditorModeCommand(mainEditor: self, register: register, editor: editor, commandMemory: commandMemory)
+        self.state = EditorModeCommand(modeSwitcher: self, register: register, editor: editor, commandMemory: commandMemory)
     }
 
     func switchToCommandParameterMode(completion: @escaping (Command) -> Void) {
-        self.state = EditorModeCommandParameter(context: self, completion: completion)
+        self.state = EditorModeCommandParameter(modeSwitcher: self, completion: completion)
     }
 
     func switchToInsertMode(freeTextCommand: FreeTextCommand) {
-        self.state = EditorModeInsert(context: self, freeTextCommand: freeTextCommand, commandMemory: commandMemory)
+        self.state = EditorModeInsert(modeSwitcher: self, freeTextCommand: freeTextCommand, commandMemory: commandMemory)
     }
 
     func switchToVisualMode(selection: VimSelection? = nil) {
-        self.state = EditorModeVisual(context: self, selection: selection, register: register, editor: editor)
+        self.state = EditorModeVisual(modeSwitcher: self, selection: selection, register: register, editor: editor)
     }
 
     func onKeyUp(_ block: @escaping () -> Void) {

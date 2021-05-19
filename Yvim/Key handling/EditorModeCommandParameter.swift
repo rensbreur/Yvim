@@ -4,7 +4,7 @@ import Foundation
 class EditorModeCommandParameter: EditorMode {
     let mode: Mode = .command
 
-    unowned var mainEditor: EditorModeSwitcher
+    unowned var modeSwitcher: EditorModeSwitcher
 
     let completion: (Command) -> Void
 
@@ -16,8 +16,8 @@ class EditorModeCommandParameter: EditorMode {
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: EditorModeSwitcher, completion: @escaping (Command) -> Void) {
-        self.mainEditor = context
+    init(modeSwitcher: EditorModeSwitcher, completion: @escaping (Command) -> Void) {
+        self.modeSwitcher = modeSwitcher
         self.completion = completion
     }
 
@@ -28,7 +28,7 @@ class EditorModeCommandParameter: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
-            mainEditor.switchToCommandMode()
+            modeSwitcher.switchToCommandMode()
             return true
         }
 
@@ -50,7 +50,7 @@ class EditorModeCommandParameter: EditorMode {
             return true
         }
 
-        mainEditor.switchToCommandMode()
+        modeSwitcher.switchToCommandMode()
 
         return true
     }

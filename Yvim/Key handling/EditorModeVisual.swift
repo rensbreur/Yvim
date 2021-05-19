@@ -4,7 +4,7 @@ import Foundation
 class EditorModeVisual: EditorMode {
     let mode: Mode = .visual
 
-    unowned var context: EditorModeSwitcher
+    unowned var modeSwitcher: EditorModeSwitcher
     let register: Register
     let editor: BufferEditor
 
@@ -20,8 +20,8 @@ class EditorModeVisual: EditorMode {
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: EditorModeSwitcher, selection: VimSelection? = nil, register: Register, editor: BufferEditor) {
-        self.context = context
+    init(modeSwitcher: EditorModeSwitcher, selection: VimSelection? = nil, register: Register, editor: BufferEditor) {
+        self.modeSwitcher = modeSwitcher
         self.selection = selection ?? VimSelection(anchor: editor.getSelectedTextRange().location)
         self.register = register
         self.editor = editor
@@ -39,7 +39,7 @@ class EditorModeVisual: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
-            context.switchToCommandMode()
+            modeSwitcher.switchToCommandMode()
             return true
         }
 
@@ -50,29 +50,29 @@ class EditorModeVisual: EditorMode {
         if reader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
                 self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: editor.getText())
-                context.switchToVisualMode(selection: self.selection)
+                modeSwitcher.switchToVisualMode(selection: self.selection)
             }
 
             if let textObject = textObjectReader.textObject {
                 self.selection.expand(textObject: textObject, in: editor.getText())
-                context.switchToVisualMode(selection: self.selection)
+                modeSwitcher.switchToVisualMode(selection: self.selection)
             }
 
             if let command = selectionCommandReader.command {
                 command.perform(editor)
-                context.switchToCommandMode()
+                modeSwitcher.switchToCommandMode()
             }
 
             if changeTextReader.success {
                 let change = FreeTextCommands.Change(register: register)
                 change.performFirstTime(editor)
-                context.switchToInsertMode(freeTextCommand: change)
+                modeSwitcher.switchToInsertMode(freeTextCommand: change)
             }
 
             return true
         }
 
-        context.switchToCommandMode()
+        modeSwitcher.switchToCommandMode()
         return true
     }
 }

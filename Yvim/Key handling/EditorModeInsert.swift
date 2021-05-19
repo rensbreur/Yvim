@@ -4,7 +4,7 @@ import Foundation
 class EditorModeInsert: EditorMode {
     let mode: Mode = .insert
 
-    unowned var context: EditorModeSwitcher
+    unowned var modeSwitcher: EditorModeSwitcher
     let commandMemory: CommandMemory
 
     let currentFreeTextCommand: FreeTextCommand
@@ -12,8 +12,8 @@ class EditorModeInsert: EditorMode {
     /// Text is recorded to create a repeatable command
     var recordedText: String = ""
 
-    init(context: EditorModeSwitcher, freeTextCommand: FreeTextCommand, commandMemory: CommandMemory) {
-        self.context = context
+    init(modeSwitcher: EditorModeSwitcher, freeTextCommand: FreeTextCommand, commandMemory: CommandMemory) {
+        self.modeSwitcher = modeSwitcher
         self.currentFreeTextCommand = freeTextCommand
         self.commandMemory = commandMemory
     }
@@ -25,7 +25,7 @@ class EditorModeInsert: EditorMode {
 
         if keyEvent.key.keycode == kVK_Escape {
             commandMemory.mostRecentCommand = currentFreeTextCommand.repeatableCommand(string: recordedText)
-            context.switchToCommandMode()
+            modeSwitcher.switchToCommandMode()
             return true
         }
 
