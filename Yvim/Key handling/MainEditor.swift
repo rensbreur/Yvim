@@ -1,7 +1,18 @@
 import Carbon.HIToolbox
 import Combine
 
-class YvimKeyHandler: KeyHandler {
+protocol MainEditorProtocol: AnyObject {
+    var register: Register { get }
+    var editor: BufferEditor { get }
+    var mostRecentCommand: Command? { get set }
+    func onKeyUp(_ block: @escaping () -> Void)
+    func switchToCommandMode()
+    func switchToCommandParameterMode(completion: @escaping (Command) -> Void)
+    func switchToInsertMode(freeTextCommand: FreeTextCommand)
+    func switchToVisualMode(selection: VimSelection?)
+}
+
+class MainEditor: KeyHandler, MainEditorProtocol {
     let editor: BufferEditor
 
     let register = Register()
@@ -15,12 +26,16 @@ class YvimKeyHandler: KeyHandler {
 
     var mostRecentCommand: Command?
 
-    var onKeyUp: (() -> Void)?
+    private var _onKeyUp: (() -> Void)?
+
+    func onKeyUp(_ block: @escaping () -> Void) {
+        self._onKeyUp = block
+    }
 
     init(editor: BufferEditor) {
         self.editor = editor
         self.mode = .command
-        self.state = EditorModeCommand(context: self)
+        self.state = EditorModeCommand(mainEditor: self)
         $state
             .compactMap { $0?.mode }
             .sink { [weak self] in self?.mode = $0 }
@@ -28,7 +43,7 @@ class YvimKeyHandler: KeyHandler {
     }
 
     func switchToCommandMode() {
-        self.state = EditorModeCommand(context: self)
+        self.state = EditorModeCommand(mainEditor: self)
     }
 
     func switchToCommandParameterMode(completion: @escaping (Command) -> Void) {
@@ -52,9 +67,9 @@ class YvimKeyHandler: KeyHandler {
             return false
         }
 
-        if let onKeyUp = self.onKeyUp {
+        if let onKeyUp = self._onKeyUp {
             onKeyUp()
-            self.onKeyUp = nil
+            self._onKeyUp = nil
         }
 
         return self.state.handleKeyEvent(keyEvent, simulateKeyPress: simulateKeyPress)

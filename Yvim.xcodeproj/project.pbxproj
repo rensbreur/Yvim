@@ -20,7 +20,7 @@
 		2EC4671925AF870E00E6367D /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4671825AF870E00E6367D /* KeyConstants.swift */; };
 		2EC7406C259D135E00108463 /* EventTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406B259D135E00108463 /* EventTap.swift */; };
 		2EC7406F259D13B100108463 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC7406E259D13B100108463 /* main.swift */; };
-		2EC74074259DDEE200108463 /* YvimKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74073259DDEE200108463 /* YvimKeyHandler.swift */; };
+		2EC74074259DDEE200108463 /* MainEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74073259DDEE200108463 /* MainEditor.swift */; };
 		2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC74076259DDF0500108463 /* AppDelegate.swift */; };
 		840AB7972651AD6B00449ADC /* EditorModeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB7962651AD6B00449ADC /* EditorModeCommand.swift */; };
 		840AB7992651ADC800449ADC /* EditorModeInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB7982651ADC800449ADC /* EditorModeInsert.swift */; };
@@ -81,7 +81,7 @@
 		2EC4671825AF870E00E6367D /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
 		2EC7406B259D135E00108463 /* EventTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTap.swift; sourceTree = "<group>"; };
 		2EC7406E259D13B100108463 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		2EC74073259DDEE200108463 /* YvimKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimKeyHandler.swift; sourceTree = "<group>"; };
+		2EC74073259DDEE200108463 /* MainEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEditor.swift; sourceTree = "<group>"; };
 		2EC74076259DDF0500108463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		840AB7962651AD6B00449ADC /* EditorModeCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModeCommand.swift; sourceTree = "<group>"; };
 		840AB7982651ADC800449ADC /* EditorModeInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModeInsert.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		84605E4A25A4D46A00410C44 /* Key handling */ = {
 			isa = PBXGroup;
 			children = (
-				2EC74073259DDEE200108463 /* YvimKeyHandler.swift */,
+				2EC74073259DDEE200108463 /* MainEditor.swift */,
 				2EA4C507259F74A600FB06EC /* EditorMode.swift */,
 				840AB7962651AD6B00449ADC /* EditorModeCommand.swift */,
 				843591E8265417FD0088F749 /* EditorModeCommandParameter.swift */,
@@ -403,7 +403,7 @@
 				84605E3225A3CA3E00410C44 /* LineMotion.swift in Sources */,
 				845E4C942655611700A11E53 /* FreeTextCommand.swift in Sources */,
 				845E4C982655668900A11E53 /* CompositeReader.swift in Sources */,
-				2EC74074259DDEE200108463 /* YvimKeyHandler.swift in Sources */,
+				2EC74074259DDEE200108463 /* MainEditor.swift in Sources */,
 				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
 				843591E9265417FD0088F749 /* EditorModeCommandParameter.swift in Sources */,
 				840AB7972651AD6B00449ADC /* EditorModeCommand.swift in Sources */,

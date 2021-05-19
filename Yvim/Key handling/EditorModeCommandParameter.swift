@@ -4,7 +4,7 @@ import Foundation
 class EditorModeCommandParameter: EditorMode {
     let mode: Mode = .command
 
-    unowned var context: YvimKeyHandler
+    unowned var mainEditor: MainEditorProtocol
 
     let completion: (Command) -> Void
 
@@ -16,8 +16,8 @@ class EditorModeCommandParameter: EditorMode {
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: YvimKeyHandler, completion: @escaping (Command) -> Void) {
-        self.context = context
+    init(context: MainEditor, completion: @escaping (Command) -> Void) {
+        self.mainEditor = context
         self.completion = completion
     }
 
@@ -28,7 +28,7 @@ class EditorModeCommandParameter: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
-            context.switchToCommandMode()
+            mainEditor.switchToCommandMode()
             return true
         }
 
@@ -50,7 +50,7 @@ class EditorModeCommandParameter: EditorMode {
             return true
         }
 
-        context.switchToCommandMode()
+        mainEditor.switchToCommandMode()
 
         return true
     }

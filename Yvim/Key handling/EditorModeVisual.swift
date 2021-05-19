@@ -4,7 +4,7 @@ import Foundation
 class EditorModeVisual: EditorMode {
     let mode: Mode = .visual
 
-    unowned var context: YvimKeyHandler
+    unowned var context: MainEditorProtocol
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
@@ -18,7 +18,7 @@ class EditorModeVisual: EditorMode {
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: YvimKeyHandler, selection: VimSelection? = nil) {
+    init(context: MainEditor, selection: VimSelection? = nil) {
         self.context = context
         self.selection = selection ?? VimSelection(anchor: context.editor.getSelectedTextRange().location)
         updateSelection()

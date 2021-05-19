@@ -4,14 +4,14 @@ import Foundation
 class EditorModeInsert: EditorMode {
     let mode: Mode = .insert
 
-    unowned var context: YvimKeyHandler
+    unowned var context: MainEditorProtocol
 
     let currentFreeTextCommand: FreeTextCommand
 
     /// Text is recorded to create a repeatable command
     var recordedText: String = ""
 
-    init(context: YvimKeyHandler, freeTextCommand: FreeTextCommand) {
+    init(context: MainEditor, freeTextCommand: FreeTextCommand) {
         self.context = context
         self.currentFreeTextCommand = freeTextCommand
     }
