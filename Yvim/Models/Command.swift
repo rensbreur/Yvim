@@ -36,6 +36,19 @@ enum Commands {
         }
     }
 
+    struct PasteAfter: Command {
+        let register: Register
+
+        func perform(_ editor: BufferEditor) {
+            editor.perform {
+                $0.selectedTextRange = CFRangeMake($0.selectedTextRange.location + 1, 0)
+            }
+            editor.perform {
+                $0.selectedText = register.register as NSString
+            }
+        }
+    }
+
     struct Move: Command {
         let motion: LineMotion
 

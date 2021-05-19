@@ -11,7 +11,7 @@ class EditorModeVisual: EditorMode {
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
     let textObjectReader = TextObjectReader()
-    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: register))
+    lazy var selectionCommandReader = ParametrizedCommandReader(register: register)
     let changeTextReader = SimpleReader(character: KeyConstants.change)
 
     lazy var reader = CompositeReader(readers: [motionReader, textObjectReader, selectionCommandReader, changeTextReader])

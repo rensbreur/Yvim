@@ -11,7 +11,9 @@ class EditorModeCommand: EditorMode {
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
-    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: register))
+    lazy var commandReader = CommandReader(register: register)
+    lazy var selectionCommandReader = ParametrizedCommandReader(register: register)
+    lazy var reader = CompositeReader(readers: [motionReader, commandReader, selectionCommandReader])
 
     init(modeSwitcher: EditorModeSwitcher, register: Register, editor: BufferEditor, commandMemory: CommandMemory) {
         self.modeSwitcher = modeSwitcher
@@ -34,16 +36,13 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
-        if motionReader.feed(character: keyEvent.key.char) {
+        if reader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
                 let motion = Commands.Move(motion: motion.multiplied(multiplierReader.multiplier ?? 1))
                 motion.perform(editor)
                 modeSwitcher?.switchToCommandMode()
             }
-            return true
-        }
 
-        if selectionCommandReader.feed(character: keyEvent.key.char) {
             if let command = selectionCommandReader.command {
                 modeSwitcher?.switchToCommandParameterMode() {
                     let composite = Commands.Composite(commands: [$0, command])
@@ -52,6 +51,13 @@ class EditorModeCommand: EditorMode {
                     self.modeSwitcher?.switchToCommandMode()
                 }
             }
+
+            if let command = commandReader.command {
+                self.commandMemory.mostRecentCommand = command
+                command.perform(self.editor)
+                self.modeSwitcher?.switchToCommandMode()
+            }
+
             return true
         }
 

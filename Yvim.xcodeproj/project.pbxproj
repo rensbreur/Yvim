@@ -29,7 +29,7 @@
 		840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F9BD325A008B2006B942F /* BufferEditor.swift */; };
 		843591E326540D580088F749 /* MultiplierReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E226540D580088F749 /* MultiplierReader.swift */; };
 		843591E52654147C0088F749 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E42654147C0088F749 /* Command.swift */; };
-		843591E7265416280088F749 /* SelectionCommandReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E6265416280088F749 /* SelectionCommandReader.swift */; };
+		843591E7265416280088F749 /* ParametrizedCommandReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E6265416280088F749 /* ParametrizedCommandReader.swift */; };
 		843591E9265417FD0088F749 /* EditorModeCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E8265417FD0088F749 /* EditorModeCommandParameter.swift */; };
 		845E4C8026550EEF00A11E53 /* YvimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C7F26550EEF00A11E53 /* YvimTests.swift */; };
 		845E4C8826550EFF00A11E53 /* LineMotionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8726550EFF00A11E53 /* LineMotionTests.swift */; };
@@ -53,6 +53,7 @@
 		84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E5425A4D7F400410C44 /* MotionReader.swift */; };
 		84941804265572C200BE1613 /* CommandMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941803265572C200BE1613 /* CommandMemory.swift */; };
 		84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941805265574AC00BE1613 /* EditorModeSwitcher.swift */; };
+		8494180826557A7400BE1613 /* CommandReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494180726557A7400BE1613 /* CommandReader.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +93,7 @@
 		840F9BD325A008B2006B942F /* BufferEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditor.swift; sourceTree = "<group>"; };
 		843591E226540D580088F749 /* MultiplierReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplierReader.swift; sourceTree = "<group>"; };
 		843591E42654147C0088F749 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
-		843591E6265416280088F749 /* SelectionCommandReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCommandReader.swift; sourceTree = "<group>"; };
+		843591E6265416280088F749 /* ParametrizedCommandReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametrizedCommandReader.swift; sourceTree = "<group>"; };
 		843591E8265417FD0088F749 /* EditorModeCommandParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModeCommandParameter.swift; sourceTree = "<group>"; };
 		845E4C7D26550EEF00A11E53 /* YvimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YvimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		845E4C7F26550EEF00A11E53 /* YvimTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimTests.swift; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 		84605E5425A4D7F400410C44 /* MotionReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReader.swift; sourceTree = "<group>"; };
 		84941803265572C200BE1613 /* CommandMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandMemory.swift; sourceTree = "<group>"; };
 		84941805265574AC00BE1613 /* EditorModeSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModeSwitcher.swift; sourceTree = "<group>"; };
+		8494180726557A7400BE1613 /* CommandReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandReader.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,7 +221,8 @@
 				843591E226540D580088F749 /* MultiplierReader.swift */,
 				84605E5425A4D7F400410C44 /* MotionReader.swift */,
 				845E4C8F265542B100A11E53 /* TextObjectReader.swift */,
-				843591E6265416280088F749 /* SelectionCommandReader.swift */,
+				843591E6265416280088F749 /* ParametrizedCommandReader.swift */,
+				8494180726557A7400BE1613 /* CommandReader.swift */,
 			);
 			path = "Key handling";
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8494180826557A7400BE1613 /* CommandReader.swift in Sources */,
 				845E4C962655666400A11E53 /* Reader.swift in Sources */,
 				2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */,
 				84DE1DC625A265910020963D /* VimSelection.swift in Sources */,
@@ -388,7 +392,7 @@
 				84605E2F25A3C83900410C44 /* BufferEditorOperation.swift in Sources */,
 				843591E52654147C0088F749 /* Command.swift in Sources */,
 				84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */,
-				843591E7265416280088F749 /* SelectionCommandReader.swift in Sources */,
+				843591E7265416280088F749 /* ParametrizedCommandReader.swift in Sources */,
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,
 				845E4C8A26553DFD00A11E53 /* TextObject.swift in Sources */,
