@@ -9,9 +9,7 @@
 import Foundation
 
 enum KeyConstants {
-    enum Motion {
-        static let up: Character = "k"
-        static let down: Character = "j"
+    enum LineMotion {
         static let forward: Character = "l"
         static let backward: Character = "h"
         static let find: Character = "f"
@@ -24,6 +22,10 @@ enum KeyConstants {
         static let lineStart: Character = "0"
         static let lineEnd: Character = "$"
         static let lineFirstNonBlank: Character = "^"
+    }
+    enum VerticalMotion {
+        static let up: Character = "k"
+        static let down: Character = "j"
     }
     static let insert: Character = "i"
     static let add: Character = "a"

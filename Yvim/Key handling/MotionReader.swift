@@ -28,21 +28,21 @@ class MotionReader {
 
     private func readMotion(_ character: Character) -> LineMotion? {
         switch character {
-        case KeyConstants.Motion.forward:
+        case KeyConstants.LineMotion.forward:
             return LineMotions.Forward()
-        case KeyConstants.Motion.backward:
+        case KeyConstants.LineMotion.backward:
             return LineMotions.Backward()
-        case KeyConstants.Motion.word:
+        case KeyConstants.LineMotion.word:
             return LineMotions.Word()
-        case KeyConstants.Motion.wordBack:
+        case KeyConstants.LineMotion.wordBack:
             return LineMotions.Back()
-        case KeyConstants.Motion.wordEnd:
+        case KeyConstants.LineMotion.wordEnd:
             return LineMotions.End()
-        case KeyConstants.Motion.lineStart:
+        case KeyConstants.LineMotion.lineStart:
             return LineMotions.LineStart()
-        case KeyConstants.Motion.lineEnd:
+        case KeyConstants.LineMotion.lineEnd:
             return LineMotions.LineEnd()
-        case KeyConstants.Motion.lineFirstNonBlank:
+        case KeyConstants.LineMotion.lineFirstNonBlank:
             return LineMotions.LineFirstNonBlankCharacter()
         default:
             return nil
@@ -51,13 +51,13 @@ class MotionReader {
 
     private func readParametrizedMotion(_ character: Character) -> LineMotionParametrized.Type? {
         switch character {
-        case KeyConstants.Motion.find:
+        case KeyConstants.LineMotion.find:
             return LineMotions.Find.self
-        case KeyConstants.Motion.findReverse:
+        case KeyConstants.LineMotion.findReverse:
             return LineMotions.FindReverse.self
-        case KeyConstants.Motion.til:
+        case KeyConstants.LineMotion.til:
             return LineMotions.Til.self
-        case KeyConstants.Motion.tilReverse:
+        case KeyConstants.LineMotion.tilReverse:
             return LineMotions.TilReverse.self
         default:
             return nil

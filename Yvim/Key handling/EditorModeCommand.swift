@@ -51,6 +51,16 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
+        if keyEvent.key.char == KeyConstants.VerticalMotion.up {
+            simulateKeyPress(CGKeyCode(kVK_UpArrow), [])
+            return true
+        }
+
+        if keyEvent.key.char == KeyConstants.VerticalMotion.down {
+            simulateKeyPress(CGKeyCode(kVK_DownArrow), [])
+            return true
+        }
+
         context.switchToCommandMode()
         return true
     }
