@@ -20,7 +20,7 @@ struct VimSelection {
         return movable + 1
     }
 
-    mutating func move(motion: VimMotion, in text: NSString) {
+    mutating func move(motion: LineMotion, in text: NSString) {
         movable = motion.index(from: movable, in: text)
     }
 

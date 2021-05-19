@@ -1,9 +1,9 @@
 import Foundation
 
 class MotionReader {
-    private var parametrizedMotion: ParametrizedVimMotion.Type?
+    private var parametrizedMotion: LineMotionParametrized.Type?
 
-    var motion: VimMotion?
+    var motion: LineMotion?
 
     func feed(character: Character) -> Bool {
         let char = character
@@ -26,39 +26,39 @@ class MotionReader {
         return false
     }
 
-    private func readMotion(_ character: Character) -> VimMotion? {
+    private func readMotion(_ character: Character) -> LineMotion? {
         switch character {
         case KeyConstants.Motion.forward:
-            return VimMotionForward()
+            return LineMotions.Forward()
         case KeyConstants.Motion.backward:
-            return VimMotionBackward()
+            return LineMotions.Backward()
         case KeyConstants.Motion.word:
-            return VimWord()
+            return LineMotions.Word()
         case KeyConstants.Motion.wordBack:
-            return VimBack()
+            return LineMotions.Back()
         case KeyConstants.Motion.wordEnd:
-            return VimEnd()
+            return LineMotions.End()
         case KeyConstants.Motion.lineStart:
-            return VimLineStart()
+            return LineMotions.LineStart()
         case KeyConstants.Motion.lineEnd:
-            return VimLineEnd()
+            return LineMotions.LineEnd()
         case KeyConstants.Motion.lineFirstNonBlank:
-            return VimLineFirstNonBlankCharacter()
+            return LineMotions.LineFirstNonBlankCharacter()
         default:
             return nil
         }
     }
 
-    private func readParametrizedMotion(_ character: Character) -> ParametrizedVimMotion.Type? {
+    private func readParametrizedMotion(_ character: Character) -> LineMotionParametrized.Type? {
         switch character {
         case KeyConstants.Motion.find:
-            return VimFind.self
+            return LineMotions.Find.self
         case KeyConstants.Motion.findReverse:
-            return VimFindReverse.self
+            return LineMotions.FindReverse.self
         case KeyConstants.Motion.til:
-            return VimTil.self
+            return LineMotions.Til.self
         case KeyConstants.Motion.tilReverse:
-            return VimTilReverse.self
+            return LineMotions.TilReverse.self
         default:
             return nil
         }

@@ -14,17 +14,17 @@ struct TextPosition {
 }
 
 extension TextPosition {
-    mutating func moveForward(while condition: (unichar) -> Bool) {
+    mutating func moveForward(ensuring condition: (unichar) -> Bool) {
         var pos = position
-        while let char = text.safeCharacter(at: pos), condition(char) {
+        while let char = text.safeCharacter(at: pos + 1), condition(char) {
             pos += 1
         }
         position = pos
     }
 
-    mutating func moveBackward(while condition: (unichar) -> Bool) {
+    mutating func moveBackward(ensuring condition: (unichar) -> Bool) {
         var pos = position
-        while let char = text.safeCharacter(at: pos), condition(char) {
+        while let char = text.safeCharacter(at: pos - 1), condition(char) {
             pos -= 1
         }
         position = pos
@@ -44,47 +44,75 @@ extension TextPosition {
         }
     }
 
-    mutating func seekForward(char: unichar) {
-        moveForwardInLine()
-        moveForward(while: { $0 != char })
+    mutating func moveForward() {
+        let pos = position + 1
+        if pos < text.length {
+            position = pos
+        }
     }
 
-    mutating func seekBackward(char: unichar) {
-        moveBackwardInLine()
-        moveBackward(while: { $0 != char })
+    mutating func moveBackward() {
+        let pos = position - 1
+        if pos >= 0 {
+            position = pos
+        }
     }
 
     mutating func moveToBeginningOfLine() {
-        moveBackward(while: { $0 != "\n" })
-        moveForwardInLine()
+        moveBackward(ensuring: { $0 != "\n" })
     }
 
     mutating func moveToEndOfLine() {
-        moveForward(while: { $0 != "\n" })
-        moveBackwardInLine()
+        moveForward(ensuring: { $0 != "\n" })
     }
 
     mutating func moveToFirstCharacterInLine() {
         moveToBeginningOfLine()
-        moveForward(while: { $0 == " " })
-    }
-
-    mutating func moveToAfterWord() {
-        moveForward(while: { $0 != " " && $0 != "\n" })
+        moveForward(ensuring: { $0 == " " })
+        moveForward()
     }
 
     mutating func moveToEndOfWord() {
-        moveToAfterWord()
-        moveBackwardInLine()
+        moveForward(ensuring: \.isWhitespace)
+        moveForward()
+        if let current = text.safeCharacter(at: position), !current.isAlphanumeric { return }
+        moveForward(ensuring: \.isAlphanumeric)
     }
 
     mutating func moveToNextWord() {
-        moveToAfterWord()
-        moveForward(while: { $0 == " " || $0 == "\n" })
+        if let current = text.safeCharacter(at: position), current.isAlphanumeric {
+            moveForward(ensuring: \.isAlphanumeric)
+            moveForward()
+        }
+        else if let current = text.safeCharacter(at: position), !current.isWhitespace {
+            moveForward()
+        }
+        if let current = text.safeCharacter(at: position), current.isWhitespace {
+            moveForward(ensuring: \.isWhitespace)
+            moveForward()
+        }
     }
 
     mutating func moveToBeginningOfWord() {
-        moveBackward(while: { $0 != " " && $0 != "\n" })
-        moveForwardInLine()
+        moveBackward(ensuring: { $0 != " " && $0 != "\n" })
+    }
+}
+
+extension TextPosition: Equatable {}
+
+extension unichar {
+    var isWhitespace: Bool {
+        guard let unicodeScalar = UnicodeScalar(self) else {
+            return false
+        }
+        return Character(unicodeScalar).isWhitespace
+    }
+
+    var isAlphanumeric: Bool {
+        guard let unicodeScalar = UnicodeScalar(self) else {
+            return false
+        }
+        let character = Character(unicodeScalar)
+        return character.isLetter || character.isNumber
     }
 }
