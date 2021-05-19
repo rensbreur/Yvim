@@ -91,7 +91,6 @@ enum LineMotions {
 
     struct Back: LineMotion {
         func move(_ position: inout TextPosition) {
-            position.moveBackwardInLine()
             position.moveToBeginningOfWord()
         }
     }

@@ -14,33 +14,39 @@ struct TextPosition {
 }
 
 extension TextPosition {
+    var currentCharacter: unichar? {
+        text.safeCharacter(at: position)
+    }
+
+    var previousCharacter: unichar? {
+        text.safeCharacter(at: position - 1)
+    }
+
+    var nextCharacter: unichar? {
+        text.safeCharacter(at: position + 1)
+    }
+
     mutating func moveForward(ensuring condition: (unichar) -> Bool) {
-        var pos = position
-        while let char = text.safeCharacter(at: pos + 1), condition(char) {
-            pos += 1
+        while let char = nextCharacter, condition(char) {
+            position += 1
         }
-        position = pos
     }
 
     mutating func moveBackward(ensuring condition: (unichar) -> Bool) {
-        var pos = position
-        while let char = text.safeCharacter(at: pos - 1), condition(char) {
-            pos -= 1
+        while let char = previousCharacter, condition(char) {
+            position -= 1
         }
-        position = pos
     }
 
     mutating func moveForwardInLine() {
-        let pos = position + 1
-        if let char = text.safeCharacter(at: pos), char != "\n" {
-            position = pos
+        if let char = nextCharacter, char != "\n" {
+            position += 1
         }
     }
 
     mutating func moveBackwardInLine() {
-        let pos = position - 1
-        if let char = text.safeCharacter(at: pos), char != "\n" {
-            position = pos
+        if let char = previousCharacter, char != "\n" {
+            position -= 1
         }
     }
 
@@ -75,26 +81,31 @@ extension TextPosition {
     mutating func moveToEndOfWord() {
         moveForward(ensuring: \.isWhitespace)
         moveForward()
-        if let current = text.safeCharacter(at: position), !current.isAlphanumeric { return }
-        moveForward(ensuring: \.isAlphanumeric)
+        if let current = currentCharacter, current.isAlphanumeric {
+            moveForward(ensuring: \.isAlphanumeric)
+        }
     }
 
     mutating func moveToNextWord() {
-        if let current = text.safeCharacter(at: position), current.isAlphanumeric {
+        if let current = currentCharacter, current.isAlphanumeric {
             moveForward(ensuring: \.isAlphanumeric)
             moveForward()
         }
-        else if let current = text.safeCharacter(at: position), !current.isWhitespace {
+        else if let current = currentCharacter, !current.isWhitespace {
             moveForward()
         }
-        if let current = text.safeCharacter(at: position), current.isWhitespace {
+        if let current = currentCharacter, current.isWhitespace {
             moveForward(ensuring: \.isWhitespace)
             moveForward()
         }
     }
 
     mutating func moveToBeginningOfWord() {
-        moveBackward(ensuring: { $0 != " " && $0 != "\n" })
+        moveBackward(ensuring: \.isWhitespace)
+        moveBackward()
+        if let current = currentCharacter, current.isAlphanumeric {
+            moveBackward(ensuring: \.isAlphanumeric)
+        }
     }
 }
 
