@@ -46,6 +46,12 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
+        if keyEvent.key.char == KeyConstants.add {
+            simulateKeyPress(CGKeyCode(kVK_RightArrow), [])
+            onKeyUp = { [weak self] in self?.context.switchToInsertMode() }
+            return true
+        }
+
         if keyEvent.key.char == KeyConstants.visual {
             onKeyUp = { [weak self] in self?.context.switchToVisualMode() }
             return true
@@ -58,6 +64,11 @@ class EditorModeCommand: EditorMode {
 
         if keyEvent.key.char == KeyConstants.VerticalMotion.down {
             simulateKeyPress(CGKeyCode(kVK_DownArrow), [])
+            return true
+        }
+
+        if keyEvent.key.char == KeyConstants.undo {
+            simulateKeyPress(keycodeForString("z"), [.maskCommand])
             return true
         }
 
