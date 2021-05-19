@@ -46,6 +46,28 @@ enum Commands {
         }
     }
 
+    struct Insert: Command {
+        let text: String
+
+        func perform(_ editor: BufferEditor) {
+            editor.perform {
+                $0.selectedText = text as NSString
+            }
+        }
+    }
+
+    struct Change: Command {
+        let register: Register
+        let text: String
+
+        func perform(_ editor: BufferEditor) {
+            editor.perform {
+                register.register = $0.selectedText as String
+                $0.selectedText = text as NSString
+            }
+        }
+    }
+
     struct ChangeSelection: Command {
         let motion: LineMotion
 

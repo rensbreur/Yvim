@@ -31,6 +31,11 @@ class EditorModeVisual: EditorMode {
             return true
         }
 
+        if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
+            context.switchToCommandMode()
+            return true
+        }
+
         if multiplierReader.feed(character: keyEvent.key.char) {
             return true
         }

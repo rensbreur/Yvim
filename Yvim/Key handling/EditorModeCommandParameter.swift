@@ -1,3 +1,4 @@
+import Carbon.HIToolbox
 import Foundation
 
 class EditorModeCommandParameter: EditorMode {
@@ -23,6 +24,11 @@ class EditorModeCommandParameter: EditorMode {
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
         if keyEvent.event == .up {
             self.onKeyUp?()
+            return true
+        }
+
+        if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
+            context.switchToCommandMode()
             return true
         }
 

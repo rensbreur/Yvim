@@ -22,6 +22,11 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
+        if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
+            context.switchToCommandMode()
+            return true
+        }
+
         if multiplierReader.feed(character: keyEvent.key.char) {
             return true
         }
@@ -43,13 +48,9 @@ class EditorModeCommand: EditorMode {
         }
 
         if keyEvent.key.char == KeyConstants.insert {
-            onKeyUp = { [weak self] in self?.context.switchToInsertMode() }
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.add {
-            simulateKeyPress(CGKeyCode(kVK_RightArrow), [])
-            onKeyUp = { [weak self] in self?.context.switchToInsertMode() }
+            let insert = FreeTextCommands.Insert()
+            insert.performFirstTime(context.editor)
+            onKeyUp = { [weak self] in self?.context.switchToInsertMode(freeTextCommand: insert) }
             return true
         }
 

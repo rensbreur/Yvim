@@ -33,8 +33,8 @@ class YvimKeyHandler: KeyHandler {
         self.state = EditorModeCommandParameter(context: self, command: command, multiplier: multiplier)
     }
 
-    func switchToInsertMode() {
-        self.state = EditorModeInsert(context: self)
+    func switchToInsertMode(freeTextCommand: FreeTextCommand) {
+        self.state = EditorModeInsert(context: self, freeTextCommand: freeTextCommand)
     }
 
     func switchToVisualMode(selection: VimSelection? = nil) {
@@ -48,11 +48,6 @@ class YvimKeyHandler: KeyHandler {
 
         if keyEvent.key.modifierKeys.contains(.maskCommand) {
             return false
-        }
-
-        if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
-            switchToCommandMode()
-            return true
         }
 
         return self.state.handleKeyEvent(keyEvent, simulateKeyPress: simulateKeyPress)
