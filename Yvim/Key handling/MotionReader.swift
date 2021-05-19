@@ -1,6 +1,6 @@
 import Foundation
 
-class MotionReader {
+class MotionReader: Reader {
     private var parametrizedMotion: LineMotionParametrized.Type?
 
     var motion: LineMotion?

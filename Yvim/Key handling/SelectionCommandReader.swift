@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SelectionCommandReader {
+class SelectionCommandReader: Reader {
     var command: Command?
 
     private let commandFactory: CommandFactory

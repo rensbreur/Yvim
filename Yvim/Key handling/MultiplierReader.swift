@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MultiplierReader {
+class MultiplierReader: Reader {
     var multiplier: Int?
     private var passthrough = false
 

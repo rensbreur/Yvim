@@ -1,6 +1,6 @@
 import Foundation
 
-class TextObjectReader {
+class TextObjectReader: Reader {
     enum Range {
         case outer
         case inner
