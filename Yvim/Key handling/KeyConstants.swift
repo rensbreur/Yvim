@@ -40,4 +40,5 @@ enum KeyConstants {
     static let paste: Character = "p"
     static let undo: Character = "u"
     static let prompt: Character = ":"
+    static let again: Character = "."
 }

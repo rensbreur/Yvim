@@ -34,8 +34,10 @@ class EditorModeCommandParameter: EditorMode {
 
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
-                context.editor.changeSelection(motion.multiplied(multiplierReader.multiplier ?? 1), simulateKeyPress: simulateKeyPress)
-                command.perform(editor: context.editor)
+                let motion = Commands.ChangeSelection(motion: motion.multiplied(multiplierReader.multiplier ?? 1))
+                let composite = Commands.Composite(commands: [motion, command])
+                composite.perform(context.editor)
+                context.mostRecentCommand = composite
                 context.switchToCommandMode()
                 return true
             }
@@ -44,11 +46,10 @@ class EditorModeCommandParameter: EditorMode {
 
         if textObjectReader.feed(character: keyEvent.key.char) {
             if let textObject = textObjectReader.textObject {
-                let operation = BufferEditorOperation(editor: context.editor.bufferEditor)
-                let newRange = textObject.range(from: operation.cursorPosition, in: operation.text)
-                operation.selectedTextRange = newRange
-                operation.commit()
-                command.perform(editor: context.editor)
+                let selection = Commands.ChangeSelectionWithTextObject(textObject: textObject)
+                let composite = Commands.Composite(commands: [selection, command])
+                composite.perform(context.editor)
+                context.mostRecentCommand = composite
                 context.switchToCommandMode()
                 return true
             }

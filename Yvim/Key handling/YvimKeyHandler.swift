@@ -2,7 +2,9 @@ import Carbon.HIToolbox
 import Combine
 
 class YvimKeyHandler: KeyHandler {
-    let editor: VimEditor
+    let editor: BufferEditor
+
+    let register = Register()
 
     @Published private(set) var mode: Mode = .command
     var active: Bool = false
@@ -11,7 +13,9 @@ class YvimKeyHandler: KeyHandler {
 
     private var subscriptions: Set<AnyCancellable> = []
 
-    init(editor: VimEditor) {
+    var mostRecentCommand: Command?
+
+    init(editor: BufferEditor) {
         self.editor = editor
         self.mode = .command
         self.state = EditorModeCommand(context: self)

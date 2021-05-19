@@ -9,7 +9,7 @@ class EditorModeVisual: EditorMode {
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
     let textObjectReader = TextObjectReader()
-    let selectionCommandReader = SelectionCommandReader()
+    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: context.register))
 
     var selection: VimSelection
 
@@ -17,12 +17,12 @@ class EditorModeVisual: EditorMode {
 
     init(context: YvimKeyHandler, selection: VimSelection? = nil) {
         self.context = context
-        self.selection = selection ?? VimSelection(anchor: context.editor.bufferEditor.getSelectedTextRange().location)
+        self.selection = selection ?? VimSelection(anchor: context.editor.getSelectedTextRange().location)
         updateSelection()
     }
 
     func updateSelection() {
-        self.context.editor.bufferEditor.setSelectedTextRange(selection.range)
+        self.context.editor.setSelectedTextRange(selection.range)
     }
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
@@ -39,7 +39,7 @@ class EditorModeVisual: EditorMode {
 
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
-                self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: context.editor.bufferEditor.getText())
+                self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: context.editor.getText())
                 context.switchToVisualMode(selection: self.selection)
                 return true
             }
@@ -48,7 +48,7 @@ class EditorModeVisual: EditorMode {
 
         if textObjectReader.feed(character: keyEvent.key.char) {
             if let textObject = textObjectReader.textObject {
-                self.selection.expand(textObject: textObject, in: context.editor.bufferEditor.getText())
+                self.selection.expand(textObject: textObject, in: context.editor.getText())
                 context.switchToVisualMode(selection: self.selection)
                 return true
             }
@@ -57,7 +57,7 @@ class EditorModeVisual: EditorMode {
 
         if selectionCommandReader.feed(character: keyEvent.key.char) {
             if let command = selectionCommandReader.command {
-                command.perform(editor: context.editor)
+                command.perform(context.editor)
                 context.switchToCommandMode()
                 return true
             }

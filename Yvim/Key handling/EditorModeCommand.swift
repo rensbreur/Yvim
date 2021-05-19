@@ -8,7 +8,7 @@ class EditorModeCommand: EditorMode {
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
-    let selectionCommandReader = SelectionCommandReader()
+    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: context.register))
 
     private var onKeyUp: (() -> Void)?
 
@@ -28,7 +28,8 @@ class EditorModeCommand: EditorMode {
 
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
-                context.editor.move(motion.multiplied(multiplierReader.multiplier ?? 1), simulateKeyPress: simulateKeyPress)
+                let motion = Commands.Move(motion: motion.multiplied(multiplierReader.multiplier ?? 1))
+                motion.perform(context.editor)
                 context.switchToCommandMode()
             }
             return true
@@ -71,6 +72,12 @@ class EditorModeCommand: EditorMode {
 
         if keyEvent.key.char == KeyConstants.undo {
             simulateKeyPress(keycodeForString("z"), [.maskCommand])
+            context.switchToCommandMode()
+            return true
+        }
+
+        if keyEvent.key.char == KeyConstants.again {
+            context.mostRecentCommand?.perform(context.editor)
             context.switchToCommandMode()
             return true
         }

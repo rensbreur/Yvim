@@ -1,13 +1,6 @@
-//
-//  BufferEditorOperation.swift
-//  Yvim
-//
-//  Created by Admin on 04.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
+/// Delays and combines actual calls to the buffer editor to increase performance.
 class BufferEditorOperation {
     let editor: BufferEditor
 
@@ -42,6 +35,18 @@ class BufferEditorOperation {
         }
     }
 
+}
+
+extension BufferEditor {
+    func operation() -> BufferEditorOperation {
+        BufferEditorOperation(editor: self)
+    }
+
+    func perform(_ block: (BufferEditorOperation) -> Void) {
+        let operation = self.operation()
+        block(operation)
+        operation.commit()
+    }
 }
 
 extension BufferEditorOperation {

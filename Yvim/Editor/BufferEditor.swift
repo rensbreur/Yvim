@@ -1,11 +1,3 @@
-//
-//  BufferEditor.swift
-//  Yvim
-//
-//  Created by Admin on 02.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
 protocol BufferEditor: AnyObject {

@@ -11,7 +11,6 @@ import Combine
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var yvimKeyHandler: YvimKeyHandler!
-    var editor: VimEditor!
 
     var keyboardEventTap: EventTap!
     var accessibilityService: AccessibilityService!
@@ -26,9 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.accessibilityService = AccessibilityService()
         self.accessibilityService.start()
         self.bufferEditor = AXBufferEditor(accessibilitySvc: self.accessibilityService)
-        self.editor = VimEditor()
-        self.editor.bufferEditor = self.bufferEditor
-        self.yvimKeyHandler = YvimKeyHandler(editor: editor)
+        self.yvimKeyHandler = YvimKeyHandler(editor: bufferEditor)
         self.statusItemController = StatusItemController()
         self.statusItemController.mode = self.yvimKeyHandler.$mode.eraseToAnyPublisher()
         self.statusItemController.active = self.accessibilityService.$active.eraseToAnyPublisher()
