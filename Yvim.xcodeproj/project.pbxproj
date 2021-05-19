@@ -51,6 +51,8 @@
 		84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3725A4C4BF00410C44 /* KeyEvent.swift */; };
 		84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E4125A4CBCD00410C44 /* KeyHandler.swift */; };
 		84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E5425A4D7F400410C44 /* MotionReader.swift */; };
+		84941804265572C200BE1613 /* CommandMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941803265572C200BE1613 /* CommandMemory.swift */; };
+		84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941805265574AC00BE1613 /* EditorModeSwitcher.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +116,8 @@
 		84605E3725A4C4BF00410C44 /* KeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		84605E4125A4CBCD00410C44 /* KeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHandler.swift; sourceTree = "<group>"; };
 		84605E5425A4D7F400410C44 /* MotionReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReader.swift; sourceTree = "<group>"; };
+		84941803265572C200BE1613 /* CommandMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandMemory.swift; sourceTree = "<group>"; };
+		84941805265574AC00BE1613 /* EditorModeSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModeSwitcher.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				2EC74073259DDEE200108463 /* MainEditor.swift */,
+				84941805265574AC00BE1613 /* EditorModeSwitcher.swift */,
 				2EA4C507259F74A600FB06EC /* EditorMode.swift */,
 				840AB7962651AD6B00449ADC /* EditorModeCommand.swift */,
 				843591E8265417FD0088F749 /* EditorModeCommandParameter.swift */,
@@ -223,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				845E4C9126555AAB00A11E53 /* Register.swift */,
+				84941803265572C200BE1613 /* CommandMemory.swift */,
 				840F9BD325A008B2006B942F /* BufferEditor.swift */,
 				84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */,
 			);
@@ -377,9 +383,11 @@
 				84605E2C25A3C81E00410C44 /* NSString+unichar.swift in Sources */,
 				2EC7406C259D135E00108463 /* EventTap.swift in Sources */,
 				84605E2925A3C7FD00410C44 /* unichar+unicodeScalar.swift in Sources */,
+				84941804265572C200BE1613 /* CommandMemory.swift in Sources */,
 				84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */,
 				84605E2F25A3C83900410C44 /* BufferEditorOperation.swift in Sources */,
 				843591E52654147C0088F749 /* Command.swift in Sources */,
+				84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */,
 				843591E7265416280088F749 /* SelectionCommandReader.swift in Sources */,
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,

@@ -4,12 +4,14 @@ import Foundation
 class EditorModeVisual: EditorMode {
     let mode: Mode = .visual
 
-    unowned var context: MainEditorProtocol
+    unowned var context: EditorModeSwitcher
+    let register: Register
+    let editor: BufferEditor
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
     let textObjectReader = TextObjectReader()
-    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: context.register))
+    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: register))
     let changeTextReader = SimpleReader(character: KeyConstants.change)
 
     lazy var reader = CompositeReader(readers: [motionReader, textObjectReader, selectionCommandReader, changeTextReader])
@@ -18,14 +20,16 @@ class EditorModeVisual: EditorMode {
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: MainEditor, selection: VimSelection? = nil) {
+    init(context: EditorModeSwitcher, selection: VimSelection? = nil, register: Register, editor: BufferEditor) {
         self.context = context
-        self.selection = selection ?? VimSelection(anchor: context.editor.getSelectedTextRange().location)
+        self.selection = selection ?? VimSelection(anchor: editor.getSelectedTextRange().location)
+        self.register = register
+        self.editor = editor
         updateSelection()
     }
 
     func updateSelection() {
-        self.context.editor.setSelectedTextRange(selection.range)
+        self.editor.setSelectedTextRange(selection.range)
     }
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
@@ -45,23 +49,23 @@ class EditorModeVisual: EditorMode {
 
         if reader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
-                self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: context.editor.getText())
+                self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: editor.getText())
                 context.switchToVisualMode(selection: self.selection)
             }
 
             if let textObject = textObjectReader.textObject {
-                self.selection.expand(textObject: textObject, in: context.editor.getText())
+                self.selection.expand(textObject: textObject, in: editor.getText())
                 context.switchToVisualMode(selection: self.selection)
             }
 
             if let command = selectionCommandReader.command {
-                command.perform(context.editor)
+                command.perform(editor)
                 context.switchToCommandMode()
             }
 
             if changeTextReader.success {
-                let change = FreeTextCommands.Change(register: context.register)
-                change.performFirstTime(context.editor)
+                let change = FreeTextCommands.Change(register: register)
+                change.performFirstTime(editor)
                 context.switchToInsertMode(freeTextCommand: change)
             }
 

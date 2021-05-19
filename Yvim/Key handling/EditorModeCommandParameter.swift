@@ -4,7 +4,7 @@ import Foundation
 class EditorModeCommandParameter: EditorMode {
     let mode: Mode = .command
 
-    unowned var mainEditor: MainEditorProtocol
+    unowned var mainEditor: EditorModeSwitcher
 
     let completion: (Command) -> Void
 
@@ -16,7 +16,7 @@ class EditorModeCommandParameter: EditorMode {
 
     private var onKeyUp: (() -> Void)?
 
-    init(context: MainEditor, completion: @escaping (Command) -> Void) {
+    init(context: EditorModeSwitcher, completion: @escaping (Command) -> Void) {
         self.mainEditor = context
         self.completion = completion
     }

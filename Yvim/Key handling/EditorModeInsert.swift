@@ -4,16 +4,18 @@ import Foundation
 class EditorModeInsert: EditorMode {
     let mode: Mode = .insert
 
-    unowned var context: MainEditorProtocol
+    unowned var context: EditorModeSwitcher
+    let commandMemory: CommandMemory
 
     let currentFreeTextCommand: FreeTextCommand
 
     /// Text is recorded to create a repeatable command
     var recordedText: String = ""
 
-    init(context: MainEditor, freeTextCommand: FreeTextCommand) {
+    init(context: EditorModeSwitcher, freeTextCommand: FreeTextCommand, commandMemory: CommandMemory) {
         self.context = context
         self.currentFreeTextCommand = freeTextCommand
+        self.commandMemory = commandMemory
     }
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
@@ -22,7 +24,7 @@ class EditorModeInsert: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape {
-            context.mostRecentCommand = currentFreeTextCommand.repeatableCommand(string: recordedText)
+            commandMemory.mostRecentCommand = currentFreeTextCommand.repeatableCommand(string: recordedText)
             context.switchToCommandMode()
             return true
         }

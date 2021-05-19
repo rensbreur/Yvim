@@ -4,14 +4,20 @@ import Foundation
 class EditorModeCommand: EditorMode {
     let mode: Mode = .command
 
-    unowned var mainEditor: MainEditorProtocol
+    unowned var mainEditor: EditorModeSwitcher
+    let register: Register
+    let editor: BufferEditor
+    let commandMemory: CommandMemory
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
-    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: mainEditor.register))
+    lazy var selectionCommandReader = SelectionCommandReader(commandFactory: CommandFactory(register: register))
 
-    init(mainEditor: MainEditorProtocol) {
+    init(mainEditor: EditorModeSwitcher, register: Register, editor: BufferEditor, commandMemory: CommandMemory) {
         self.mainEditor = mainEditor
+        self.register = register
+        self.editor = editor
+        self.commandMemory = commandMemory
     }
 
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
@@ -31,7 +37,7 @@ class EditorModeCommand: EditorMode {
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
                 let motion = Commands.Move(motion: motion.multiplied(multiplierReader.multiplier ?? 1))
-                motion.perform(mainEditor.editor)
+                motion.perform(editor)
                 mainEditor.switchToCommandMode()
             }
             return true
@@ -41,8 +47,8 @@ class EditorModeCommand: EditorMode {
             if let command = selectionCommandReader.command {
                 mainEditor.switchToCommandParameterMode() {
                     let composite = Commands.Composite(commands: [$0, command])
-                    self.mainEditor.mostRecentCommand = composite
-                    composite.perform(self.mainEditor.editor)
+                    self.commandMemory.mostRecentCommand = composite
+                    composite.perform(self.editor)
                     self.mainEditor.switchToCommandMode()
                 }
             }
@@ -51,22 +57,22 @@ class EditorModeCommand: EditorMode {
 
         if keyEvent.key.char == KeyConstants.insert {
             let insert = FreeTextCommands.Insert()
-            insert.performFirstTime(mainEditor.editor)
+            insert.performFirstTime(editor)
             mainEditor.onKeyUp { [weak self] in self?.mainEditor.switchToInsertMode(freeTextCommand: insert) }
             return true
         }
 
         if keyEvent.key.char == KeyConstants.add {
             let add = FreeTextCommands.Add()
-            add.performFirstTime(mainEditor.editor)
+            add.performFirstTime(editor)
             mainEditor.onKeyUp { [weak self] in self?.mainEditor.switchToInsertMode(freeTextCommand: add) }
             return true
         }
 
         if keyEvent.key.char == KeyConstants.change {
             mainEditor.switchToCommandParameterMode() { selection in
-                let change = FreeTextCommands.Change(register: self.mainEditor.register, selection: selection)
-                change.performFirstTime(self.mainEditor.editor)
+                let change = FreeTextCommands.Change(register: self.register, selection: selection)
+                change.performFirstTime(self.editor)
                 self.mainEditor.onKeyUp { self.mainEditor.switchToInsertMode(freeTextCommand: change) }
             }
             return true
@@ -96,7 +102,7 @@ class EditorModeCommand: EditorMode {
         }
 
         if keyEvent.key.char == KeyConstants.again {
-            mainEditor.mostRecentCommand?.perform(mainEditor.editor)
+            commandMemory.mostRecentCommand?.perform(editor)
             mainEditor.switchToCommandMode()
             return true
         }
