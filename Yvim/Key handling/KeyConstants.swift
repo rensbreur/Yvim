@@ -27,6 +27,10 @@ enum KeyConstants {
         static let up: Character = "k"
         static let down: Character = "j"
     }
+    enum TextObject {
+        static let inner: Character = "i"
+        static let word: Character = "w"
+    }
     static let insert: Character = "i"
     static let add: Character = "a"
     static let delete: Character = "d"

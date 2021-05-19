@@ -5,8 +5,12 @@ class MotionReader {
 
     var motion: LineMotion?
 
+    private(set) var invalid = false
+
     func feed(character: Character) -> Bool {
         let char = character
+
+        if invalid { return false }
 
         if let parametrizedMotion = self.parametrizedMotion {
             self.motion = parametrizedMotion.init(parameter: char.utf16.first!)
@@ -23,6 +27,7 @@ class MotionReader {
             return true
         }
 
+        invalid = true
         return false
     }
 

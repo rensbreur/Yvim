@@ -10,6 +10,7 @@ class EditorModeCommandParameter: EditorMode {
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
+    let textObjectReader = TextObjectReader()
 
     private var onKeyUp: (() -> Void)?
 
@@ -29,16 +30,35 @@ class EditorModeCommandParameter: EditorMode {
             return true
         }
 
+        var characterWasRead = false
+
         if motionReader.feed(character: keyEvent.key.char) {
             if let motion = motionReader.motion {
                 context.editor.changeSelection(motion.multiplied(multiplierReader.multiplier ?? 1), simulateKeyPress: simulateKeyPress)
                 command.perform(editor: context.editor)
                 context.switchToCommandMode()
+                return true
             }
-            return true
+            characterWasRead = true
         }
 
-        context.switchToCommandMode()
+        if textObjectReader.feed(character: keyEvent.key.char) {
+            if let textObject = textObjectReader.textObject {
+                let operation = BufferEditorOperation(editor: context.editor.bufferEditor)
+                let newRange = textObject.range(from: operation.cursorPosition, in: operation.text)
+                operation.selectedTextRange = newRange
+                operation.commit()
+                command.perform(editor: context.editor)
+                context.switchToCommandMode()
+                return true
+            }
+            characterWasRead = true
+        }
+
+        if (!characterWasRead) {
+            context.switchToCommandMode()
+        }
+
         return true
     }
 

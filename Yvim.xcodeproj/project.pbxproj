@@ -33,6 +33,10 @@
 		843591E9265417FD0088F749 /* EditorModeCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E8265417FD0088F749 /* EditorModeCommandParameter.swift */; };
 		845E4C8026550EEF00A11E53 /* YvimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C7F26550EEF00A11E53 /* YvimTests.swift */; };
 		845E4C8826550EFF00A11E53 /* LineMotionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8726550EFF00A11E53 /* LineMotionTests.swift */; };
+		845E4C8A26553DFD00A11E53 /* TextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8926553DFD00A11E53 /* TextObject.swift */; };
+		845E4C8C26553E2E00A11E53 /* TextRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8B26553E2E00A11E53 /* TextRange.swift */; };
+		845E4C8E265540EE00A11E53 /* TextObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8D265540EE00A11E53 /* TextObjectTests.swift */; };
+		845E4C90265542B100A11E53 /* TextObjectReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8F265542B100A11E53 /* TextObjectReader.swift */; };
 		84605E2325A3C7A600410C44 /* AXUIElement+TextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2225A3C7A600410C44 /* AXUIElement+TextArea.swift */; };
 		84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2525A3C7D700410C44 /* AXBufferEditor.swift */; };
 		84605E2925A3C7FD00410C44 /* unichar+unicodeScalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */; };
@@ -88,6 +92,10 @@
 		845E4C7F26550EEF00A11E53 /* YvimTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimTests.swift; sourceTree = "<group>"; };
 		845E4C8126550EEF00A11E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		845E4C8726550EFF00A11E53 /* LineMotionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionTests.swift; sourceTree = "<group>"; };
+		845E4C8926553DFD00A11E53 /* TextObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObject.swift; sourceTree = "<group>"; };
+		845E4C8B26553E2E00A11E53 /* TextRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRange.swift; sourceTree = "<group>"; };
+		845E4C8D265540EE00A11E53 /* TextObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectTests.swift; sourceTree = "<group>"; };
+		845E4C8F265542B100A11E53 /* TextObjectReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectReader.swift; sourceTree = "<group>"; };
 		84605E2225A3C7A600410C44 /* AXUIElement+TextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AXUIElement+TextArea.swift"; sourceTree = "<group>"; };
 		84605E2525A3C7D700410C44 /* AXBufferEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AXBufferEditor.swift; sourceTree = "<group>"; };
 		84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "unichar+unicodeScalar.swift"; sourceTree = "<group>"; };
@@ -159,6 +167,7 @@
 		845E4C7E26550EEF00A11E53 /* YvimTests */ = {
 			isa = PBXGroup;
 			children = (
+				845E4C8D265540EE00A11E53 /* TextObjectTests.swift */,
 				845E4C8726550EFF00A11E53 /* LineMotionTests.swift */,
 				845E4C7F26550EEF00A11E53 /* YvimTests.swift */,
 				845E4C8126550EEF00A11E53 /* Info.plist */,
@@ -171,6 +180,7 @@
 			children = (
 				840AB79C2651BE0B00449ADC /* Mode.swift */,
 				84605E3125A3CA3E00410C44 /* LineMotion.swift */,
+				845E4C8926553DFD00A11E53 /* TextObject.swift */,
 				84DE1DC525A265910020963D /* VimSelection.swift */,
 				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
 				843591E42654147C0088F749 /* Command.swift */,
@@ -191,6 +201,7 @@
 				2EC4671825AF870E00E6367D /* KeyConstants.swift */,
 				843591E226540D580088F749 /* MultiplierReader.swift */,
 				84605E5425A4D7F400410C44 /* MotionReader.swift */,
+				845E4C8F265542B100A11E53 /* TextObjectReader.swift */,
 				843591E6265416280088F749 /* SelectionCommandReader.swift */,
 			);
 			path = "Key handling";
@@ -235,6 +246,7 @@
 				84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */,
 				84605E2B25A3C81E00410C44 /* NSString+unichar.swift */,
 				2EC4671525AF7E0700E6367D /* TextPosition.swift */,
+				845E4C8B26553E2E00A11E53 /* TextRange.swift */,
 			);
 			path = "String utilities";
 			sourceTree = "<group>";
@@ -359,6 +371,7 @@
 				843591E7265416280088F749 /* SelectionCommandReader.swift in Sources */,
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,
+				845E4C8A26553DFD00A11E53 /* TextObject.swift in Sources */,
 				840AB79B2651ADE300449ADC /* EditorModeVisual.swift in Sources */,
 				843591E326540D580088F749 /* MultiplierReader.swift in Sources */,
 				84605E2325A3C7A600410C44 /* AXUIElement+TextArea.swift in Sources */,
@@ -366,6 +379,7 @@
 				840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */,
 				2EA4C508259F74A600FB06EC /* EditorMode.swift in Sources */,
 				2EC7406F259D13B100108463 /* main.swift in Sources */,
+				845E4C90265542B100A11E53 /* TextObjectReader.swift in Sources */,
 				84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */,
 				84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
@@ -378,6 +392,7 @@
 				843591E9265417FD0088F749 /* EditorModeCommandParameter.swift in Sources */,
 				840AB7972651AD6B00449ADC /* EditorModeCommand.swift in Sources */,
 				840AB7992651ADC800449ADC /* EditorModeInsert.swift in Sources */,
+				845E4C8C26553E2E00A11E53 /* TextRange.swift in Sources */,
 				2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */,
 				2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */,
 				84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */,
@@ -388,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845E4C8E265540EE00A11E53 /* TextObjectTests.swift in Sources */,
 				845E4C8026550EEF00A11E53 /* YvimTests.swift in Sources */,
 				845E4C8826550EFF00A11E53 /* LineMotionTests.swift in Sources */,
 			);

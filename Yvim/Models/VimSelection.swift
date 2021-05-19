@@ -24,6 +24,12 @@ struct VimSelection {
         movable = motion.index(from: movable, in: text)
     }
 
+    mutating func expand(textObject: TextObject, in text: NSString) {
+        let range = textObject.range(from: anchor, in: text)
+        self.anchor = range.location
+        self.movable = range.location + range.length - 1
+    }
+
     var range: CFRange {
         CFRange(location: start, length: end - start)
     }
