@@ -6,7 +6,7 @@ protocol TextObject {
 
 extension TextObject {
     func range(from index: Int, in text: NSString) -> CFRange {
-        var range = TextRange(text: text, start: index, end: index + 1)
+        var range = TextRange(text: text, start: index, end: index)
         expand(&range)
         return CFRangeMake(range.start, range.end + 1 - range.start)
     }
