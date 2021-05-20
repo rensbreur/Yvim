@@ -3,7 +3,7 @@ import Foundation
 class CompositeReader: Reader {
     let readers: [Reader]
 
-    init(readers: [Reader]) {
+    init(_  readers: [Reader]) {
         self.readers = readers.map(AutofailingReader.init)
     }
 

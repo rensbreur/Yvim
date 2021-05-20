@@ -8,7 +8,7 @@ class ExtendedTextObjectReader: Reader {
 
     var textObject: TextObject?
 
-    lazy var reader: CompositeReader = CompositeReader(readers: [motionReader, textObjectReader])
+    lazy var reader: CompositeReader = CompositeReader([motionReader, textObjectReader])
 
     func feed(character: Character) -> Bool {
         if multiplierReader.feed(character: character) {

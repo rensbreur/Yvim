@@ -8,13 +8,14 @@ class EditorModeVisual: EditorMode {
     let register: Register
     let editor: BufferEditor
 
-    let multiplierReader = MultiplierReader()
-    let motionReader = MotionReader()
-    let textObjectReader = TextObjectReader()
-    lazy var selectionCommandReader = ParametrizedCommandReader(register: register)
-    let changeTextReader = SimpleReader(character: KeyConstants.change)
+    lazy var reader = CompositeReader(createCommands())
 
-    lazy var reader = CompositeReader(readers: [motionReader, textObjectReader, selectionCommandReader, changeTextReader])
+    func createCommands() -> [Reader] {
+        [
+            VisualModeMove(editor: editor, selection: selection, modeSwitcher: modeSwitcher),
+            VisualModeDelete(register: register, editor: editor, modeSwitcher: modeSwitcher)
+        ]
+    }
 
     var selection: VimSelection
 
@@ -43,32 +44,7 @@ class EditorModeVisual: EditorMode {
             return true
         }
 
-        if multiplierReader.feed(character: keyEvent.key.char) {
-            return true
-        }
-
         if reader.feed(character: keyEvent.key.char) {
-            if let motion = motionReader.motion {
-                self.selection.move(motion: motion.multiplied(multiplierReader.multiplier ?? 1), in: editor.getText())
-                modeSwitcher?.switchToVisualMode(selection: self.selection)
-            }
-
-            if let textObject = textObjectReader.textObject {
-                self.selection.expand(textObject: textObject, in: editor.getText())
-                modeSwitcher?.switchToVisualMode(selection: self.selection)
-            }
-
-            if let command = selectionCommandReader.command {
-                //command.perform(editor)
-                modeSwitcher?.switchToCommandMode()
-            }
-
-            if changeTextReader.success {
-                let change = FreeTextCommands.Change(register: register, textObject: TextObjects.Empty())
-                editor.setSelectedText("")
-                modeSwitcher?.switchToInsertMode(freeTextCommand: change)
-            }
-
             return true
         }
 
