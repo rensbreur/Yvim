@@ -20,6 +20,13 @@ enum TextObjects {
         }
     }
 
+    struct Line: TextObject {
+        func expand(_ range: inout TextRange) {
+            range.expandToBeginningOfLine()
+            range.expandToNewline()
+        }
+    }
+
     struct Empty: TextObject {
         func expand(_ range: inout TextRange) {
             // do nothing

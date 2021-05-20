@@ -13,15 +13,46 @@ class CommandModeDelete: EditorCommand {
         self.modeSwitcher = modeSwitcher
     }
 
-    let textObjectReader = ExtendedTextObjectReader()
-    lazy var reader: Reader = PrefixedReader(prefix: KeyConstants.delete, reader: textObjectReader)
+    let multiplierReader = MultiplierReader()
+    let motionReader = MotionReader()
+    let textObjectReader = TextObjectReader()
+    let lineReader = SimpleReader(character: KeyConstants.delete) // `dd` deletes full line
+
+    lazy var reader: Reader = PrefixedReader(
+        prefix: KeyConstants.delete,
+        reader: CompositeReader(
+            [motionReader, textObjectReader, lineReader]
+        )
+    )
 
     func handleEvent() {
-        if let textObject = textObjectReader.textObject {
-            let command = Commands.Delete(register: self.register, textObject: textObject)
-            command.perform(editor)
-            commandMemory.mostRecentCommand = command
-            modeSwitcher?.switchToCommandMode()
+        if let motion = motionReader.motion {
+            let textObject = TextObjects.FromMotion(motion: motion.multiplied(multiplierReader.multiplier ?? 1))
+            delete(textObject)
+            return
         }
+        if let textObject = textObjectReader.textObject {
+            delete(textObject)
+            return
+        }
+        if lineReader.success {
+            deleteLine()
+            return
+        }
+    }
+
+    private func delete(_ textObject: TextObject) {
+        let command = Commands.Delete(register: self.register, textObject: textObject)
+        command.perform(editor)
+        commandMemory.mostRecentCommand = command
+        modeSwitcher?.switchToCommandMode()
+    }
+
+    private func deleteLine() {
+        let textObject = TextObjects.Line()
+        let command = Commands.DeleteLine(register: self.register, textObject: textObject)
+        command.perform(editor)
+        commandMemory.mostRecentCommand = command
+        modeSwitcher?.switchToCommandMode()
     }
 }

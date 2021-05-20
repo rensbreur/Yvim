@@ -22,7 +22,8 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
             CommandModeMove(editor: editor, keySimulator: self, modeSwitcher: modeSwitcher),
             CommandModeDelete(register: register, commandMemory: commandMemory, editor: editor, modeSwitcher: modeSwitcher),
             CommandModeInsert(editor: editor, modeSwitcher: modeSwitcher),
-            CommandModeVisual(modeSwitcher: modeSwitcher)
+            CommandModeVisual(modeSwitcher: modeSwitcher),
+            CommandModePasteBefore(editor: editor, register: register, commandMemory: commandMemory, modeSwitcher: modeSwitcher)
         ]
     }
 

@@ -12,7 +12,20 @@ enum Commands {
         func perform(_ editor: BufferEditor) {
             editor.expandTextRange(textObject)
             editor.perform {
-                register.register = $0.selectedText as String
+                register.register = TextRegisterValue(text: $0.selectedText as String)
+                $0.selectedText = ""
+            }
+        }
+    }
+
+    struct DeleteLine: Command {
+        let register: Register
+        let textObject: TextObject
+
+        func perform(_ editor: BufferEditor) {
+            editor.expandTextRange(textObject)
+            editor.perform {
+                register.register = LineRegisterValue(text: $0.selectedText as String)
                 $0.selectedText = ""
             }
         }
@@ -25,43 +38,24 @@ enum Commands {
         func perform(_ editor: BufferEditor) {
             editor.expandTextRange(textObject)
             editor.perform {
-                register.register = $0.selectedText as String
-            }
-        }
-    }
-
-    struct Paste: Command {
-        let register: Register
-        let textObject: TextObject
-
-        func perform(_ editor: BufferEditor) {
-            editor.expandTextRange(textObject)
-            editor.perform {
-                $0.selectedText = register.register as NSString
+                register.register = TextRegisterValue(text: $0.selectedText as String)
             }
         }
     }
 
     struct PasteBefore: Command {
-        let register: Register
+        let value: RegisterValue
 
         func perform(_ editor: BufferEditor) {
-            editor.perform {
-                $0.selectedText = register.register as NSString
-            }
+            value.pasteBefore(editor: editor)
         }
     }
 
     struct PasteAfter: Command {
-        let register: Register
+        let value: RegisterValue
 
         func perform(_ editor: BufferEditor) {
-            editor.perform {
-                $0.selectedTextRange = CFRangeMake($0.selectedTextRange.location + 1, 0)
-            }
-            editor.perform {
-                $0.selectedText = register.register as NSString
-            }
+            value.pasteAfter(editor: editor)
         }
     }
 
@@ -106,7 +100,7 @@ enum Commands {
         func perform(_ editor: BufferEditor) {
             editor.expandTextRange(textObject)
             editor.perform {
-                register.register = $0.selectedText as String
+                register.register = TextRegisterValue(text: $0.selectedText as String)
                 $0.selectedText = text as NSString
             }
         }

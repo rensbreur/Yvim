@@ -14,7 +14,7 @@ class VisualModeDelete: EditorCommand {
     let reader: Reader = SimpleReader(character: KeyConstants.delete)
 
     func handleEvent() {
-        register.register = editor.getSelectedText() as String
+        register.register = TextRegisterValue(text: editor.getSelectedText() as String)
         editor.setSelectedText("")
         modeSwitcher?.switchToCommandMode()
     }

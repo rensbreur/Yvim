@@ -72,6 +72,16 @@ extension TextRange {
             expandBackward(ensuring: \.isAlphanumeric)
         }
     }
+
+    mutating func expandToBeginningOfLine() {
+        expandBackward(ensuring: { $0 != "\n" })
+    }
+
+    mutating func expandToNewline() {
+        expandForward(ensuring: { $0 != "\n" })
+        expandForward()
+    }
+
 }
 
 extension TextRange: Equatable {}
