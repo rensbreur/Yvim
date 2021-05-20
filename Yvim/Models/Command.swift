@@ -7,8 +7,10 @@ protocol Command {
 enum Commands {
     struct Delete: Command {
         let register: Register
+        let textObject: TextObject
 
         func perform(_ editor: BufferEditor) {
+            editor.expandTextRange(textObject)
             editor.perform {
                 register.register = $0.selectedText as String
                 $0.selectedText = ""
@@ -18,8 +20,10 @@ enum Commands {
 
     struct Yank: Command {
         let register: Register
+        let textObject: TextObject
 
         func perform(_ editor: BufferEditor) {
+            editor.expandTextRange(textObject)
             editor.perform {
                 register.register = $0.selectedText as String
             }
@@ -27,6 +31,18 @@ enum Commands {
     }
 
     struct Paste: Command {
+        let register: Register
+        let textObject: TextObject
+
+        func perform(_ editor: BufferEditor) {
+            editor.expandTextRange(textObject)
+            editor.perform {
+                $0.selectedText = register.register as NSString
+            }
+        }
+    }
+
+    struct PasteBefore: Command {
         let register: Register
 
         func perform(_ editor: BufferEditor) {
@@ -85,8 +101,10 @@ enum Commands {
     struct Change: Command {
         let register: Register
         let text: String
+        let textObject: TextObject
 
         func perform(_ editor: BufferEditor) {
+            editor.expandTextRange(textObject)
             editor.perform {
                 register.register = $0.selectedText as String
                 $0.selectedText = text as NSString
@@ -123,6 +141,15 @@ enum Commands {
             for command in commands {
                 command.perform(editor)
             }
+        }
+    }
+}
+
+extension BufferEditor {
+    func expandTextRange(_ textObject: TextObject) {
+        perform {
+            let newRange = textObject.range(from: $0.cursorPosition, in: $0.text)
+            $0.selectedTextRange = newRange
         }
     }
 }

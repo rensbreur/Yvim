@@ -12,7 +12,7 @@ class CommandReader: Reader {
     func feed(character: Character) -> Bool {
         switch character {
         case KeyConstants.pasteBefore:
-            self.command = Commands.Paste(register: self.register)
+            self.command = Commands.PasteBefore(register: self.register)
         case KeyConstants.pasteAfter:
             self.command = Commands.PasteAfter(register: self.register)
         default:

@@ -59,13 +59,13 @@ class EditorModeVisual: EditorMode {
             }
 
             if let command = selectionCommandReader.command {
-                command.perform(editor)
+                //command.perform(editor)
                 modeSwitcher?.switchToCommandMode()
             }
 
             if changeTextReader.success {
-                let change = FreeTextCommands.Change(register: register)
-                change.performFirstTime(editor)
+                let change = FreeTextCommands.Change(register: register, textObject: TextObjects.Empty())
+                editor.setSelectedText("")
                 modeSwitcher?.switchToInsertMode(freeTextCommand: change)
             }
 

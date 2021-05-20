@@ -47,10 +47,6 @@ class MainEditor: KeyHandler, EditorModeSwitcher {
         self.state = EditorModeCommand(modeSwitcher: self, register: register, editor: editor, commandMemory: commandMemory)
     }
 
-    func switchToCommandParameterMode(completion: @escaping (Command) -> Void) {
-        self.state = EditorModeCommandParameter(modeSwitcher: self, completion: completion)
-    }
-
     func switchToInsertMode(freeTextCommand: FreeTextCommand) {
         self.state = EditorModeInsert(modeSwitcher: self, freeTextCommand: freeTextCommand, commandMemory: commandMemory)
     }

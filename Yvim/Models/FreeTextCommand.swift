@@ -30,21 +30,19 @@ enum FreeTextCommands {
 
     struct Change: FreeTextCommand {
         let register: Register
-        let selection: Command?
+        let textObject: TextObject
 
-        init(register: Register, selection: Command? = nil) {
+        init(register: Register, textObject: TextObject) {
             self.register = register
-            self.selection = selection
+            self.textObject = textObject
         }
 
         func performFirstTime(_ editor: BufferEditor) {
-            selection?.perform(editor)
-            Commands.Delete(register: register).perform(editor)
+            Commands.Change(register: register, text: "", textObject: textObject).perform(editor)
         }
 
         func repeatableCommand(string: String) -> Command {
-            let change = Commands.Change(register: register, text: string)
-            return Commands.Composite(commands: [selection, change].compactMap { $0 })
+            Commands.Change(register: register, text: string, textObject: textObject)
         }
     }
 }

@@ -2,7 +2,6 @@ import Foundation
 
 protocol EditorModeSwitcher: AnyObject {
     func switchToCommandMode()
-    func switchToCommandParameterMode(completion: @escaping (Command) -> Void)
     func switchToInsertMode(freeTextCommand: FreeTextCommand)
     func switchToVisualMode(selection: VimSelection?)
 

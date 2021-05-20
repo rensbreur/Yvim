@@ -9,11 +9,8 @@ class EditorModeCommand: EditorMode {
     let editor: BufferEditor
     let commandMemory: CommandMemory
 
-    let multiplierReader = MultiplierReader()
-    let motionReader = MotionReader()
-    lazy var commandReader = CommandReader(register: register)
-    lazy var selectionCommandReader = ParametrizedCommandReader(register: register)
-    lazy var reader = CompositeReader(readers: [motionReader, commandReader, selectionCommandReader])
+    lazy var reader = CompositeReader(readers: [CommandModeMove(editor: editor, modeSwitcher: modeSwitcher),
+                                                CommandModeDelete(register: register, commandMemory: commandMemory, editor: editor, modeSwitcher: modeSwitcher)])
 
     init(modeSwitcher: EditorModeSwitcher, register: Register, editor: BufferEditor, commandMemory: CommandMemory) {
         self.modeSwitcher = modeSwitcher
@@ -32,84 +29,7 @@ class EditorModeCommand: EditorMode {
             return true
         }
 
-        if multiplierReader.feed(character: keyEvent.key.char) {
-            return true
-        }
-
         if reader.feed(character: keyEvent.key.char) {
-            if let motion = motionReader.motion {
-                let motion = Commands.Move(motion: motion.multiplied(multiplierReader.multiplier ?? 1))
-                motion.perform(editor)
-                modeSwitcher?.switchToCommandMode()
-            }
-
-            if let command = selectionCommandReader.command {
-                modeSwitcher?.switchToCommandParameterMode() {
-                    let composite = Commands.Composite(commands: [$0, command])
-                    self.commandMemory.mostRecentCommand = composite
-                    composite.perform(self.editor)
-                    self.modeSwitcher?.switchToCommandMode()
-                }
-            }
-
-            if let command = commandReader.command {
-                self.commandMemory.mostRecentCommand = command
-                command.perform(self.editor)
-                self.modeSwitcher?.switchToCommandMode()
-            }
-
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.insert {
-            let insert = FreeTextCommands.Insert()
-            insert.performFirstTime(editor)
-            modeSwitcher?.onKeyUp { [weak self] in self?.modeSwitcher?.switchToInsertMode(freeTextCommand: insert) }
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.add {
-            let add = FreeTextCommands.Add()
-            add.performFirstTime(editor)
-            modeSwitcher?.onKeyUp { [weak self] in self?.modeSwitcher?.switchToInsertMode(freeTextCommand: add) }
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.change {
-            modeSwitcher?.switchToCommandParameterMode() { selection in
-                let change = FreeTextCommands.Change(register: self.register, selection: selection)
-                change.performFirstTime(self.editor)
-                self.modeSwitcher?.onKeyUp { self.modeSwitcher?.switchToInsertMode(freeTextCommand: change) }
-            }
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.visual {
-            modeSwitcher?.onKeyUp { [weak self] in self?.modeSwitcher?.switchToVisualMode(selection: nil) }
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.VerticalMotion.up {
-            simulateKeyPress(CGKeyCode(kVK_UpArrow), [])
-            modeSwitcher?.switchToCommandMode()
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.VerticalMotion.down {
-            simulateKeyPress(CGKeyCode(kVK_DownArrow), [])
-            modeSwitcher?.switchToCommandMode()
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.undo {
-            simulateKeyPress(keycodeForString("z"), [.maskCommand])
-            modeSwitcher?.switchToCommandMode()
-            return true
-        }
-
-        if keyEvent.key.char == KeyConstants.again {
-            commandMemory.mostRecentCommand?.perform(editor)
-            modeSwitcher?.switchToCommandMode()
             return true
         }
 
