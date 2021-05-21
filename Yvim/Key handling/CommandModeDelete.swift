@@ -20,11 +20,4 @@ class CommandModeDelete: ParametrizedEditorCommand {
         modeSwitcher?.switchToCommandMode()
     }
 
-    func handleAsLine(textObject: TextObject) {
-        let textObject = TextObjects.Line()
-        let command = Operations.DeleteLine(register: self.register, textObject: textObject)
-        command.perform(editor)
-        operationMemory.mostRecentCommand = command
-        modeSwitcher?.switchToCommandMode()
-    }
 }

@@ -25,9 +25,10 @@ struct VimSelection {
     }
 
     mutating func expand(textObject: TextObject, in text: NSString) {
-        let range = textObject.range(from: anchor, in: text)
-        self.anchor = range.location
-        self.movable = range.location + range.length - 1
+        var range = TextRange(text: text, start: anchor)
+        textObject.expand(&range)
+        self.anchor = range.start
+        self.movable = range.end
     }
 
     var range: CFRange {

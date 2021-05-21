@@ -14,7 +14,6 @@ extension EditorCommand {
 
 protocol ParametrizedEditorCommand {
     func handle(textObject: TextObject)
-    func handleAsLine(textObject: TextObject)
 }
 
 extension ParametrizedEditorCommand {

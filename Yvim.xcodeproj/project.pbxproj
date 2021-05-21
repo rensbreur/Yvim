@@ -64,7 +64,6 @@
 		849418222657CA4900BE1613 /* CommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418212657CA4800BE1613 /* CommandHandler.swift */; };
 		849418242657D21E00BE1613 /* CommandModeChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418232657D21E00BE1613 /* CommandModeChange.swift */; };
 		849418262657D52100BE1613 /* OperationDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418252657D52100BE1613 /* OperationDelete.swift */; };
-		849418282657D59700BE1613 /* OperationDeleteLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418272657D59700BE1613 /* OperationDeleteLine.swift */; };
 		8494182A2657D5A900BE1613 /* OperationYank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418292657D5A900BE1613 /* OperationYank.swift */; };
 		8494182C2657D5C200BE1613 /* OperationPasteBefore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494182B2657D5C200BE1613 /* OperationPasteBefore.swift */; };
 		8494182E2657D5D900BE1613 /* OperationPasteAfter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494182D2657D5D900BE1613 /* OperationPasteAfter.swift */; };
@@ -154,7 +153,6 @@
 		849418212657CA4800BE1613 /* CommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandler.swift; sourceTree = "<group>"; };
 		849418232657D21E00BE1613 /* CommandModeChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeChange.swift; sourceTree = "<group>"; };
 		849418252657D52100BE1613 /* OperationDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDelete.swift; sourceTree = "<group>"; };
-		849418272657D59700BE1613 /* OperationDeleteLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDeleteLine.swift; sourceTree = "<group>"; };
 		849418292657D5A900BE1613 /* OperationYank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationYank.swift; sourceTree = "<group>"; };
 		8494182B2657D5C200BE1613 /* OperationPasteBefore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationPasteBefore.swift; sourceTree = "<group>"; };
 		8494182D2657D5D900BE1613 /* OperationPasteAfter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationPasteAfter.swift; sourceTree = "<group>"; };
@@ -341,7 +339,6 @@
 			children = (
 				843591E42654147C0088F749 /* Operation.swift */,
 				849418252657D52100BE1613 /* OperationDelete.swift */,
-				849418272657D59700BE1613 /* OperationDeleteLine.swift */,
 				849418292657D5A900BE1613 /* OperationYank.swift */,
 				8494182B2657D5C200BE1613 /* OperationPasteBefore.swift */,
 				8494182D2657D5D900BE1613 /* OperationPasteAfter.swift */,
@@ -462,7 +459,6 @@
 			files = (
 				845E4C962655666400A11E53 /* Reader.swift in Sources */,
 				2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */,
-				849418282657D59700BE1613 /* OperationDeleteLine.swift in Sources */,
 				84DE1DC625A265910020963D /* VimSelection.swift in Sources */,
 				84605E2C25A3C81E00410C44 /* NSString+unichar.swift in Sources */,
 				8494180C2656EE1900BE1613 /* SequentialReader.swift in Sources */,

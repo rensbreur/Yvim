@@ -11,6 +11,15 @@ protocol RegisterValue {
     func pasteOver(editor: BufferEditor)
 }
 
+extension TextRange {
+    var asRegisterValue: RegisterValue {
+        if coversFullLines {
+            return LineRegisterValue(text: textInRange as String)
+        }
+        return TextRegisterValue(text: textInRange as String)
+    }
+}
+
 struct TextRegisterValue: RegisterValue {
     let text: String
 

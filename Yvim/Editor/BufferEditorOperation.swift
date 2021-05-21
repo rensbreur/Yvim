@@ -54,4 +54,12 @@ extension BufferEditorOperation {
         get { selectedTextRange.location }
         set { selectedTextRange = CFRangeMake(newValue, 0) }
     }
+
+    var textPosition: TextPosition {
+        TextPosition(text: text, position: cursorPosition)
+    }
+
+    var textRange: TextRange {
+        TextRange(text: text, start: selectedTextRange.location, end: selectedTextRange.location + selectedTextRange.length - 1)
+    }
 }

@@ -4,6 +4,16 @@ struct TextRange {
     let text: NSString
     var start: Int
     var end: Int
+
+    init (text: NSString, start: Int, end: Int) {
+        self.text = text
+        self.start = start
+        self.end = end
+    }
+
+    init(text: NSString, start: Int) {
+        self.init(text: text, start: start, end: start)
+    }
 }
 
 extension TextRange {
@@ -21,6 +31,30 @@ extension TextRange {
 
     var proceedingCharacter: unichar? {
         text.safeCharacter(at: end + 1)
+    }
+
+    var textInRange: NSString {
+        self.text.substring(with: NSMakeRange(start, length)) as NSString
+    }
+
+    var startsAtBeginningOfLine: Bool {
+        start == 0 || precedingCharacter == "\n"
+    }
+
+    var endsAtEndOfLine: Bool {
+        end == text.length - 1 || endCharacter == "\n"
+    }
+
+    var coversFullLines: Bool {
+        startsAtBeginningOfLine && endsAtEndOfLine
+    }
+
+    var length: Int {
+        return end + 1 - start
+    }
+
+    var cfRange: CFRange {
+        CFRangeMake(start, length)
     }
 
     mutating func expandForward(ensuring condition: (unichar) -> Bool) {

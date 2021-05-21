@@ -11,8 +11,9 @@ enum Operations {}
 extension BufferEditor {
     func expandTextRange(_ textObject: TextObject) {
         perform {
-            let newRange = textObject.range(from: $0.cursorPosition, in: $0.text)
-            $0.selectedTextRange = newRange
+            var range = TextRange(text: $0.text, start: $0.cursorPosition)
+            textObject.expand(&range)
+            $0.selectedTextRange = range.cfRange
         }
     }
 }

@@ -32,7 +32,7 @@ class ParametrizedCommandHandler: Reader {
             }
             if lineReader.success {
                 let textObject = TextObjects.Line()
-                command.handleAsLine(textObject: textObject)
+                command.handle(textObject: textObject)
             }
             return true
         }
