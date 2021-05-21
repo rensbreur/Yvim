@@ -28,7 +28,7 @@
 		840AB79D2651BE0B00449ADC /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AB79C2651BE0B00449ADC /* Mode.swift */; };
 		840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F9BD325A008B2006B942F /* BufferEditor.swift */; };
 		843591E326540D580088F749 /* MultiplierReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E226540D580088F749 /* MultiplierReader.swift */; };
-		843591E52654147C0088F749 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E42654147C0088F749 /* Command.swift */; };
+		843591E52654147C0088F749 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E42654147C0088F749 /* Operation.swift */; };
 		843591E9265417FD0088F749 /* CommandModeDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E8265417FD0088F749 /* CommandModeDelete.swift */; };
 		845E4C8026550EEF00A11E53 /* YvimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C7F26550EEF00A11E53 /* YvimTests.swift */; };
 		845E4C8826550EFF00A11E53 /* LineMotionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8726550EFF00A11E53 /* LineMotionTests.swift */; };
@@ -37,7 +37,7 @@
 		845E4C8E265540EE00A11E53 /* TextObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8D265540EE00A11E53 /* TextObjectTests.swift */; };
 		845E4C90265542B100A11E53 /* TextObjectReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8F265542B100A11E53 /* TextObjectReader.swift */; };
 		845E4C9226555AAB00A11E53 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C9126555AAB00A11E53 /* Register.swift */; };
-		845E4C942655611700A11E53 /* FreeTextCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C932655611700A11E53 /* FreeTextCommand.swift */; };
+		845E4C942655611700A11E53 /* FreeTextOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C932655611700A11E53 /* FreeTextOperation.swift */; };
 		845E4C962655666400A11E53 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C952655666400A11E53 /* Reader.swift */; };
 		845E4C982655668900A11E53 /* CompositeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C972655668900A11E53 /* CompositeReader.swift */; };
 		845E4C9A2655693D00A11E53 /* SimpleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C992655693D00A11E53 /* SimpleReader.swift */; };
@@ -50,7 +50,7 @@
 		84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3725A4C4BF00410C44 /* KeyEvent.swift */; };
 		84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E4125A4CBCD00410C44 /* KeyHandler.swift */; };
 		84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E5425A4D7F400410C44 /* MotionReader.swift */; };
-		84941804265572C200BE1613 /* CommandMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941803265572C200BE1613 /* CommandMemory.swift */; };
+		84941804265572C200BE1613 /* OperationMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941803265572C200BE1613 /* OperationMemory.swift */; };
 		84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941805265574AC00BE1613 /* EditorModeSwitcher.swift */; };
 		8494180C2656EE1900BE1613 /* SequentialReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494180B2656EE1900BE1613 /* SequentialReader.swift */; };
 		8494180E2656EEBC00BE1613 /* CommandModeMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494180D2656EEBC00BE1613 /* CommandModeMove.swift */; };
@@ -63,6 +63,21 @@
 		8494181E2657C8FF00BE1613 /* EditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181D2657C8FF00BE1613 /* EditorCommand.swift */; };
 		849418222657CA4900BE1613 /* CommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418212657CA4800BE1613 /* CommandHandler.swift */; };
 		849418242657D21E00BE1613 /* CommandModeChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418232657D21E00BE1613 /* CommandModeChange.swift */; };
+		849418262657D52100BE1613 /* OperationDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418252657D52100BE1613 /* OperationDelete.swift */; };
+		849418282657D59700BE1613 /* OperationDeleteLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418272657D59700BE1613 /* OperationDeleteLine.swift */; };
+		8494182A2657D5A900BE1613 /* OperationYank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418292657D5A900BE1613 /* OperationYank.swift */; };
+		8494182C2657D5C200BE1613 /* OperationPasteBefore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494182B2657D5C200BE1613 /* OperationPasteBefore.swift */; };
+		8494182E2657D5D900BE1613 /* OperationPasteAfter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494182D2657D5D900BE1613 /* OperationPasteAfter.swift */; };
+		849418302657D5F100BE1613 /* OperationMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494182F2657D5F100BE1613 /* OperationMove.swift */; };
+		849418322657D61200BE1613 /* OperationInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418312657D61100BE1613 /* OperationInsert.swift */; };
+		849418342657D62C00BE1613 /* OperationAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418332657D62C00BE1613 /* OperationAdd.swift */; };
+		849418362657D64300BE1613 /* OperationChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418352657D64300BE1613 /* OperationChange.swift */; };
+		849418382657D65B00BE1613 /* OperationChangeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418372657D65B00BE1613 /* OperationChangeSelection.swift */; };
+		8494183A2657D68900BE1613 /* OperationChangeSelectionWithTextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418392657D68900BE1613 /* OperationChangeSelectionWithTextObject.swift */; };
+		8494183C2657D6A300BE1613 /* OperationComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494183B2657D6A300BE1613 /* OperationComposite.swift */; };
+		8494183F2657D77800BE1613 /* FreeTextInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494183E2657D77800BE1613 /* FreeTextInsert.swift */; };
+		849418412657D78F00BE1613 /* FreeTextAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418402657D78F00BE1613 /* FreeTextAdd.swift */; };
+		849418432657D7AC00BE1613 /* FreeTextChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418422657D7AC00BE1613 /* FreeTextChange.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,7 +116,7 @@
 		840AB79C2651BE0B00449ADC /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		840F9BD325A008B2006B942F /* BufferEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditor.swift; sourceTree = "<group>"; };
 		843591E226540D580088F749 /* MultiplierReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplierReader.swift; sourceTree = "<group>"; };
-		843591E42654147C0088F749 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		843591E42654147C0088F749 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		843591E8265417FD0088F749 /* CommandModeDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeDelete.swift; sourceTree = "<group>"; };
 		845E4C7D26550EEF00A11E53 /* YvimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YvimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		845E4C7F26550EEF00A11E53 /* YvimTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimTests.swift; sourceTree = "<group>"; };
@@ -112,7 +127,7 @@
 		845E4C8D265540EE00A11E53 /* TextObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectTests.swift; sourceTree = "<group>"; };
 		845E4C8F265542B100A11E53 /* TextObjectReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectReader.swift; sourceTree = "<group>"; };
 		845E4C9126555AAB00A11E53 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
-		845E4C932655611700A11E53 /* FreeTextCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextCommand.swift; sourceTree = "<group>"; };
+		845E4C932655611700A11E53 /* FreeTextOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextOperation.swift; sourceTree = "<group>"; };
 		845E4C952655666400A11E53 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		845E4C972655668900A11E53 /* CompositeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeReader.swift; sourceTree = "<group>"; };
 		845E4C992655693D00A11E53 /* SimpleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleReader.swift; sourceTree = "<group>"; };
@@ -125,7 +140,7 @@
 		84605E3725A4C4BF00410C44 /* KeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		84605E4125A4CBCD00410C44 /* KeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHandler.swift; sourceTree = "<group>"; };
 		84605E5425A4D7F400410C44 /* MotionReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReader.swift; sourceTree = "<group>"; };
-		84941803265572C200BE1613 /* CommandMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandMemory.swift; sourceTree = "<group>"; };
+		84941803265572C200BE1613 /* OperationMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationMemory.swift; sourceTree = "<group>"; };
 		84941805265574AC00BE1613 /* EditorModeSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModeSwitcher.swift; sourceTree = "<group>"; };
 		8494180B2656EE1900BE1613 /* SequentialReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialReader.swift; sourceTree = "<group>"; };
 		8494180D2656EEBC00BE1613 /* CommandModeMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeMove.swift; sourceTree = "<group>"; };
@@ -138,6 +153,21 @@
 		8494181D2657C8FF00BE1613 /* EditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCommand.swift; sourceTree = "<group>"; };
 		849418212657CA4800BE1613 /* CommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandler.swift; sourceTree = "<group>"; };
 		849418232657D21E00BE1613 /* CommandModeChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeChange.swift; sourceTree = "<group>"; };
+		849418252657D52100BE1613 /* OperationDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDelete.swift; sourceTree = "<group>"; };
+		849418272657D59700BE1613 /* OperationDeleteLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDeleteLine.swift; sourceTree = "<group>"; };
+		849418292657D5A900BE1613 /* OperationYank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationYank.swift; sourceTree = "<group>"; };
+		8494182B2657D5C200BE1613 /* OperationPasteBefore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationPasteBefore.swift; sourceTree = "<group>"; };
+		8494182D2657D5D900BE1613 /* OperationPasteAfter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationPasteAfter.swift; sourceTree = "<group>"; };
+		8494182F2657D5F100BE1613 /* OperationMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationMove.swift; sourceTree = "<group>"; };
+		849418312657D61100BE1613 /* OperationInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationInsert.swift; sourceTree = "<group>"; };
+		849418332657D62C00BE1613 /* OperationAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationAdd.swift; sourceTree = "<group>"; };
+		849418352657D64300BE1613 /* OperationChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationChange.swift; sourceTree = "<group>"; };
+		849418372657D65B00BE1613 /* OperationChangeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationChangeSelection.swift; sourceTree = "<group>"; };
+		849418392657D68900BE1613 /* OperationChangeSelectionWithTextObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationChangeSelectionWithTextObject.swift; sourceTree = "<group>"; };
+		8494183B2657D6A300BE1613 /* OperationComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationComposite.swift; sourceTree = "<group>"; };
+		8494183E2657D77800BE1613 /* FreeTextInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextInsert.swift; sourceTree = "<group>"; };
+		849418402657D78F00BE1613 /* FreeTextAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextAdd.swift; sourceTree = "<group>"; };
+		849418422657D7AC00BE1613 /* FreeTextChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextChange.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +213,7 @@
 			children = (
 				2EC7406E259D13B100108463 /* main.swift */,
 				2EC74076259DDF0500108463 /* AppDelegate.swift */,
+				8494183D2657D6B400BE1613 /* Operations */,
 				84605E4925A4D40200410C44 /* Models */,
 				84605E4A25A4D46A00410C44 /* Key handling */,
 				84605E4B25A4D48300410C44 /* Editor */,
@@ -215,8 +246,6 @@
 				845E4C8926553DFD00A11E53 /* TextObject.swift */,
 				84DE1DC525A265910020963D /* VimSelection.swift */,
 				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
-				843591E42654147C0088F749 /* Command.swift */,
-				845E4C932655611700A11E53 /* FreeTextCommand.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -258,7 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				845E4C9126555AAB00A11E53 /* Register.swift */,
-				84941803265572C200BE1613 /* CommandMemory.swift */,
+				84941803265572C200BE1613 /* OperationMemory.swift */,
 				840F9BD325A008B2006B942F /* BufferEditor.swift */,
 				84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */,
 			);
@@ -305,6 +334,30 @@
 				2EA4C4F8259F4EA800FB06EC /* StatusItemController.swift */,
 			);
 			path = "Status item";
+			sourceTree = "<group>";
+		};
+		8494183D2657D6B400BE1613 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				843591E42654147C0088F749 /* Operation.swift */,
+				849418252657D52100BE1613 /* OperationDelete.swift */,
+				849418272657D59700BE1613 /* OperationDeleteLine.swift */,
+				849418292657D5A900BE1613 /* OperationYank.swift */,
+				8494182B2657D5C200BE1613 /* OperationPasteBefore.swift */,
+				8494182D2657D5D900BE1613 /* OperationPasteAfter.swift */,
+				8494182F2657D5F100BE1613 /* OperationMove.swift */,
+				849418312657D61100BE1613 /* OperationInsert.swift */,
+				849418332657D62C00BE1613 /* OperationAdd.swift */,
+				849418352657D64300BE1613 /* OperationChange.swift */,
+				849418372657D65B00BE1613 /* OperationChangeSelection.swift */,
+				849418392657D68900BE1613 /* OperationChangeSelectionWithTextObject.swift */,
+				8494183B2657D6A300BE1613 /* OperationComposite.swift */,
+				845E4C932655611700A11E53 /* FreeTextOperation.swift */,
+				8494183E2657D77800BE1613 /* FreeTextInsert.swift */,
+				849418402657D78F00BE1613 /* FreeTextAdd.swift */,
+				849418422657D7AC00BE1613 /* FreeTextChange.swift */,
+			);
+			path = Operations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,23 +462,29 @@
 			files = (
 				845E4C962655666400A11E53 /* Reader.swift in Sources */,
 				2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */,
+				849418282657D59700BE1613 /* OperationDeleteLine.swift in Sources */,
 				84DE1DC625A265910020963D /* VimSelection.swift in Sources */,
 				84605E2C25A3C81E00410C44 /* NSString+unichar.swift in Sources */,
 				8494180C2656EE1900BE1613 /* SequentialReader.swift in Sources */,
 				2EC7406C259D135E00108463 /* EventTap.swift in Sources */,
 				84605E2925A3C7FD00410C44 /* unichar+unicodeScalar.swift in Sources */,
-				84941804265572C200BE1613 /* CommandMemory.swift in Sources */,
+				84941804265572C200BE1613 /* OperationMemory.swift in Sources */,
+				8494183F2657D77800BE1613 /* FreeTextInsert.swift in Sources */,
 				84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */,
 				84605E2F25A3C83900410C44 /* BufferEditorOperation.swift in Sources */,
-				843591E52654147C0088F749 /* Command.swift in Sources */,
+				843591E52654147C0088F749 /* Operation.swift in Sources */,
 				84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */,
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
 				8494181626570AE500BE1613 /* CommandModeVisual.swift in Sources */,
+				849418262657D52100BE1613 /* OperationDelete.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,
 				845E4C8A26553DFD00A11E53 /* TextObject.swift in Sources */,
+				849418302657D5F100BE1613 /* OperationMove.swift in Sources */,
 				840AB79B2651ADE300449ADC /* EditorModeVisual.swift in Sources */,
 				843591E326540D580088F749 /* MultiplierReader.swift in Sources */,
+				849418412657D78F00BE1613 /* FreeTextAdd.swift in Sources */,
 				84605E2325A3C7A600410C44 /* AXUIElement+TextArea.swift in Sources */,
+				849418432657D7AC00BE1613 /* FreeTextChange.swift in Sources */,
 				2EC4671925AF870E00E6367D /* KeyConstants.swift in Sources */,
 				849418122657046400BE1613 /* CommandModeInsert.swift in Sources */,
 				840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */,
@@ -438,27 +497,36 @@
 				84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */,
 				84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
+				849418322657D61200BE1613 /* OperationInsert.swift in Sources */,
 				2EC4671625AF7E0700E6367D /* TextPosition.swift in Sources */,
+				8494183C2657D6A300BE1613 /* OperationComposite.swift in Sources */,
 				840AB79D2651BE0B00449ADC /* Mode.swift in Sources */,
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
 				845E4C9A2655693D00A11E53 /* SimpleReader.swift in Sources */,
 				84605E3225A3CA3E00410C44 /* LineMotion.swift in Sources */,
-				845E4C942655611700A11E53 /* FreeTextCommand.swift in Sources */,
+				845E4C942655611700A11E53 /* FreeTextOperation.swift in Sources */,
+				849418342657D62C00BE1613 /* OperationAdd.swift in Sources */,
 				845E4C982655668900A11E53 /* CompositeReader.swift in Sources */,
+				849418362657D64300BE1613 /* OperationChange.swift in Sources */,
 				2EC74074259DDEE200108463 /* MainEditor.swift in Sources */,
 				849418242657D21E00BE1613 /* CommandModeChange.swift in Sources */,
 				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
 				843591E9265417FD0088F749 /* CommandModeDelete.swift in Sources */,
 				840AB7972651AD6B00449ADC /* EditorModeCommand.swift in Sources */,
 				849418102656FCDE00BE1613 /* PrefixedReader.swift in Sources */,
+				849418382657D65B00BE1613 /* OperationChangeSelection.swift in Sources */,
 				840AB7992651ADC800449ADC /* EditorModeInsert.swift in Sources */,
 				845E4C8C26553E2E00A11E53 /* TextRange.swift in Sources */,
 				8494180E2656EEBC00BE1613 /* CommandModeMove.swift in Sources */,
 				2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */,
+				8494182A2657D5A900BE1613 /* OperationYank.swift in Sources */,
 				8494181C2657170300BE1613 /* CommandModePasteBefore.swift in Sources */,
 				8494181826570B6E00BE1613 /* VisualModeMove.swift in Sources */,
 				2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */,
+				8494182C2657D5C200BE1613 /* OperationPasteBefore.swift in Sources */,
+				8494183A2657D68900BE1613 /* OperationChangeSelectionWithTextObject.swift in Sources */,
 				8494181A26570DDE00BE1613 /* VisualModeDelete.swift in Sources */,
+				8494182E2657D5D900BE1613 /* OperationPasteAfter.swift in Sources */,
 				84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

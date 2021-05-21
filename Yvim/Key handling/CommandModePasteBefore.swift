@@ -3,13 +3,13 @@ import Foundation
 class CommandModePasteBefore: EditorCommand {
     let editor: BufferEditor
     let register: Register
-    let commandMemory: CommandMemory
+    let operationMemory: OperationMemory
     weak var modeSwitcher: EditorModeSwitcher?
 
-    init(editor: BufferEditor, register: Register, commandMemory: CommandMemory, modeSwitcher: EditorModeSwitcher?) {
+    init(editor: BufferEditor, register: Register, operationMemory: OperationMemory, modeSwitcher: EditorModeSwitcher?) {
         self.editor = editor
         self.register = register
-        self.commandMemory = commandMemory
+        self.operationMemory = operationMemory
         self.modeSwitcher = modeSwitcher
     }
 
@@ -17,9 +17,9 @@ class CommandModePasteBefore: EditorCommand {
 
     func handleEvent() {
         if let registerValue = register.register {
-            let paste = Commands.PasteBefore(value: registerValue)
+            let paste = Operations.PasteBefore(value: registerValue)
             paste.perform(editor)
-            commandMemory.mostRecentCommand = paste
+            operationMemory.mostRecentCommand = paste
         }
         modeSwitcher?.switchToCommandMode()
     }

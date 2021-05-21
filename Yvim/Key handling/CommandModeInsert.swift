@@ -10,7 +10,7 @@ class CommandModeInsert: EditorCommand {
     }
 
     func handleEvent() {
-        let insert = FreeTextCommands.Insert()
+        let insert = FreeTextOperations.Insert()
         insert.performFirstTime(self.editor)
         modeSwitcher?.switchToInsertMode(freeTextCommand: insert)
     }

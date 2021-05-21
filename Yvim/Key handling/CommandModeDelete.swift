@@ -2,29 +2,29 @@ import Foundation
 
 class CommandModeDelete: ParametrizedEditorCommand {
     let register: Register
-    let commandMemory: CommandMemory
+    let operationMemory: OperationMemory
     let editor: BufferEditor
     weak var modeSwitcher: EditorModeSwitcher?
 
-    init(register: Register, commandMemory: CommandMemory, editor: BufferEditor, modeSwitcher: EditorModeSwitcher?) {
+    init(register: Register, operationMemory: OperationMemory, editor: BufferEditor, modeSwitcher: EditorModeSwitcher?) {
         self.register = register
-        self.commandMemory = commandMemory
+        self.operationMemory = operationMemory
         self.editor = editor
         self.modeSwitcher = modeSwitcher
     }
 
     func handle(textObject: TextObject) {
-        let command = Commands.Delete(register: self.register, textObject: textObject)
+        let command = Operations.Delete(register: self.register, textObject: textObject)
         command.perform(editor)
-        commandMemory.mostRecentCommand = command
+        operationMemory.mostRecentCommand = command
         modeSwitcher?.switchToCommandMode()
     }
 
     func handleAsLine(textObject: TextObject) {
         let textObject = TextObjects.Line()
-        let command = Commands.DeleteLine(register: self.register, textObject: textObject)
+        let command = Operations.DeleteLine(register: self.register, textObject: textObject)
         command.perform(editor)
-        commandMemory.mostRecentCommand = command
+        operationMemory.mostRecentCommand = command
         modeSwitcher?.switchToCommandMode()
     }
 }

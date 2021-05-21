@@ -7,7 +7,7 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
     weak var modeSwitcher: EditorModeSwitcher?
     let register: Register
     let editor: BufferEditor
-    let commandMemory: CommandMemory
+    let operationMemory: OperationMemory
 
     lazy var reader = CompositeReader(createCommands())
 
@@ -19,18 +19,18 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
 
     func createCommands() -> [Reader] {[
         MotionCommandHandler(command: CommandModeMove(editor: editor, keySimulator: self, modeSwitcher: modeSwitcher)),
-        ParametrizedCommandHandler("d", command: CommandModeDelete(register: register, commandMemory: commandMemory, editor: editor, modeSwitcher: modeSwitcher)),
-        ParametrizedCommandHandler("c", command: CommandModeChange(register: register, commandMemory: commandMemory, editor: editor, modeSwitcher: modeSwitcher)),
+        ParametrizedCommandHandler("d", command: CommandModeDelete(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)),
+        ParametrizedCommandHandler("c", command: CommandModeChange(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)),
         CommandHandler("i", command: CommandModeInsert(editor: editor, modeSwitcher: modeSwitcher)),
         CommandHandler("v", command: CommandModeVisual(modeSwitcher: modeSwitcher)),
-       CommandHandler("P", command: CommandModePasteBefore(editor: editor, register: register, commandMemory: commandMemory, modeSwitcher: modeSwitcher))
+       CommandHandler("P", command: CommandModePasteBefore(editor: editor, register: register, operationMemory: operationMemory, modeSwitcher: modeSwitcher))
     ]}
 
-    init(modeSwitcher: EditorModeSwitcher, register: Register, editor: BufferEditor, commandMemory: CommandMemory) {
+    init(modeSwitcher: EditorModeSwitcher, register: Register, editor: BufferEditor, operationMemory: OperationMemory) {
         self.modeSwitcher = modeSwitcher
         self.register = register
         self.editor = editor
-        self.commandMemory = commandMemory
+        self.operationMemory = operationMemory
     }
 
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {

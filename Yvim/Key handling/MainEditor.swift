@@ -7,7 +7,7 @@ class MainEditor: KeyHandler, EditorModeSwitcher {
 
     let editor: BufferEditor
     let register = Register()
-    let commandMemory: CommandMemory
+    let operationMemory: OperationMemory
 
     @Published private var state: EditorMode!
 
@@ -18,8 +18,8 @@ class MainEditor: KeyHandler, EditorModeSwitcher {
     init(editor: BufferEditor) {
         self.editor = editor
         self.mode = .command
-        self.commandMemory = CommandMemory()
-        self.state = EditorModeCommand(modeSwitcher: self, register: register, editor: editor, commandMemory: commandMemory)
+        self.operationMemory = OperationMemory()
+        self.state = EditorModeCommand(modeSwitcher: self, register: register, editor: editor, operationMemory: operationMemory)
         $state
             .compactMap { $0?.mode }
             .sink { [weak self] in self?.mode = $0 }
@@ -44,11 +44,11 @@ class MainEditor: KeyHandler, EditorModeSwitcher {
     }
 
     func switchToCommandMode() {
-        self.state = EditorModeCommand(modeSwitcher: self, register: register, editor: editor, commandMemory: commandMemory)
+        self.state = EditorModeCommand(modeSwitcher: self, register: register, editor: editor, operationMemory: operationMemory)
     }
 
-    func switchToInsertMode(freeTextCommand: FreeTextCommand) {
-        self.state = EditorModeInsert(modeSwitcher: self, freeTextCommand: freeTextCommand, commandMemory: commandMemory)
+    func switchToInsertMode(freeTextCommand: FreeTextOperation) {
+        self.state = EditorModeInsert(modeSwitcher: self, freeTextCommand: freeTextCommand, operationMemory: operationMemory)
     }
 
     func switchToVisualMode(selection: VimSelection? = nil) {

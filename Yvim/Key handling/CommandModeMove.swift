@@ -51,7 +51,7 @@ class CommandModeMove: MotionCommand {
     }
 
     func handle(motion: LineMotion) {
-        Commands.Move(motion: motion).perform(editor)
+        Operations.Move(motion: motion).perform(editor)
         modeSwitcher?.switchToCommandMode()
     }
 

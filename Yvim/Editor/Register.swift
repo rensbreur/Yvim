@@ -43,7 +43,7 @@ struct LineRegisterValue: RegisterValue {
     }
 
     func pasteBefore(editor: BufferEditor) {
-        Commands.Move(motion: LineMotions.LineStart()).perform(editor)
+        Operations.Move(motion: LineMotions.LineStart()).perform(editor)
         editor.perform {
             $0.selectedText = text as NSString
         }
@@ -56,7 +56,7 @@ struct LineRegisterValue: RegisterValue {
     }
 
     func pasteAfter(editor: BufferEditor) {
-        Commands.Move(motion: LineMotions.LineEnd()).perform(editor)
+        Operations.Move(motion: LineMotions.LineEnd()).perform(editor)
         editor.perform {
             $0.cursorPosition += 1
             $0.selectedText = text as NSString

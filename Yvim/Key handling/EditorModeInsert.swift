@@ -5,17 +5,17 @@ class EditorModeInsert: EditorMode {
     let mode: Mode = .insert
 
     weak var modeSwitcher: EditorModeSwitcher?
-    let commandMemory: CommandMemory
+    let operationMemory: OperationMemory
 
-    let currentFreeTextCommand: FreeTextCommand
+    let currentFreeTextCommand: FreeTextOperation
 
     /// Text is recorded to create a repeatable command
     var recordedText: String = ""
 
-    init(modeSwitcher: EditorModeSwitcher, freeTextCommand: FreeTextCommand, commandMemory: CommandMemory) {
+    init(modeSwitcher: EditorModeSwitcher, freeTextCommand: FreeTextOperation, operationMemory: OperationMemory) {
         self.modeSwitcher = modeSwitcher
         self.currentFreeTextCommand = freeTextCommand
-        self.commandMemory = commandMemory
+        self.operationMemory = operationMemory
     }
     
     func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool {
@@ -24,7 +24,7 @@ class EditorModeInsert: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape {
-            commandMemory.mostRecentCommand = currentFreeTextCommand.repeatableCommand(string: recordedText)
+            operationMemory.mostRecentCommand = currentFreeTextCommand.createOperation(string: recordedText)
             modeSwitcher?.switchToCommandMode()
             return true
         }
