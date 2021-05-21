@@ -38,6 +38,7 @@ class EditorModeVisual: EditorMode {
         }
 
         if keyEvent.key.keycode == kVK_Escape && keyEvent.event == .down {
+            editor.perform { $0.cursorPosition = self.selection.movable }
             modeSwitcher?.switchToCommandMode()
             return true
         }
