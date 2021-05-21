@@ -22,8 +22,9 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
         ParametrizedCommandHandler("d", command: CommandModeDelete(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)),
         ParametrizedCommandHandler("c", command: CommandModeChange(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)),
         CommandHandler("i", command: CommandModeInsert(editor: editor, modeSwitcher: modeSwitcher)),
+        CommandHandler(".", command: CommandModeRepeat(editor: editor, operationMemory: operationMemory, modeSwitcher: modeSwitcher)),
         CommandHandler("v", command: CommandModeVisual(modeSwitcher: modeSwitcher)),
-       CommandHandler("P", command: CommandModePasteBefore(editor: editor, register: register, operationMemory: operationMemory, modeSwitcher: modeSwitcher))
+        CommandHandler("P", command: CommandModePasteBefore(editor: editor, register: register, operationMemory: operationMemory, modeSwitcher: modeSwitcher))
     ]}
 
     init(modeSwitcher: EditorModeSwitcher, register: Register, editor: BufferEditor, operationMemory: OperationMemory) {
