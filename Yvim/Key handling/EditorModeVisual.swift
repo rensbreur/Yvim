@@ -10,12 +10,10 @@ class EditorModeVisual: EditorMode {
 
     lazy var reader = CompositeReader(createCommands())
 
-    func createCommands() -> [Reader] {
-        [
-            VisualModeMove(editor: editor, selection: selection, modeSwitcher: modeSwitcher),
-            VisualModeDelete(register: register, editor: editor, modeSwitcher: modeSwitcher)
-        ]
-    }
+    func createCommands() -> [Reader] {[
+        SelectionCommandHandler(command: VisualModeMove(editor: editor, selection: selection, modeSwitcher: modeSwitcher)),
+        CommandHandler("d", command: VisualModeDelete(register: register, editor: editor, modeSwitcher: modeSwitcher))
+    ]}
 
     var selection: VimSelection
 

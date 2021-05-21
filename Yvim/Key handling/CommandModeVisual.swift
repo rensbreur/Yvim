@@ -7,8 +7,6 @@ class CommandModeVisual: EditorCommand {
         self.modeSwitcher = modeSwitcher
     }
 
-    let reader: Reader = SimpleReader(character: KeyConstants.visual)
-
     func handleEvent() {
         modeSwitcher?.switchToVisualMode(selection: nil)
     }

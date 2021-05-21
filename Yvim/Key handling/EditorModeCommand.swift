@@ -17,15 +17,14 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
         _pressKeys.append((keyCode, flags))
     }
 
-    func createCommands() -> [Reader] {
-        [
-            CommandModeMove(editor: editor, keySimulator: self, modeSwitcher: modeSwitcher),
-            CommandModeDelete(register: register, commandMemory: commandMemory, editor: editor, modeSwitcher: modeSwitcher),
-            CommandModeInsert(editor: editor, modeSwitcher: modeSwitcher),
-            CommandModeVisual(modeSwitcher: modeSwitcher),
-            CommandModePasteBefore(editor: editor, register: register, commandMemory: commandMemory, modeSwitcher: modeSwitcher)
-        ]
-    }
+    func createCommands() -> [Reader] {[
+        MotionCommandHandler(command: CommandModeMove(editor: editor, keySimulator: self, modeSwitcher: modeSwitcher)),
+        ParametrizedCommandHandler("d", command: CommandModeDelete(register: register, commandMemory: commandMemory, editor: editor, modeSwitcher: modeSwitcher)),
+        ParametrizedCommandHandler("c", command: CommandModeChange(register: register, commandMemory: commandMemory, editor: editor, modeSwitcher: modeSwitcher)),
+        CommandHandler("i", command: CommandModeInsert(editor: editor, modeSwitcher: modeSwitcher)),
+        CommandHandler("v", command: CommandModeVisual(modeSwitcher: modeSwitcher)),
+       CommandHandler("P", command: CommandModePasteBefore(editor: editor, register: register, commandMemory: commandMemory, modeSwitcher: modeSwitcher))
+    ]}
 
     init(modeSwitcher: EditorModeSwitcher, register: Register, editor: BufferEditor, commandMemory: CommandMemory) {
         self.modeSwitcher = modeSwitcher

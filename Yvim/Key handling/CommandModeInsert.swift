@@ -9,8 +9,6 @@ class CommandModeInsert: EditorCommand {
         self.modeSwitcher = modeSwitcher
     }
 
-    let reader: Reader = SimpleReader(character: KeyConstants.insert)
-
     func handleEvent() {
         let insert = FreeTextCommands.Insert()
         insert.performFirstTime(self.editor)

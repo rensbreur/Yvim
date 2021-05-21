@@ -56,11 +56,13 @@
 		8494180E2656EEBC00BE1613 /* CommandModeMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494180D2656EEBC00BE1613 /* CommandModeMove.swift */; };
 		849418102656FCDE00BE1613 /* PrefixedReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494180F2656FCDE00BE1613 /* PrefixedReader.swift */; };
 		849418122657046400BE1613 /* CommandModeInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418112657046400BE1613 /* CommandModeInsert.swift */; };
-		849418142657072B00BE1613 /* EditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418132657072B00BE1613 /* EditorCommand.swift */; };
 		8494181626570AE500BE1613 /* CommandModeVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181526570AE500BE1613 /* CommandModeVisual.swift */; };
 		8494181826570B6E00BE1613 /* VisualModeMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181726570B6E00BE1613 /* VisualModeMove.swift */; };
 		8494181A26570DDE00BE1613 /* VisualModeDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181926570DDE00BE1613 /* VisualModeDelete.swift */; };
 		8494181C2657170300BE1613 /* CommandModePasteBefore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181B2657170300BE1613 /* CommandModePasteBefore.swift */; };
+		8494181E2657C8FF00BE1613 /* EditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181D2657C8FF00BE1613 /* EditorCommand.swift */; };
+		849418222657CA4900BE1613 /* CommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418212657CA4800BE1613 /* CommandHandler.swift */; };
+		849418242657D21E00BE1613 /* CommandModeChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418232657D21E00BE1613 /* CommandModeChange.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -129,11 +131,13 @@
 		8494180D2656EEBC00BE1613 /* CommandModeMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeMove.swift; sourceTree = "<group>"; };
 		8494180F2656FCDE00BE1613 /* PrefixedReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixedReader.swift; sourceTree = "<group>"; };
 		849418112657046400BE1613 /* CommandModeInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeInsert.swift; sourceTree = "<group>"; };
-		849418132657072B00BE1613 /* EditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCommand.swift; sourceTree = "<group>"; };
 		8494181526570AE500BE1613 /* CommandModeVisual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeVisual.swift; sourceTree = "<group>"; };
 		8494181726570B6E00BE1613 /* VisualModeMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModeMove.swift; sourceTree = "<group>"; };
 		8494181926570DDE00BE1613 /* VisualModeDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModeDelete.swift; sourceTree = "<group>"; };
 		8494181B2657170300BE1613 /* CommandModePasteBefore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModePasteBefore.swift; sourceTree = "<group>"; };
+		8494181D2657C8FF00BE1613 /* EditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCommand.swift; sourceTree = "<group>"; };
+		849418212657CA4800BE1613 /* CommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandler.swift; sourceTree = "<group>"; };
+		849418232657D21E00BE1613 /* CommandModeChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeChange.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,12 +228,14 @@
 				84941805265574AC00BE1613 /* EditorModeSwitcher.swift */,
 				2EA4C507259F74A600FB06EC /* EditorMode.swift */,
 				840AB7962651AD6B00449ADC /* EditorModeCommand.swift */,
+				8494181D2657C8FF00BE1613 /* EditorCommand.swift */,
+				849418212657CA4800BE1613 /* CommandHandler.swift */,
 				843591E8265417FD0088F749 /* CommandModeDelete.swift */,
+				849418232657D21E00BE1613 /* CommandModeChange.swift */,
 				8494181526570AE500BE1613 /* CommandModeVisual.swift */,
 				849418112657046400BE1613 /* CommandModeInsert.swift */,
 				8494180D2656EEBC00BE1613 /* CommandModeMove.swift */,
 				8494181B2657170300BE1613 /* CommandModePasteBefore.swift */,
-				849418132657072B00BE1613 /* EditorCommand.swift */,
 				840AB7982651ADC800449ADC /* EditorModeInsert.swift */,
 				840AB79A2651ADE300449ADC /* EditorModeVisual.swift */,
 				8494181726570B6E00BE1613 /* VisualModeMove.swift */,
@@ -423,7 +429,9 @@
 				2EC4671925AF870E00E6367D /* KeyConstants.swift in Sources */,
 				849418122657046400BE1613 /* CommandModeInsert.swift in Sources */,
 				840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */,
+				849418222657CA4900BE1613 /* CommandHandler.swift in Sources */,
 				2EA4C508259F74A600FB06EC /* EditorMode.swift in Sources */,
+				8494181E2657C8FF00BE1613 /* EditorCommand.swift in Sources */,
 				2EC7406F259D13B100108463 /* main.swift in Sources */,
 				845E4C9226555AAB00A11E53 /* Register.swift in Sources */,
 				845E4C90265542B100A11E53 /* TextObjectReader.swift in Sources */,
@@ -435,10 +443,10 @@
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
 				845E4C9A2655693D00A11E53 /* SimpleReader.swift in Sources */,
 				84605E3225A3CA3E00410C44 /* LineMotion.swift in Sources */,
-				849418142657072B00BE1613 /* EditorCommand.swift in Sources */,
 				845E4C942655611700A11E53 /* FreeTextCommand.swift in Sources */,
 				845E4C982655668900A11E53 /* CompositeReader.swift in Sources */,
 				2EC74074259DDEE200108463 /* MainEditor.swift in Sources */,
+				849418242657D21E00BE1613 /* CommandModeChange.swift in Sources */,
 				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
 				843591E9265417FD0088F749 /* CommandModeDelete.swift in Sources */,
 				840AB7972651AD6B00449ADC /* EditorModeCommand.swift in Sources */,

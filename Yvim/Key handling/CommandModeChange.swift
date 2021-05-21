@@ -1,6 +1,6 @@
 import Foundation
 
-class CommandModeDelete: ParametrizedEditorCommand {
+class CommandModeChange: ParametrizedEditorCommand {
     let register: Register
     let commandMemory: CommandMemory
     let editor: BufferEditor
@@ -14,17 +14,14 @@ class CommandModeDelete: ParametrizedEditorCommand {
     }
 
     func handle(textObject: TextObject) {
-        let command = Commands.Delete(register: self.register, textObject: textObject)
-        command.perform(editor)
-        commandMemory.mostRecentCommand = command
-        modeSwitcher?.switchToCommandMode()
+        let command = FreeTextCommands.Change(register: self.register, textObject: textObject)
+        command.performFirstTime(editor)
+        modeSwitcher?.switchToInsertMode(freeTextCommand: command)
     }
 
     func handleAsLine(textObject: TextObject) {
-        let textObject = TextObjects.Line()
-        let command = Commands.DeleteLine(register: self.register, textObject: textObject)
-        command.perform(editor)
-        commandMemory.mostRecentCommand = command
-        modeSwitcher?.switchToCommandMode()
+        let command = FreeTextCommands.Change(register: self.register, textObject: textObject)
+        command.performFirstTime(editor)
+        modeSwitcher?.switchToInsertMode(freeTextCommand: command)
     }
 }

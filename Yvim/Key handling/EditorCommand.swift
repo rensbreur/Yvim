@@ -1,16 +1,35 @@
 import Foundation
 
-protocol EditorCommand: Reader {
+protocol EditorCommand {
     func handleEvent()
-    var reader: Reader { get }
 }
 
+infix operator ~>: AdditionPrecedence
+
 extension EditorCommand {
-    func feed(character: Character) -> Bool {
-        if reader.feed(character: character) {
-            handleEvent()
-            return true
-        }
-        return false
+    static func ~>(_ lhs: Character, _ rhs: EditorCommand) -> CommandHandler {
+        CommandHandler(lhs, command: rhs)
     }
+}
+
+protocol ParametrizedEditorCommand {
+    func handle(textObject: TextObject)
+    func handleAsLine(textObject: TextObject)
+}
+
+extension ParametrizedEditorCommand {
+    static func ~>(_ lhs: Character, _ rhs: ParametrizedEditorCommand) -> ParametrizedCommandHandler {
+        ParametrizedCommandHandler(lhs, command: rhs)
+    }
+}
+
+protocol SelectionCommand {
+    func handle(motion: LineMotion)
+    func handle(textObject: TextObject)
+}
+
+protocol MotionCommand {
+    func handle(motion: LineMotion)
+    func handleUp()
+    func handleDown()
 }
