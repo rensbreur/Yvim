@@ -95,6 +95,13 @@ extension TextRange {
         }
     }
 
+    mutating func shrinkBackward() {
+        let pos = end - 1
+        if pos >= start {
+            end = pos
+        }
+    }
+
     mutating func expandToEndOfWord() {
         if let current = endCharacter, current.isAlphanumeric {
             expandForward(ensuring: \.isAlphanumeric)

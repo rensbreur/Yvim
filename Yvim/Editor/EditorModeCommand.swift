@@ -18,13 +18,44 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
     }
 
     func createCommands() -> [Reader] {[
-        MotionCommandHandler(command: CommandModeMove(editor: editor, keySimulator: self, modeSwitcher: modeSwitcher)),
-        ParametrizedCommandHandler("d", command: CommandModeDelete(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)),
-        ParametrizedCommandHandler("c", command: CommandModeChange(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)),
-        CommandHandler("i", command: CommandModeInsert(editor: editor, modeSwitcher: modeSwitcher)),
-        CommandHandler(".", command: CommandModeRepeat(editor: editor, operationMemory: operationMemory, modeSwitcher: modeSwitcher)),
-        CommandHandler("v", command: CommandModeVisual(modeSwitcher: modeSwitcher)),
-        CommandHandler("P", command: CommandModePasteBefore(editor: editor, register: register, operationMemory: operationMemory, modeSwitcher: modeSwitcher))
+        MotionCommandHandler(
+            command: CommandModeMove(editor: editor, keySimulator: self, modeSwitcher: modeSwitcher)
+        ),
+        ParametrizedCommandHandler(
+            KeyConstants.delete,
+            command: CommandModeDelete(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)
+        ),
+        ParametrizedCommandHandler(
+            KeyConstants.yank,
+            command: CommandModeYank(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)
+        ),
+        ParametrizedCommandHandler(
+            KeyConstants.change,
+            command: CommandModeChange(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.insert,
+            command: CommandModeInsert(editor: editor, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.undo,
+            command: CommandModeUndo(keySimulator: self, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.again,
+            command: CommandModeRepeat(editor: editor, operationMemory: operationMemory, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.visual, command: CommandModeVisual(modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.pasteBefore,
+            command: CommandModePasteBefore(editor: editor, register: register, operationMemory: operationMemory, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.pasteAfter,
+            command: CommandModePasteAfter(editor: editor, register: register, operationMemory: operationMemory, modeSwitcher: modeSwitcher)
+        )
     ]}
 
     init(modeSwitcher: EditorModeSwitcher, register: Register, editor: BufferEditor, operationMemory: OperationMemory) {

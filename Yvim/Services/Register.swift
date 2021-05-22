@@ -38,6 +38,8 @@ struct TextRegisterValue: RegisterValue {
     func pasteAfter(editor: BufferEditor) {
         editor.perform {
             $0.cursorPosition += 1
+        }
+        editor.perform {
             $0.selectedText = text as NSString
         }
     }
