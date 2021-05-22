@@ -6,24 +6,39 @@ class EditorModeVisual: EditorMode {
 
     weak var modeSwitcher: EditorModeSwitcher?
     let register: Register
+    let operationMemory: OperationMemory
     let editor: BufferEditor
 
     lazy var reader = CompositeReader(createCommands())
 
     func createCommands() -> [Reader] {[
-        SelectionCommandHandler(command: VisualModeMove(editor: editor, selection: selection, modeSwitcher: modeSwitcher)),
-        CommandHandler("d", command: VisualModeDelete(register: register, editor: editor, modeSwitcher: modeSwitcher))
+        SelectionCommandHandler(
+            command: VisualModeMove(editor: editor, selection: selection, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.delete,
+            command: VisualModeDelete(register: register, editor: editor, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.paste,
+            command: VisualModePaste(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)
+        ),
+        CommandHandler(
+            KeyConstants.change,
+            command: VisualModeChange(register: register, editor: editor, modeSwitcher: modeSwitcher)
+        )
     ]}
 
     var selection: VimSelection
 
     private var onKeyUp: (() -> Void)?
 
-    init(modeSwitcher: EditorModeSwitcher, selection: VimSelection? = nil, register: Register, editor: BufferEditor) {
+    init(modeSwitcher: EditorModeSwitcher, selection: VimSelection? = nil, register: Register, editor: BufferEditor, operationMemory: OperationMemory) {
         self.modeSwitcher = modeSwitcher
         self.selection = selection ?? VimSelection(anchor: editor.getSelectedTextRange().location)
         self.register = register
         self.editor = editor
+        self.operationMemory = operationMemory
         updateSelection()
     }
 

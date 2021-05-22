@@ -3,7 +3,7 @@ import XCTest
 
 class TextObjectTests: XCTestCase {
 
-    func testInnerWord() {
+    func testWord() {
         var rng = textRange("There once was a",
                             "       *        ")
         let exp = textRange("There once was a",
@@ -53,6 +53,15 @@ class TextObjectTests: XCTestCase {
                             "     *           ")
         let exp = textRange("There  once was a",
                             "     *           ")
+        TextObjects.InnerWord().expand(&rng)
+        XCTAssertEqual(rng, exp)
+    }
+
+    func testInnerWordAtBeginningOfWord() {
+        var rng = textRange("There once was a",
+                            "      *         ")
+        let exp = textRange("There once was a",
+                            "      ****      ")
         TextObjects.InnerWord().expand(&rng)
         XCTAssertEqual(rng, exp)
     }

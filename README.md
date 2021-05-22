@@ -2,7 +2,19 @@
 
 Yvim uses macOS accessibility APIs to add Vim-inspired keyboard commands to Xcode. It is an alternative to Xvim2 that does not require code injection.
 
-![Command mode](screenshot.png)
+### Showcase
+
+![Repeat](demo_repeat.gif)
+
+Repeating a command
+
+![Visual](demo_visual.gif)
+
+Visual mode
+
+![Move lines](demo_move_lines.gif)
+
+Moving lines down
 
 ### Example commands
 

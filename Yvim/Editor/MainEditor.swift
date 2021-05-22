@@ -52,7 +52,7 @@ class MainEditor: KeyHandler, EditorModeSwitcher {
     }
 
     func switchToVisualMode(selection: VimSelection? = nil) {
-        self.state = EditorModeVisual(modeSwitcher: self, selection: selection, register: register, editor: editor)
+        self.state = EditorModeVisual(modeSwitcher: self, selection: selection, register: register, editor: editor, operationMemory: operationMemory)
     }
 
     func onKeyUp(_ block: @escaping () -> Void) {

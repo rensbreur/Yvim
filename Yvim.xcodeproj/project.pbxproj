@@ -97,6 +97,10 @@
 		8494186F2659406700BE1613 /* CommandModeYank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494186E2659406700BE1613 /* CommandModeYank.swift */; };
 		84941871265944BA00BE1613 /* CommandModeUndo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941870265944BA00BE1613 /* CommandModeUndo.swift */; };
 		84941873265949FB00BE1613 /* VisualModeYank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941872265949FB00BE1613 /* VisualModeYank.swift */; };
+		8494187526594DBC00BE1613 /* VisualModeChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494187426594DBC00BE1613 /* VisualModeChange.swift */; };
+		8494187726594DF600BE1613 /* TextObjectEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494187626594DF600BE1613 /* TextObjectEmpty.swift */; };
+		8494187926594F7600BE1613 /* VisualModePaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494187826594F7600BE1613 /* VisualModePaste.swift */; };
+		8494187B26594FC600BE1613 /* OperationPasteOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494187A26594FC600BE1613 /* OperationPasteOver.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -206,6 +210,10 @@
 		8494186E2659406700BE1613 /* CommandModeYank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeYank.swift; sourceTree = "<group>"; };
 		84941870265944BA00BE1613 /* CommandModeUndo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeUndo.swift; sourceTree = "<group>"; };
 		84941872265949FB00BE1613 /* VisualModeYank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModeYank.swift; sourceTree = "<group>"; };
+		8494187426594DBC00BE1613 /* VisualModeChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModeChange.swift; sourceTree = "<group>"; };
+		8494187626594DF600BE1613 /* TextObjectEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectEmpty.swift; sourceTree = "<group>"; };
+		8494187826594F7600BE1613 /* VisualModePaste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModePaste.swift; sourceTree = "<group>"; };
+		8494187A26594FC600BE1613 /* OperationPasteOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationPasteOver.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -369,6 +377,7 @@
 				849418292657D5A900BE1613 /* OperationYank.swift */,
 				8494182B2657D5C200BE1613 /* OperationPasteBefore.swift */,
 				8494182D2657D5D900BE1613 /* OperationPasteAfter.swift */,
+				8494187A26594FC600BE1613 /* OperationPasteOver.swift */,
 				8494182F2657D5F100BE1613 /* OperationMove.swift */,
 				849418312657D61100BE1613 /* OperationInsert.swift */,
 				849418332657D62C00BE1613 /* OperationAdd.swift */,
@@ -407,6 +416,8 @@
 				8494181726570B6E00BE1613 /* VisualModeMove.swift */,
 				8494181926570DDE00BE1613 /* VisualModeDelete.swift */,
 				84941872265949FB00BE1613 /* VisualModeYank.swift */,
+				8494187426594DBC00BE1613 /* VisualModeChange.swift */,
+				8494187826594F7600BE1613 /* VisualModePaste.swift */,
 			);
 			path = "Visual mode";
 			sourceTree = "<group>";
@@ -437,6 +448,7 @@
 				8494186026593A3200BE1613 /* TextObjectInnerWord.swift */,
 				8494186226593A4B00BE1613 /* TextObjectLine.swift */,
 				8494186426593A8000BE1613 /* TextObjectFromMotion.swift */,
+				8494187626594DF600BE1613 /* TextObjectEmpty.swift */,
 			);
 			path = "Text objects";
 			sourceTree = "<group>";
@@ -562,6 +574,7 @@
 				8494181626570AE500BE1613 /* CommandModeVisual.swift in Sources */,
 				849418262657D52100BE1613 /* OperationDelete.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,
+				8494187926594F7600BE1613 /* VisualModePaste.swift in Sources */,
 				8494185126592DD100BE1613 /* LineMotionTilReverse.swift in Sources */,
 				845E4C8A26553DFD00A11E53 /* TextObject.swift in Sources */,
 				849418302657D5F100BE1613 /* OperationMove.swift in Sources */,
@@ -589,12 +602,15 @@
 				2EC4671625AF7E0700E6367D /* TextPosition.swift in Sources */,
 				8494183C2657D6A300BE1613 /* OperationComposite.swift in Sources */,
 				840AB79D2651BE0B00449ADC /* Mode.swift in Sources */,
+				8494187526594DBC00BE1613 /* VisualModeChange.swift in Sources */,
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
 				8494186126593A3200BE1613 /* TextObjectInnerWord.swift in Sources */,
 				845E4C9A2655693D00A11E53 /* SimpleReader.swift in Sources */,
 				84605E3225A3CA3E00410C44 /* LineMotion.swift in Sources */,
+				8494187726594DF600BE1613 /* TextObjectEmpty.swift in Sources */,
 				849418452658059700BE1613 /* CommandModeRepeat.swift in Sources */,
 				8494184726592D0C00BE1613 /* LineMotionForward.swift in Sources */,
+				8494187B26594FC600BE1613 /* OperationPasteOver.swift in Sources */,
 				845E4C942655611700A11E53 /* FreeTextOperation.swift in Sources */,
 				849418342657D62C00BE1613 /* OperationAdd.swift in Sources */,
 				845E4C982655668900A11E53 /* CompositeReader.swift in Sources */,

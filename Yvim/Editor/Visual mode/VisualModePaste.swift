@@ -1,9 +1,9 @@
 import Foundation
 
-class CommandModeChange: ParametrizedEditorCommand {
+class VisualModePaste: EditorCommand {
     let register: Register
-    let operationMemory: OperationMemory
     let editor: BufferEditor
+    let operationMemory: OperationMemory
     weak var modeSwitcher: EditorModeSwitcher?
 
     init(register: Register, operationMemory: OperationMemory, editor: BufferEditor, modeSwitcher: EditorModeSwitcher?) {
@@ -13,10 +13,13 @@ class CommandModeChange: ParametrizedEditorCommand {
         self.modeSwitcher = modeSwitcher
     }
 
-    func handle(textObject: TextObject) {
-        let command = FreeTextOperations.Change(register: self.register, textObject: textObject)
-        command.performFirstTime(editor)
-        modeSwitcher?.switchToInsertMode(freeTextCommand: command)
+    func handleEvent() {
+        if let value = register.register {
+            let operation = Operations.PasteOver(value: value)
+            operation.perform(editor)
+            operationMemory.mostRecentCommand = operation
+        }
+        modeSwitcher?.switchToCommandMode()
     }
 
 }

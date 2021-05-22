@@ -519,10 +519,10 @@ class LineMotionTests: XCTestCase {
     // MARK: Word
 
     func testWord() {
-        var pos = textPos("this is suspicious",
-                          "  ^               ")
-        let exp = textPos("this is suspicious",
+        let exp = textPos("that is suspicious",
                           "     ^            ")
+        var pos = textPos("that is suspicious",
+                          "  ^               ")
         LineMotions.Word().move(&pos)
         XCTAssertEqual(pos, exp)
     }
