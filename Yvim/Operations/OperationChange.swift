@@ -9,7 +9,7 @@ extension Operations {
         func perform(_ editor: BufferEditor) {
             editor.expandTextRange(textObject)
             editor.perform {
-                register.register = TextRegisterValue(text: $0.selectedText as String)
+                register.register = $0.textRange.asRegisterValue
                 $0.selectedText = text as NSString
             }
         }

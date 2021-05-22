@@ -1,6 +1,6 @@
 import Foundation
 
-class CommandModeYank: ParametrizedEditorCommand {
+class VisualModeYank: EditorCommand {
     let register: Register
     let editor: BufferEditor
     weak var modeSwitcher: EditorModeSwitcher?
@@ -11,11 +11,9 @@ class CommandModeYank: ParametrizedEditorCommand {
         self.modeSwitcher = modeSwitcher
     }
 
-    func handle(textObject: TextObject) {
+    func handleEvent() {
         editor.perform {
-            var range = $0.textRange
-            textObject.expand(&range)
-            register.register = range.asRegisterValue
+            register.register = $0.textRange.asRegisterValue
         }
         modeSwitcher?.switchToCommandMode()
     }

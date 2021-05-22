@@ -6,9 +6,10 @@ extension Operations {
         let textObject: TextObject
 
         func perform(_ editor: BufferEditor) {
-            editor.expandTextRange(textObject)
             editor.perform {
-                register.register = $0.textRange.asRegisterValue
+                var range = $0.textRange
+                textObject.expand(&range)
+                register.register = range.asRegisterValue
             }
         }
     }

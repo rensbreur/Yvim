@@ -12,7 +12,7 @@ extension FreeTextOperations {
 
         func performFirstTime(_ editor: BufferEditor) {
             editor.perform {
-                var range = TextRange(text: $0.text, start: $0.cursorPosition)
+                var range = $0.textRange
                 textObject.expand(&range)
                 register.register = range.asRegisterValue
                 if range.coversFullLines { range.shrinkBackward() }

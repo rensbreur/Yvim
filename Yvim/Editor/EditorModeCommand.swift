@@ -27,7 +27,7 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
         ),
         ParametrizedCommandHandler(
             KeyConstants.yank,
-            command: CommandModeYank(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)
+            command: CommandModeYank(register: register, editor: editor, modeSwitcher: modeSwitcher)
         ),
         ParametrizedCommandHandler(
             KeyConstants.change,
