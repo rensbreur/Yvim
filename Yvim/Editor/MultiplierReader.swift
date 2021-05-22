@@ -1,11 +1,3 @@
-//
-//  MultiplierReader.swift
-//  Yvim
-//
-//  Created by Admin on 18.05.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
 class MultiplierReader: Reader {

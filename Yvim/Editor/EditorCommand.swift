@@ -4,14 +4,6 @@ protocol EditorCommand {
     func handleEvent()
 }
 
-infix operator ~>: AdditionPrecedence
-
-extension EditorCommand {
-    static func ~>(_ lhs: Character, _ rhs: EditorCommand) -> CommandHandler {
-        CommandHandler(lhs, command: rhs)
-    }
-}
-
 protocol ParametrizedEditorCommand {
     func handle(textObject: TextObject)
 }

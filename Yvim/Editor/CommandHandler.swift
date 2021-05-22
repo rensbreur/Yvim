@@ -11,14 +11,23 @@ class ParametrizedCommandHandler: Reader {
 
     let multiplierReader = MultiplierReader()
     let motionReader = MotionReader()
+    let verticalMotionReaderUp = SimpleReader(character: KeyConstants.VerticalMotion.up)
+    let verticalMotionReaderDown = SimpleReader(character: KeyConstants.VerticalMotion.down)
     let textObjectReader = TextObjectReader()
     lazy var lineReader = SimpleReader(character: key)
 
     lazy var reader: Reader = PrefixedReader(
         prefix: key,
-        reader: CompositeReader(
-            [motionReader, textObjectReader, lineReader]
-        )
+        reader: SequentialReader([
+            multiplierReader,
+            CompositeReader([
+                motionReader,
+                verticalMotionReaderUp,
+                verticalMotionReaderDown,
+                textObjectReader,
+                lineReader
+            ])
+        ])
     )
 
     func feed(character: Character) -> Bool {
@@ -31,7 +40,15 @@ class ParametrizedCommandHandler: Reader {
                 command.handle(textObject: textObject)
             }
             if lineReader.success {
-                let textObject = TextObjects.Line()
+                let textObject = TextObjects.Line(expansion: (multiplierReader.multiplier ?? 1) - 1)
+                command.handle(textObject: textObject)
+            }
+            if verticalMotionReaderUp.success {
+                let textObject = TextObjects.Line(expansion: (multiplierReader.multiplier ?? 1) * -1)
+                command.handle(textObject: textObject)
+            }
+            if verticalMotionReaderDown.success {
+                let textObject = TextObjects.Line(expansion: (multiplierReader.multiplier ?? 1))
                 command.handle(textObject: textObject)
             }
             return true

@@ -1,11 +1,3 @@
-//
-//  LineMotionTests.swift
-//  YvimTests
-//
-//  Created by Admin on 19.05.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import XCTest
 @testable import Yvim
 

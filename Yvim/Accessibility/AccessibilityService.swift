@@ -1,11 +1,3 @@
-//
-//  AccessibilityService.swift
-//  Yvim
-//
-//  Created by Rens Breur on 01.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Cocoa
 import Combine
 

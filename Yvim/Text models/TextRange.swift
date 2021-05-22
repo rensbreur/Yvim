@@ -89,9 +89,9 @@ extension TextRange {
     }
 
     mutating func expandBackward() {
-        let pos = end - 1
+        let pos = start - 1
         if pos >= 0 {
-            end = pos
+            start = pos
         }
     }
 
@@ -112,6 +112,7 @@ extension TextRange {
     }
 
     mutating func expandToNewline() {
+        guard endCharacter != "\n" else { return }
         expandForward(ensuring: { $0 != "\n" })
         expandForward()
     }

@@ -1,12 +1,10 @@
-//
-//  KeyEvent.swift
-//  Yvim
-//
-//  Created by Admin on 05.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
+
+typealias SimulateKeyPress = (CGKeyCode, CGEventFlags) -> Void
+
+protocol KeyHandler {
+    func handleKeyEvent(_ keyEvent: KeyEvent, simulateKeyPress: SimulateKeyPress) -> Bool
+}
 
 struct KeyEvent {
     enum Event {

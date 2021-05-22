@@ -1,11 +1,3 @@
-//
-//  NSString+unichar.swift
-//  Yvim
-//
-//  Created by Admin on 04.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
 extension NSString {

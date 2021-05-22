@@ -1,11 +1,3 @@
-//
-//  OperationInsert.swift
-//  Yvim
-//
-//  Created by Admin on 21.05.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
 extension Operations {

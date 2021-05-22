@@ -1,11 +1,3 @@
-//
-//  KeyConstants.swift
-//  Yvim
-//
-//  Created by Rens Breur on 13.01.21.
-//  Copyright © 2021 Rens Breur. All rights reserved.
-//
-
 import Foundation
 
 enum KeyConstants {

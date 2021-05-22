@@ -30,7 +30,6 @@
 		843591E326540D580088F749 /* MultiplierReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E226540D580088F749 /* MultiplierReader.swift */; };
 		843591E52654147C0088F749 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E42654147C0088F749 /* Operation.swift */; };
 		843591E9265417FD0088F749 /* CommandModeDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843591E8265417FD0088F749 /* CommandModeDelete.swift */; };
-		845E4C8026550EEF00A11E53 /* YvimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C7F26550EEF00A11E53 /* YvimTests.swift */; };
 		845E4C8826550EFF00A11E53 /* LineMotionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8726550EFF00A11E53 /* LineMotionTests.swift */; };
 		845E4C8A26553DFD00A11E53 /* TextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8926553DFD00A11E53 /* TextObject.swift */; };
 		845E4C8C26553E2E00A11E53 /* TextRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4C8B26553E2E00A11E53 /* TextRange.swift */; };
@@ -47,7 +46,6 @@
 		84605E2C25A3C81E00410C44 /* NSString+unichar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2B25A3C81E00410C44 /* NSString+unichar.swift */; };
 		84605E2F25A3C83900410C44 /* BufferEditorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */; };
 		84605E3225A3CA3E00410C44 /* LineMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3125A3CA3E00410C44 /* LineMotion.swift */; };
-		84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E3725A4C4BF00410C44 /* KeyEvent.swift */; };
 		84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E4125A4CBCD00410C44 /* KeyHandler.swift */; };
 		84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84605E5425A4D7F400410C44 /* MotionReader.swift */; };
 		84941804265572C200BE1613 /* OperationMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84941803265572C200BE1613 /* OperationMemory.swift */; };
@@ -78,6 +76,23 @@
 		849418412657D78F00BE1613 /* FreeTextAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418402657D78F00BE1613 /* FreeTextAdd.swift */; };
 		849418432657D7AC00BE1613 /* FreeTextChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418422657D7AC00BE1613 /* FreeTextChange.swift */; };
 		849418452658059700BE1613 /* CommandModeRepeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418442658059700BE1613 /* CommandModeRepeat.swift */; };
+		8494184726592D0C00BE1613 /* LineMotionForward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494184626592D0C00BE1613 /* LineMotionForward.swift */; };
+		8494184926592D6800BE1613 /* LineMotionBackward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494184826592D6800BE1613 /* LineMotionBackward.swift */; };
+		8494184B26592D7F00BE1613 /* LineMotionFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494184A26592D7F00BE1613 /* LineMotionFind.swift */; };
+		8494184D26592DB000BE1613 /* LineMotionFindReverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494184C26592DB000BE1613 /* LineMotionFindReverse.swift */; };
+		8494184F26592DC400BE1613 /* LineMotionTil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494184E26592DC400BE1613 /* LineMotionTil.swift */; };
+		8494185126592DD100BE1613 /* LineMotionTilReverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185026592DD100BE1613 /* LineMotionTilReverse.swift */; };
+		8494185326592E0800BE1613 /* LineMotionWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185226592E0800BE1613 /* LineMotionWord.swift */; };
+		8494185526592E5E00BE1613 /* LineMotionEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185426592E5E00BE1613 /* LineMotionEnd.swift */; };
+		8494185726592E7500BE1613 /* LineMotionBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185626592E7500BE1613 /* LineMotionBack.swift */; };
+		8494185926592E8000BE1613 /* LineMotionLineStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185826592E8000BE1613 /* LineMotionLineStart.swift */; };
+		8494185B26592E8900BE1613 /* LineMotionLineEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185A26592E8900BE1613 /* LineMotionLineEnd.swift */; };
+		8494185D26592EB200BE1613 /* LineMotionLineFirstNonBlankCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185C26592EB200BE1613 /* LineMotionLineFirstNonBlankCharacter.swift */; };
+		8494185F26592ED500BE1613 /* LineMotion+multiplied.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494185E26592ED500BE1613 /* LineMotion+multiplied.swift */; };
+		8494186126593A3200BE1613 /* TextObjectInnerWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494186026593A3200BE1613 /* TextObjectInnerWord.swift */; };
+		8494186326593A4C00BE1613 /* TextObjectLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494186226593A4B00BE1613 /* TextObjectLine.swift */; };
+		8494186526593A8000BE1613 /* TextObjectFromMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494186426593A8000BE1613 /* TextObjectFromMotion.swift */; };
+		8494186B26593CCB00BE1613 /* KeyEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494186A26593CCB00BE1613 /* KeyEventHandler.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -119,7 +134,6 @@
 		843591E42654147C0088F749 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		843591E8265417FD0088F749 /* CommandModeDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeDelete.swift; sourceTree = "<group>"; };
 		845E4C7D26550EEF00A11E53 /* YvimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YvimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		845E4C7F26550EEF00A11E53 /* YvimTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YvimTests.swift; sourceTree = "<group>"; };
 		845E4C8126550EEF00A11E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		845E4C8726550EFF00A11E53 /* LineMotionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionTests.swift; sourceTree = "<group>"; };
 		845E4C8926553DFD00A11E53 /* TextObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObject.swift; sourceTree = "<group>"; };
@@ -137,7 +151,6 @@
 		84605E2B25A3C81E00410C44 /* NSString+unichar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+unichar.swift"; sourceTree = "<group>"; };
 		84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditorOperation.swift; sourceTree = "<group>"; };
 		84605E3125A3CA3E00410C44 /* LineMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotion.swift; sourceTree = "<group>"; };
-		84605E3725A4C4BF00410C44 /* KeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		84605E4125A4CBCD00410C44 /* KeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHandler.swift; sourceTree = "<group>"; };
 		84605E5425A4D7F400410C44 /* MotionReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReader.swift; sourceTree = "<group>"; };
 		84941803265572C200BE1613 /* OperationMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationMemory.swift; sourceTree = "<group>"; };
@@ -168,6 +181,23 @@
 		849418402657D78F00BE1613 /* FreeTextAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextAdd.swift; sourceTree = "<group>"; };
 		849418422657D7AC00BE1613 /* FreeTextChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextChange.swift; sourceTree = "<group>"; };
 		849418442658059700BE1613 /* CommandModeRepeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeRepeat.swift; sourceTree = "<group>"; };
+		8494184626592D0C00BE1613 /* LineMotionForward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionForward.swift; sourceTree = "<group>"; };
+		8494184826592D6800BE1613 /* LineMotionBackward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionBackward.swift; sourceTree = "<group>"; };
+		8494184A26592D7F00BE1613 /* LineMotionFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionFind.swift; sourceTree = "<group>"; };
+		8494184C26592DB000BE1613 /* LineMotionFindReverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionFindReverse.swift; sourceTree = "<group>"; };
+		8494184E26592DC400BE1613 /* LineMotionTil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionTil.swift; sourceTree = "<group>"; };
+		8494185026592DD100BE1613 /* LineMotionTilReverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionTilReverse.swift; sourceTree = "<group>"; };
+		8494185226592E0800BE1613 /* LineMotionWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionWord.swift; sourceTree = "<group>"; };
+		8494185426592E5E00BE1613 /* LineMotionEnd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionEnd.swift; sourceTree = "<group>"; };
+		8494185626592E7500BE1613 /* LineMotionBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionBack.swift; sourceTree = "<group>"; };
+		8494185826592E8000BE1613 /* LineMotionLineStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionLineStart.swift; sourceTree = "<group>"; };
+		8494185A26592E8900BE1613 /* LineMotionLineEnd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionLineEnd.swift; sourceTree = "<group>"; };
+		8494185C26592EB200BE1613 /* LineMotionLineFirstNonBlankCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMotionLineFirstNonBlankCharacter.swift; sourceTree = "<group>"; };
+		8494185E26592ED500BE1613 /* LineMotion+multiplied.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LineMotion+multiplied.swift"; sourceTree = "<group>"; };
+		8494186026593A3200BE1613 /* TextObjectInnerWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectInnerWord.swift; sourceTree = "<group>"; };
+		8494186226593A4B00BE1613 /* TextObjectLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectLine.swift; sourceTree = "<group>"; };
+		8494186426593A8000BE1613 /* TextObjectFromMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectFromMotion.swift; sourceTree = "<group>"; };
+		8494186A26593CCB00BE1613 /* KeyEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandler.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,15 +243,15 @@
 			children = (
 				2EC7406E259D13B100108463 /* main.swift */,
 				2EC74076259DDF0500108463 /* AppDelegate.swift */,
+				84605E4925A4D40200410C44 /* Text models */,
+				84605E4A25A4D46A00410C44 /* Editor */,
+				84605E4B25A4D48300410C44 /* Services */,
 				8494183D2657D6B400BE1613 /* Operations */,
-				84605E4925A4D40200410C44 /* Models */,
-				84605E4A25A4D46A00410C44 /* Key handling */,
-				84605E4B25A4D48300410C44 /* Editor */,
 				84605E5125A4D51900410C44 /* Status item */,
 				84605E4C25A4D4AC00410C44 /* Accessibility */,
 				84605E4D25A4D4F600410C44 /* Event tap */,
-				84605E4F25A4D50E00410C44 /* String utilities */,
 				2E0CF26823A29704009BDDFB /* Assets.xcassets */,
+				2EC4671825AF870E00E6367D /* KeyConstants.swift */,
 				2E0CF26D23A29704009BDDFB /* Info.plist */,
 			);
 			path = Yvim;
@@ -232,46 +262,42 @@
 			children = (
 				845E4C8D265540EE00A11E53 /* TextObjectTests.swift */,
 				845E4C8726550EFF00A11E53 /* LineMotionTests.swift */,
-				845E4C7F26550EEF00A11E53 /* YvimTests.swift */,
 				845E4C8126550EEF00A11E53 /* Info.plist */,
 			);
 			path = YvimTests;
 			sourceTree = "<group>";
 		};
-		84605E4925A4D40200410C44 /* Models */ = {
+		84605E4925A4D40200410C44 /* Text models */ = {
 			isa = PBXGroup;
 			children = (
-				840AB79C2651BE0B00449ADC /* Mode.swift */,
 				84605E3125A3CA3E00410C44 /* LineMotion.swift */,
+				8494186826593BEF00BE1613 /* Motions */,
 				845E4C8926553DFD00A11E53 /* TextObject.swift */,
+				8494186926593C0900BE1613 /* Text objects */,
 				84DE1DC525A265910020963D /* VimSelection.swift */,
-				84605E3725A4C4BF00410C44 /* KeyEvent.swift */,
+				2EC4671525AF7E0700E6367D /* TextPosition.swift */,
+				845E4C8B26553E2E00A11E53 /* TextRange.swift */,
+				84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */,
+				84605E2B25A3C81E00410C44 /* NSString+unichar.swift */,
 			);
-			path = Models;
+			path = "Text models";
 			sourceTree = "<group>";
 		};
-		84605E4A25A4D46A00410C44 /* Key handling */ = {
+		84605E4A25A4D46A00410C44 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
 				2EC74073259DDEE200108463 /* MainEditor.swift */,
+				840AB79C2651BE0B00449ADC /* Mode.swift */,
 				84941805265574AC00BE1613 /* EditorModeSwitcher.swift */,
 				2EA4C507259F74A600FB06EC /* EditorMode.swift */,
-				840AB7962651AD6B00449ADC /* EditorModeCommand.swift */,
 				8494181D2657C8FF00BE1613 /* EditorCommand.swift */,
 				849418212657CA4800BE1613 /* CommandHandler.swift */,
-				843591E8265417FD0088F749 /* CommandModeDelete.swift */,
-				849418232657D21E00BE1613 /* CommandModeChange.swift */,
-				8494181526570AE500BE1613 /* CommandModeVisual.swift */,
-				849418112657046400BE1613 /* CommandModeInsert.swift */,
-				849418442658059700BE1613 /* CommandModeRepeat.swift */,
-				8494180D2656EEBC00BE1613 /* CommandModeMove.swift */,
-				8494181B2657170300BE1613 /* CommandModePasteBefore.swift */,
+				840AB7962651AD6B00449ADC /* EditorModeCommand.swift */,
+				8494186626593B1700BE1613 /* Command mode */,
 				840AB7982651ADC800449ADC /* EditorModeInsert.swift */,
 				840AB79A2651ADE300449ADC /* EditorModeVisual.swift */,
-				8494181726570B6E00BE1613 /* VisualModeMove.swift */,
-				8494181926570DDE00BE1613 /* VisualModeDelete.swift */,
+				8494186726593B3000BE1613 /* Visual mode */,
 				84605E4125A4CBCD00410C44 /* KeyHandler.swift */,
-				2EC4671825AF870E00E6367D /* KeyConstants.swift */,
 				845E4C952655666400A11E53 /* Reader.swift */,
 				845E4C992655693D00A11E53 /* SimpleReader.swift */,
 				8494180F2656FCDE00BE1613 /* PrefixedReader.swift */,
@@ -281,10 +307,10 @@
 				84605E5425A4D7F400410C44 /* MotionReader.swift */,
 				845E4C8F265542B100A11E53 /* TextObjectReader.swift */,
 			);
-			path = "Key handling";
+			path = Editor;
 			sourceTree = "<group>";
 		};
-		84605E4B25A4D48300410C44 /* Editor */ = {
+		84605E4B25A4D48300410C44 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				845E4C9126555AAB00A11E53 /* Register.swift */,
@@ -292,7 +318,7 @@
 				840F9BD325A008B2006B942F /* BufferEditor.swift */,
 				84605E2E25A3C83900410C44 /* BufferEditorOperation.swift */,
 			);
-			path = Editor;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		84605E4C25A4D4AC00410C44 /* Accessibility */ = {
@@ -311,22 +337,12 @@
 			isa = PBXGroup;
 			children = (
 				2EC7406B259D135E00108463 /* EventTap.swift */,
+				8494186A26593CCB00BE1613 /* KeyEventHandler.swift */,
 				2EA4C513259FB4E400FB06EC /* CGKeyCode+keyConstants.swift */,
 				2EA4C4FD259F67EC00FB06EC /* CGKeyCode+character.swift */,
 				2EA4C504259F721600FB06EC /* CGEvent+keyboardEvent.swift */,
 			);
 			path = "Event tap";
-			sourceTree = "<group>";
-		};
-		84605E4F25A4D50E00410C44 /* String utilities */ = {
-			isa = PBXGroup;
-			children = (
-				84605E2825A3C7FD00410C44 /* unichar+unicodeScalar.swift */,
-				84605E2B25A3C81E00410C44 /* NSString+unichar.swift */,
-				2EC4671525AF7E0700E6367D /* TextPosition.swift */,
-				845E4C8B26553E2E00A11E53 /* TextRange.swift */,
-			);
-			path = "String utilities";
 			sourceTree = "<group>";
 		};
 		84605E5125A4D51900410C44 /* Status item */ = {
@@ -358,6 +374,59 @@
 				849418422657D7AC00BE1613 /* FreeTextChange.swift */,
 			);
 			path = Operations;
+			sourceTree = "<group>";
+		};
+		8494186626593B1700BE1613 /* Command mode */ = {
+			isa = PBXGroup;
+			children = (
+				843591E8265417FD0088F749 /* CommandModeDelete.swift */,
+				849418232657D21E00BE1613 /* CommandModeChange.swift */,
+				8494181526570AE500BE1613 /* CommandModeVisual.swift */,
+				849418112657046400BE1613 /* CommandModeInsert.swift */,
+				849418442658059700BE1613 /* CommandModeRepeat.swift */,
+				8494180D2656EEBC00BE1613 /* CommandModeMove.swift */,
+				8494181B2657170300BE1613 /* CommandModePasteBefore.swift */,
+			);
+			path = "Command mode";
+			sourceTree = "<group>";
+		};
+		8494186726593B3000BE1613 /* Visual mode */ = {
+			isa = PBXGroup;
+			children = (
+				8494181726570B6E00BE1613 /* VisualModeMove.swift */,
+				8494181926570DDE00BE1613 /* VisualModeDelete.swift */,
+			);
+			path = "Visual mode";
+			sourceTree = "<group>";
+		};
+		8494186826593BEF00BE1613 /* Motions */ = {
+			isa = PBXGroup;
+			children = (
+				8494184626592D0C00BE1613 /* LineMotionForward.swift */,
+				8494184826592D6800BE1613 /* LineMotionBackward.swift */,
+				8494184A26592D7F00BE1613 /* LineMotionFind.swift */,
+				8494184C26592DB000BE1613 /* LineMotionFindReverse.swift */,
+				8494184E26592DC400BE1613 /* LineMotionTil.swift */,
+				8494185026592DD100BE1613 /* LineMotionTilReverse.swift */,
+				8494185226592E0800BE1613 /* LineMotionWord.swift */,
+				8494185426592E5E00BE1613 /* LineMotionEnd.swift */,
+				8494185626592E7500BE1613 /* LineMotionBack.swift */,
+				8494185826592E8000BE1613 /* LineMotionLineStart.swift */,
+				8494185A26592E8900BE1613 /* LineMotionLineEnd.swift */,
+				8494185C26592EB200BE1613 /* LineMotionLineFirstNonBlankCharacter.swift */,
+				8494185E26592ED500BE1613 /* LineMotion+multiplied.swift */,
+			);
+			path = Motions;
+			sourceTree = "<group>";
+		};
+		8494186926593C0900BE1613 /* Text objects */ = {
+			isa = PBXGroup;
+			children = (
+				8494186026593A3200BE1613 /* TextObjectInnerWord.swift */,
+				8494186226593A4B00BE1613 /* TextObjectLine.swift */,
+				8494186426593A8000BE1613 /* TextObjectFromMotion.swift */,
+			);
+			path = "Text objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,8 +530,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				845E4C962655666400A11E53 /* Reader.swift in Sources */,
+				8494186B26593CCB00BE1613 /* KeyEventHandler.swift in Sources */,
 				2EA4C505259F721600FB06EC /* CGEvent+keyboardEvent.swift in Sources */,
 				84DE1DC625A265910020963D /* VimSelection.swift in Sources */,
+				8494185D26592EB200BE1613 /* LineMotionLineFirstNonBlankCharacter.swift in Sources */,
 				84605E2C25A3C81E00410C44 /* NSString+unichar.swift in Sources */,
 				8494180C2656EE1900BE1613 /* SequentialReader.swift in Sources */,
 				2EC7406C259D135E00108463 /* EventTap.swift in Sources */,
@@ -474,14 +545,17 @@
 				843591E52654147C0088F749 /* Operation.swift in Sources */,
 				84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */,
 				2EA4C51D259FBDCE00FB06EC /* AccessibilityService.swift in Sources */,
+				8494184B26592D7F00BE1613 /* LineMotionFind.swift in Sources */,
 				8494181626570AE500BE1613 /* CommandModeVisual.swift in Sources */,
 				849418262657D52100BE1613 /* OperationDelete.swift in Sources */,
 				2EA4C50F259F82B800FB06EC /* ProcessObservationService.swift in Sources */,
+				8494185126592DD100BE1613 /* LineMotionTilReverse.swift in Sources */,
 				845E4C8A26553DFD00A11E53 /* TextObject.swift in Sources */,
 				849418302657D5F100BE1613 /* OperationMove.swift in Sources */,
 				840AB79B2651ADE300449ADC /* EditorModeVisual.swift in Sources */,
 				843591E326540D580088F749 /* MultiplierReader.swift in Sources */,
 				849418412657D78F00BE1613 /* FreeTextAdd.swift in Sources */,
+				8494186326593A4C00BE1613 /* TextObjectLine.swift in Sources */,
 				84605E2325A3C7A600410C44 /* AXUIElement+TextArea.swift in Sources */,
 				849418432657D7AC00BE1613 /* FreeTextChange.swift in Sources */,
 				2EC4671925AF870E00E6367D /* KeyConstants.swift in Sources */,
@@ -489,11 +563,12 @@
 				840F9BD425A008B2006B942F /* BufferEditor.swift in Sources */,
 				849418222657CA4900BE1613 /* CommandHandler.swift in Sources */,
 				2EA4C508259F74A600FB06EC /* EditorMode.swift in Sources */,
+				8494185B26592E8900BE1613 /* LineMotionLineEnd.swift in Sources */,
 				8494181E2657C8FF00BE1613 /* EditorCommand.swift in Sources */,
 				2EC7406F259D13B100108463 /* main.swift in Sources */,
 				845E4C9226555AAB00A11E53 /* Register.swift in Sources */,
 				845E4C90265542B100A11E53 /* TextObjectReader.swift in Sources */,
-				84605E3825A4C4BF00410C44 /* KeyEvent.swift in Sources */,
+				8494185526592E5E00BE1613 /* LineMotionEnd.swift in Sources */,
 				84605E2625A3C7D700410C44 /* AXBufferEditor.swift in Sources */,
 				2EA4C4FE259F67EC00FB06EC /* CGKeyCode+character.swift in Sources */,
 				849418322657D61200BE1613 /* OperationInsert.swift in Sources */,
@@ -501,30 +576,40 @@
 				8494183C2657D6A300BE1613 /* OperationComposite.swift in Sources */,
 				840AB79D2651BE0B00449ADC /* Mode.swift in Sources */,
 				2EA4C514259FB4E400FB06EC /* CGKeyCode+keyConstants.swift in Sources */,
+				8494186126593A3200BE1613 /* TextObjectInnerWord.swift in Sources */,
 				845E4C9A2655693D00A11E53 /* SimpleReader.swift in Sources */,
 				84605E3225A3CA3E00410C44 /* LineMotion.swift in Sources */,
 				849418452658059700BE1613 /* CommandModeRepeat.swift in Sources */,
+				8494184726592D0C00BE1613 /* LineMotionForward.swift in Sources */,
 				845E4C942655611700A11E53 /* FreeTextOperation.swift in Sources */,
 				849418342657D62C00BE1613 /* OperationAdd.swift in Sources */,
 				845E4C982655668900A11E53 /* CompositeReader.swift in Sources */,
 				849418362657D64300BE1613 /* OperationChange.swift in Sources */,
+				8494184F26592DC400BE1613 /* LineMotionTil.swift in Sources */,
 				2EC74074259DDEE200108463 /* MainEditor.swift in Sources */,
+				8494185326592E0800BE1613 /* LineMotionWord.swift in Sources */,
+				8494184926592D6800BE1613 /* LineMotionBackward.swift in Sources */,
+				8494185F26592ED500BE1613 /* LineMotion+multiplied.swift in Sources */,
 				849418242657D21E00BE1613 /* CommandModeChange.swift in Sources */,
 				2EA4C4F9259F4EA800FB06EC /* StatusItemController.swift in Sources */,
 				843591E9265417FD0088F749 /* CommandModeDelete.swift in Sources */,
 				840AB7972651AD6B00449ADC /* EditorModeCommand.swift in Sources */,
 				849418102656FCDE00BE1613 /* PrefixedReader.swift in Sources */,
+				8494184D26592DB000BE1613 /* LineMotionFindReverse.swift in Sources */,
 				849418382657D65B00BE1613 /* OperationChangeSelection.swift in Sources */,
+				8494185726592E7500BE1613 /* LineMotionBack.swift in Sources */,
 				840AB7992651ADC800449ADC /* EditorModeInsert.swift in Sources */,
 				845E4C8C26553E2E00A11E53 /* TextRange.swift in Sources */,
 				8494180E2656EEBC00BE1613 /* CommandModeMove.swift in Sources */,
 				2EA4C519259FB94300FB06EC /* ProgramAccessibilityService.swift in Sources */,
 				8494182A2657D5A900BE1613 /* OperationYank.swift in Sources */,
 				8494181C2657170300BE1613 /* CommandModePasteBefore.swift in Sources */,
+				8494186526593A8000BE1613 /* TextObjectFromMotion.swift in Sources */,
 				8494181826570B6E00BE1613 /* VisualModeMove.swift in Sources */,
 				2EC74077259DDF0500108463 /* AppDelegate.swift in Sources */,
 				8494182C2657D5C200BE1613 /* OperationPasteBefore.swift in Sources */,
 				8494183A2657D68900BE1613 /* OperationChangeSelectionWithTextObject.swift in Sources */,
+				8494185926592E8000BE1613 /* LineMotionLineStart.swift in Sources */,
 				8494181A26570DDE00BE1613 /* VisualModeDelete.swift in Sources */,
 				8494182E2657D5D900BE1613 /* OperationPasteAfter.swift in Sources */,
 				84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */,
@@ -536,7 +621,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				845E4C8E265540EE00A11E53 /* TextObjectTests.swift in Sources */,
-				845E4C8026550EEF00A11E53 /* YvimTests.swift in Sources */,
 				845E4C8826550EFF00A11E53 /* LineMotionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
