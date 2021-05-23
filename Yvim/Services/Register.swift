@@ -20,7 +20,7 @@ extension TextRange {
     }
 }
 
-struct TextRegisterValue: RegisterValue {
+struct TextRegisterValue: RegisterValue, Equatable {
     let text: String
 
     func pasteBefore(editor: BufferEditor) {
@@ -45,7 +45,7 @@ struct TextRegisterValue: RegisterValue {
     }
 }
 
-struct LineRegisterValue: RegisterValue {
+struct LineRegisterValue: RegisterValue, Equatable {
     let text: String
 
     var line: String {

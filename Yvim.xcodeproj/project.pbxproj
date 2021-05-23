@@ -58,7 +58,6 @@
 		8494181826570B6E00BE1613 /* VisualModeMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181726570B6E00BE1613 /* VisualModeMove.swift */; };
 		8494181A26570DDE00BE1613 /* VisualModeDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181926570DDE00BE1613 /* VisualModeDelete.swift */; };
 		8494181C2657170300BE1613 /* CommandModePasteBefore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181B2657170300BE1613 /* CommandModePasteBefore.swift */; };
-		8494181E2657C8FF00BE1613 /* EditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494181D2657C8FF00BE1613 /* EditorCommand.swift */; };
 		849418222657CA4900BE1613 /* CommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418212657CA4800BE1613 /* CommandHandler.swift */; };
 		849418242657D21E00BE1613 /* CommandModeChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418232657D21E00BE1613 /* CommandModeChange.swift */; };
 		849418262657D52100BE1613 /* OperationDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849418252657D52100BE1613 /* OperationDelete.swift */; };
@@ -101,6 +100,17 @@
 		8494187726594DF600BE1613 /* TextObjectEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494187626594DF600BE1613 /* TextObjectEmpty.swift */; };
 		8494187926594F7600BE1613 /* VisualModePaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494187826594F7600BE1613 /* VisualModePaste.swift */; };
 		8494187B26594FC600BE1613 /* OperationPasteOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494187A26594FC600BE1613 /* OperationPasteOver.swift */; };
+		84AFEC0F265A5DA100AB3B71 /* CommandHandlerParametrized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC0E265A5DA100AB3B71 /* CommandHandlerParametrized.swift */; };
+		84AFEC11265A5F0600AB3B71 /* CommandHandlerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC10265A5F0600AB3B71 /* CommandHandlerSelection.swift */; };
+		84AFEC13265A5F2900AB3B71 /* CommandHandlerMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC12265A5F2900AB3B71 /* CommandHandlerMotion.swift */; };
+		84AFEC15265A600500AB3B71 /* CommandHandlerParametrizedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC14265A600500AB3B71 /* CommandHandlerParametrizedTests.swift */; };
+		84AFEC17265AA1D200AB3B71 /* CommandModeDeleteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC16265AA1D200AB3B71 /* CommandModeDeleteTests.swift */; };
+		84AFEC19265AB01500AB3B71 /* TextPosition+graphical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC18265AB01500AB3B71 /* TextPosition+graphical.swift */; };
+		84AFEC1B265AB0AB00AB3B71 /* TextRange+graphical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC1A265AB0AB00AB3B71 /* TextRange+graphical.swift */; };
+		84AFEC1D265AB2B900AB3B71 /* BufferEditorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC1C265AB2B900AB3B71 /* BufferEditorMock.swift */; };
+		84AFEC1F265AB2E200AB3B71 /* ModeSwitcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC1E265AB2E200AB3B71 /* ModeSwitcherMock.swift */; };
+		84AFEC21265AB32200AB3B71 /* Reader+feedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC20265AB32200AB3B71 /* Reader+feedString.swift */; };
+		84AFEC23265AB34600AB3B71 /* CommandModeYankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEC22265AB34600AB3B71 /* CommandModeYankTests.swift */; };
 		84DE1DC625A265910020963D /* VimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE1DC525A265910020963D /* VimSelection.swift */; };
 /* End PBXBuildFile section */
 
@@ -171,7 +181,6 @@
 		8494181726570B6E00BE1613 /* VisualModeMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModeMove.swift; sourceTree = "<group>"; };
 		8494181926570DDE00BE1613 /* VisualModeDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModeDelete.swift; sourceTree = "<group>"; };
 		8494181B2657170300BE1613 /* CommandModePasteBefore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModePasteBefore.swift; sourceTree = "<group>"; };
-		8494181D2657C8FF00BE1613 /* EditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCommand.swift; sourceTree = "<group>"; };
 		849418212657CA4800BE1613 /* CommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandler.swift; sourceTree = "<group>"; };
 		849418232657D21E00BE1613 /* CommandModeChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeChange.swift; sourceTree = "<group>"; };
 		849418252657D52100BE1613 /* OperationDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDelete.swift; sourceTree = "<group>"; };
@@ -214,6 +223,17 @@
 		8494187626594DF600BE1613 /* TextObjectEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextObjectEmpty.swift; sourceTree = "<group>"; };
 		8494187826594F7600BE1613 /* VisualModePaste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualModePaste.swift; sourceTree = "<group>"; };
 		8494187A26594FC600BE1613 /* OperationPasteOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationPasteOver.swift; sourceTree = "<group>"; };
+		84AFEC0E265A5DA100AB3B71 /* CommandHandlerParametrized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandlerParametrized.swift; sourceTree = "<group>"; };
+		84AFEC10265A5F0600AB3B71 /* CommandHandlerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandlerSelection.swift; sourceTree = "<group>"; };
+		84AFEC12265A5F2900AB3B71 /* CommandHandlerMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandlerMotion.swift; sourceTree = "<group>"; };
+		84AFEC14265A600500AB3B71 /* CommandHandlerParametrizedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHandlerParametrizedTests.swift; sourceTree = "<group>"; };
+		84AFEC16265AA1D200AB3B71 /* CommandModeDeleteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeDeleteTests.swift; sourceTree = "<group>"; };
+		84AFEC18265AB01500AB3B71 /* TextPosition+graphical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextPosition+graphical.swift"; sourceTree = "<group>"; };
+		84AFEC1A265AB0AB00AB3B71 /* TextRange+graphical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextRange+graphical.swift"; sourceTree = "<group>"; };
+		84AFEC1C265AB2B900AB3B71 /* BufferEditorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferEditorMock.swift; sourceTree = "<group>"; };
+		84AFEC1E265AB2E200AB3B71 /* ModeSwitcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSwitcherMock.swift; sourceTree = "<group>"; };
+		84AFEC20265AB32200AB3B71 /* Reader+feedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reader+feedString.swift"; sourceTree = "<group>"; };
+		84AFEC22265AB34600AB3B71 /* CommandModeYankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModeYankTests.swift; sourceTree = "<group>"; };
 		84DE1DC525A265910020963D /* VimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VimSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -276,8 +296,16 @@
 		845E4C7E26550EEF00A11E53 /* YvimTests */ = {
 			isa = PBXGroup;
 			children = (
-				845E4C8D265540EE00A11E53 /* TextObjectTests.swift */,
 				845E4C8726550EFF00A11E53 /* LineMotionTests.swift */,
+				845E4C8D265540EE00A11E53 /* TextObjectTests.swift */,
+				84AFEC18265AB01500AB3B71 /* TextPosition+graphical.swift */,
+				84AFEC1A265AB0AB00AB3B71 /* TextRange+graphical.swift */,
+				84AFEC20265AB32200AB3B71 /* Reader+feedString.swift */,
+				84AFEC1C265AB2B900AB3B71 /* BufferEditorMock.swift */,
+				84AFEC1E265AB2E200AB3B71 /* ModeSwitcherMock.swift */,
+				84AFEC16265AA1D200AB3B71 /* CommandModeDeleteTests.swift */,
+				84AFEC22265AB34600AB3B71 /* CommandModeYankTests.swift */,
+				84AFEC14265A600500AB3B71 /* CommandHandlerParametrizedTests.swift */,
 				845E4C8126550EEF00A11E53 /* Info.plist */,
 			);
 			path = YvimTests;
@@ -306,8 +334,10 @@
 				840AB79C2651BE0B00449ADC /* Mode.swift */,
 				84941805265574AC00BE1613 /* EditorModeSwitcher.swift */,
 				2EA4C507259F74A600FB06EC /* EditorMode.swift */,
-				8494181D2657C8FF00BE1613 /* EditorCommand.swift */,
 				849418212657CA4800BE1613 /* CommandHandler.swift */,
+				84AFEC0E265A5DA100AB3B71 /* CommandHandlerParametrized.swift */,
+				84AFEC10265A5F0600AB3B71 /* CommandHandlerSelection.swift */,
+				84AFEC12265A5F2900AB3B71 /* CommandHandlerMotion.swift */,
 				840AB7962651AD6B00449ADC /* EditorModeCommand.swift */,
 				8494186626593B1700BE1613 /* Command mode */,
 				840AB7982651ADC800449ADC /* EditorModeInsert.swift */,
@@ -565,6 +595,7 @@
 				84941804265572C200BE1613 /* OperationMemory.swift in Sources */,
 				8494183F2657D77800BE1613 /* FreeTextInsert.swift in Sources */,
 				84605E4225A4CBCD00410C44 /* KeyHandler.swift in Sources */,
+				84AFEC13265A5F2900AB3B71 /* CommandHandlerMotion.swift in Sources */,
 				84605E2F25A3C83900410C44 /* BufferEditorOperation.swift in Sources */,
 				843591E52654147C0088F749 /* Operation.swift in Sources */,
 				84941806265574AC00BE1613 /* EditorModeSwitcher.swift in Sources */,
@@ -590,7 +621,6 @@
 				849418222657CA4900BE1613 /* CommandHandler.swift in Sources */,
 				2EA4C508259F74A600FB06EC /* EditorMode.swift in Sources */,
 				8494185B26592E8900BE1613 /* LineMotionLineEnd.swift in Sources */,
-				8494181E2657C8FF00BE1613 /* EditorCommand.swift in Sources */,
 				2EC7406F259D13B100108463 /* main.swift in Sources */,
 				845E4C9226555AAB00A11E53 /* Register.swift in Sources */,
 				845E4C90265542B100A11E53 /* TextObjectReader.swift in Sources */,
@@ -610,6 +640,7 @@
 				8494187726594DF600BE1613 /* TextObjectEmpty.swift in Sources */,
 				849418452658059700BE1613 /* CommandModeRepeat.swift in Sources */,
 				8494184726592D0C00BE1613 /* LineMotionForward.swift in Sources */,
+				84AFEC11265A5F0600AB3B71 /* CommandHandlerSelection.swift in Sources */,
 				8494187B26594FC600BE1613 /* OperationPasteOver.swift in Sources */,
 				845E4C942655611700A11E53 /* FreeTextOperation.swift in Sources */,
 				849418342657D62C00BE1613 /* OperationAdd.swift in Sources */,
@@ -642,6 +673,7 @@
 				8494183A2657D68900BE1613 /* OperationChangeSelectionWithTextObject.swift in Sources */,
 				84941873265949FB00BE1613 /* VisualModeYank.swift in Sources */,
 				8494185926592E8000BE1613 /* LineMotionLineStart.swift in Sources */,
+				84AFEC0F265A5DA100AB3B71 /* CommandHandlerParametrized.swift in Sources */,
 				8494181A26570DDE00BE1613 /* VisualModeDelete.swift in Sources */,
 				8494182E2657D5D900BE1613 /* OperationPasteAfter.swift in Sources */,
 				84605E5525A4D7F400410C44 /* MotionReader.swift in Sources */,
@@ -653,7 +685,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				845E4C8E265540EE00A11E53 /* TextObjectTests.swift in Sources */,
+				84AFEC23265AB34600AB3B71 /* CommandModeYankTests.swift in Sources */,
+				84AFEC1F265AB2E200AB3B71 /* ModeSwitcherMock.swift in Sources */,
+				84AFEC1D265AB2B900AB3B71 /* BufferEditorMock.swift in Sources */,
+				84AFEC21265AB32200AB3B71 /* Reader+feedString.swift in Sources */,
+				84AFEC17265AA1D200AB3B71 /* CommandModeDeleteTests.swift in Sources */,
+				84AFEC19265AB01500AB3B71 /* TextPosition+graphical.swift in Sources */,
 				845E4C8826550EFF00A11E53 /* LineMotionTests.swift in Sources */,
+				84AFEC1B265AB0AB00AB3B71 /* TextRange+graphical.swift in Sources */,
+				84AFEC15265A600500AB3B71 /* CommandHandlerParametrizedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,6 +57,10 @@ extension TextRange {
         CFRangeMake(start, length)
     }
 
+    var nsRange: NSRange {
+        NSMakeRange(start, length)
+    }
+
     mutating func expandForward(ensuring condition: (unichar) -> Bool) {
         while let char = proceedingCharacter, condition(char) {
             end += 1

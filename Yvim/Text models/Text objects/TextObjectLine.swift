@@ -1,7 +1,7 @@
 import Foundation
 
 extension TextObjects {
-    struct Line: TextObject {
+    struct Line: TextObject, Equatable {
         /// If non-zero, the relative lines that are included as well.
         /// E.g. -1 includes the line before, 2 will select 3 lines in total.
         let expansion: Int

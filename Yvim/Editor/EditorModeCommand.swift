@@ -17,20 +17,22 @@ class EditorModeCommand: EditorMode, KeyPressSimulator {
         _pressKeys.append((keyCode, flags))
     }
 
+    private var multiplierReader = MultiplierReader()
+
     func createCommands() -> [Reader] {[
-        MotionCommandHandler(
+        CommandHandlerMotion(
             command: CommandModeMove(editor: editor, keySimulator: self, modeSwitcher: modeSwitcher)
         ),
-        ParametrizedCommandHandler(
-            KeyConstants.delete,
+        CommandHandlerParametrized(
+            KeyConstants.delete, multiplier: multiplierReader,
             command: CommandModeDelete(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)
         ),
-        ParametrizedCommandHandler(
-            KeyConstants.yank,
+        CommandHandlerParametrized(
+            KeyConstants.yank, multiplier: multiplierReader,
             command: CommandModeYank(register: register, editor: editor, modeSwitcher: modeSwitcher)
         ),
-        ParametrizedCommandHandler(
-            KeyConstants.change,
+        CommandHandlerParametrized(
+            KeyConstants.change, multiplier: multiplierReader,
             command: CommandModeChange(register: register, operationMemory: operationMemory, editor: editor, modeSwitcher: modeSwitcher)
         ),
         CommandHandler(

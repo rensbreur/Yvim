@@ -12,7 +12,7 @@ class EditorModeVisual: EditorMode {
     lazy var reader = CompositeReader(createCommands())
 
     func createCommands() -> [Reader] {[
-        SelectionCommandHandler(
+        CommandHandlerSelection(
             command: VisualModeMove(editor: editor, selection: selection, modeSwitcher: modeSwitcher)
         ),
         CommandHandler(
